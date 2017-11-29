@@ -12,7 +12,7 @@ Kitchen kitchen = new Kitchen(3);
 
 Test(getNbCookers, return_value_is_good)
 {
-	int	exceptedValue = 3
+	int	exceptedValue = 3;
 	cr_assert_eq(kitchen.getNbCookers(), exceptedValue);
 }
 
