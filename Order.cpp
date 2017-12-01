@@ -7,11 +7,11 @@
 
 #include "Order.h"
 
-Order::Order() {}
-
-Order::~Order() {
+Order::Order(std::string &order) : command(order) {
 
 }
+
+Order::~Order() = default;
 
 int Order::getId() const {
 	return id;

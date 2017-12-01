@@ -12,7 +12,7 @@
 
 class Order {
 public:
-	Order();
+	Order(std::string &order);
 	virtual ~Order();
 
 	int getId() const;
