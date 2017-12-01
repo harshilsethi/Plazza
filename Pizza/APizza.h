@@ -16,7 +16,7 @@ public:
 	virtual ~APizza() = default;;
 
 	virtual std::string getSize();
-	virtual float getCookTime() = 0;
+	virtual float getCookTime();
 
 protected:
 	const std::string size;

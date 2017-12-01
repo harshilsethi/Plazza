@@ -13,3 +13,7 @@ APizza::APizza(const std::string &size) : size(size) {
 std::string APizza::getSize() {
 	return this->size;
 }
+
+float APizza::getCookTime() {
+	return 0;
+}

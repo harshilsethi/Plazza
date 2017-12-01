@@ -4,6 +4,12 @@ project(Plazzav1)
 set(CMAKE_CXX_STANDARD 14)
 
 set(SOURCE_FILES main.cpp
+        AKitchen.h
+        AKitchen.cpp
+        Cooker.cpp
+        Cooker.h
+        Order.cpp
+        Order.h
         Pizza/PizzaFactory.cpp
         Pizza/PizzaFactory.h
         Pizza/APizza.h
