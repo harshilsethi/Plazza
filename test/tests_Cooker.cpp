@@ -6,11 +6,11 @@
 */
 
 #include <criterion/criterion.h>
-#include "Cooker.h"
-#include "Margarita.h"
-#include "Regina.h"
-#include "American.h"
-#include "Fantasia.h"
+#include "../Cooker.h"
+#include "../Pizza/Margarita.h"
+#include "../Pizza/Regina.h"
+#include "../Pizza/American.h"
+#include "../Pizza/Fantasia.h"
 
 Cooker cooker = new Cooker();
 
@@ -23,9 +23,9 @@ Test(getKitchen, return_value_is_good)
 
 Test(getKitchen, return_value_is_bad)
 {
-        cr_assert_neq(cooker.getKitchen(), 0);
-        cr_assert_neq(cooker.getKitchen(), 1);
-        cr_assert_neq(cooker.getKitchen(), 5);
+        cr_assert_eq(cooker.getKitchen(), 0);
+        cr_assert_eq(cooker.getKitchen(), 1);
+        cr_assert_eq(cooker.getKitchen(), 5);
 }
 
 Test(getPizza, return_value_is_good)
