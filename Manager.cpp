@@ -29,6 +29,7 @@ void split5(const std::string& str, Container& cont,
 }
 
 std::queue<std::string> Manager::convertInputIntoOrder(Order order) {
+	std::cout << order.getCommand() << std::endl;
 	std::string orderToConvert = order.getCommand();
 	std::vector<std::string> result;
 
@@ -54,6 +55,6 @@ std::queue<std::string> Manager::convertInputIntoOrder(Order order) {
 	} */
 }
 
-std::queue<std::string> Manager::getOrders() {
+std::queue<std::string> Manager::getPizzas() {
 	return pizzas;
 }

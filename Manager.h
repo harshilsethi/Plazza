@@ -21,7 +21,7 @@ public:
 	~Manager();
 
 	std::queue<std::string> convertInputIntoOrder(Order order);
-	std::queue<std::string> getOrders();
+	std::queue<std::string> getPizzas();
 
 private:
 	std::queue<std::string> pizzas;
