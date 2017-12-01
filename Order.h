@@ -12,10 +12,11 @@
 
 class Order {
 public:
-	Order(std::string &order);
+	explicit Order(std::string &order);
 	virtual ~Order();
 
 	int getId() const;
+	std::string getCommand();
 
 private:
 	int id;

@@ -16,3 +16,7 @@ Order::~Order() = default;
 int Order::getId() const {
 	return id;
 }
+
+std::string Order::getCommand() {
+	return command;
+}
