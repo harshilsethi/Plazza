@@ -10,5 +10,5 @@
 Margarita::Margarita(const std::string &size) : APizza(size) {}
 
 float Margarita::getCookTime() {
-	return 2;
+	return 1.5;
 }
