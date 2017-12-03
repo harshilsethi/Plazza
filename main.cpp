@@ -5,7 +5,7 @@
 
 int main() {
 	Manager manager;
-	std::string input1 = "Margarita L 2 ; American XL 1;";
+	std::string input1 = "Margarita L 2 ; American XL 1";
 	Order order1(input1);
 
 	manager.convertInputIntoOrder(order1);
@@ -13,6 +13,7 @@ int main() {
 	std::cout << "===================================" << std::endl << std::endl;
 	
 	std::queue<std::string> res = manager.getPizzas();
+	manager.manageKitchens(4);
 	while(!res.empty()){
 		std::cout << res.front() << std::endl;
 		res.pop();

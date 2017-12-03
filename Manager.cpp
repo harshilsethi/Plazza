@@ -64,3 +64,26 @@ std::queue<std::string> Manager::convertInputIntoOrder(Order order) {
 std::queue<std::string> Manager::getPizzas() {
 	return pizzas;
 }
+
+void Manager::manageKitchens(int maxCookers) {
+	int nbKitchens = pizzas.size() / maxCookers;
+
+	//security: limit of 10 processes
+	if (nbKitchens > 10)
+		nbKitchens = 10;
+	else if (nbKitchens < 1)
+		nbKitchens = 1;
+
+	for (int i = 0; i < nbKitchens; ++i){
+		isSon = fork();
+		if(isSon == 0){
+			Kitchen processK(maxCookers);
+			for(int j = 0; j < maxCookers; ++i){
+				processK.addOrder(pizzas.front());
+				pizzas.pop();
+			}
+			processK.dispatch();
+		}else
+			wait();
+	}
+}
