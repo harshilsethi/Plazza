@@ -4,7 +4,7 @@
 #include <ncurses.h>
 #include <menu.h>
 #include <cstring>
-
+/*
 WINDOW *create_newwin(int height, int width, int starty, int startx);
 void destroy_win(WINDOW *local_win);
 
@@ -30,6 +30,7 @@ WINDOW *create_newwin(int height, int width, int starty, int startx)
 	 * 8. bl: character to be used for the bottom left corner of the window
 	 * 9. br: character to be used for the bottom right corner of the window
 	 */
+/*
 	wborder(local_win,  '|', '|', '-' ,'_', '|', '|', '|', '|');
 	attron(A_BOLD);
 	mvwprintw(local_win,1,width/5, "Welcome to The PLAZZA PIZZA");
@@ -47,7 +48,7 @@ WINDOW *create_newwin(int height, int width, int starty, int startx)
 
 
 	wrefresh(local_win);		/* Show that window 		*/
-
+/*
 	return local_win;
 }
 
@@ -60,7 +61,7 @@ void destroy_win(WINDOW *local_win)
 void createCurse(std::vector<std::string> commands){
 
 	/* For the calcul*/
-	int startx, starty, width, height;
+/*	int startx, starty, width, height;
 	int row, col;
 	char pizza;
 	char size;
@@ -70,7 +71,7 @@ void createCurse(std::vector<std::string> commands){
 	std::string command;
 	bool end = false;
 	/* Initialize curses */
-	initscr();
+/*	initscr();
 	cbreak();
 	raw();
 	noecho();
@@ -78,11 +79,11 @@ void createCurse(std::vector<std::string> commands){
 	getmaxyx(stdscr,row,col);		/* get the number of rows and columns */
 
 	/* Initialize Window Menu */
-	height = 15;
+/*	height = 15;
 	width = 40;
 	starty = (LINES - height) /2 ;/* Calculating for a center placement */
-	startx = (COLS - width) / 2;	/*		*/
-	attron(COLOR_PAIR(1));
+/*	startx = (COLS - width) / 2;	/*		*/
+/*	attron(COLOR_PAIR(1));
 	printw("Please choose your pizza \n Enter the number before the pizza \n");
 	refresh();
 	window = create_newwin(height, width, starty, startx);
@@ -162,7 +163,7 @@ int main()
 	createCurse(commands);
 	return 0;
 }
-/*
+*/
 int main() {
 	Manager manager;
 	std::string input1 = "Margarita L 2 ; American XL 1";
@@ -171,4 +172,4 @@ int main() {
 	manager.convertInputIntoOrder(order1);
 
 	return 0;
-}*/
+}
