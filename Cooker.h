@@ -8,7 +8,6 @@
 #ifndef PLAZZAV1_COOKER_H
 #define PLAZZAV1_COOKER_H
 
-
 #include "Pizza/APizza.h"
 
 class Cooker {
