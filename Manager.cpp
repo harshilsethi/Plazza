@@ -84,6 +84,6 @@ void Manager::manageKitchens(int maxCookers) {
 			}
 			processK.dispatch();
 		}else
-			wait();
+			wait(NULL);
 	}
 }

@@ -14,6 +14,7 @@
 #include <list>
 #include <iostream>
 #include <algorithm>
+#include <sys/wait.h>
 #include "Kitchen.h"
 #include "Order.h"
 
