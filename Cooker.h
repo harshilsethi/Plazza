@@ -5,8 +5,8 @@
 //
 //
 
-#ifndef PLAZZAV1_COOKER_H
-#define PLAZZAV1_COOKER_H
+#ifndef COOKER_H__
+#define COOKER_H__
 
 
 #include "Pizza/APizza.h"
@@ -28,4 +28,4 @@ public:
 };
 
 
-#endif //PLAZZAV1_COOKER_H
+#endif //COOKER_H
