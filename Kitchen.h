@@ -1,16 +1,12 @@
 /*                                                                              
 ** EPITECH PROJECT, 2017                                                        
-**                                                                   
+** Plazza project
 ** File description:                                                            
-**                                                           
+** Kitchen.h
 */
 
-//
-// Created by jerome on 02/12/17.
-//
-
-#ifndef PLAZZAV1_KITCHEN_H
-#define PLAZZAV1_KITCHEN_H
+#ifndef KITCHEN_H__
+#define KITCHEN_H__
 
 #include <list>
 #include <queue>
@@ -34,4 +30,4 @@ public:
 };
 
 
-#endif //PLAZZAV1_KITCHEN_H
+#endif //KITCHEN_H__

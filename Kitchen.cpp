@@ -1,6 +1,9 @@
-//
-// Created by jerome on 02/12/17.
-//
+/*
+** EPITECH PROJECT, 2017
+** Plazza project
+** File description:
+** Kitchen.cpp
+*/
 
 #include "Kitchen.h"
 

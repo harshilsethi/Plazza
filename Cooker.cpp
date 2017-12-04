@@ -1,8 +1,8 @@
 //
 // EPITECH PROJECT, 2017
-// 
+// Plazza project
 // File description:
-//
+// Cooker.cpp
 //
 
 #include <iostream>
@@ -22,5 +22,6 @@ const APizza &Cooker::getPizza() const {
 }
 
 void Cooker::cookPizza(std::string &pizza) {
-	std::cout << "Cooking the pizza " << std::endl;
+
+	std::cout << "Cooking the pizza " << pizza << std::endl;
 }
