@@ -28,7 +28,6 @@ public:
 	void manageKitchens(int);
 
 private:
-	id_t isSon;
 	std::queue<std::string> pizzas;
 	std::list<Kitchen *> kitchens;
 };
