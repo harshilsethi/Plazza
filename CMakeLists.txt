@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD 14)
 set(SOURCE_FILES main.cpp
         AKitchen.h
         AKitchen.cpp
+        Kitchen.cpp
+        Kitchen.h
         Cooker.cpp
         Cooker.h
         Order.cpp
