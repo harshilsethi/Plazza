@@ -78,19 +78,15 @@ void Manager::manageKitchens(int maxCookers) {
 
 	for (int i = 0; i < nbKitchens; ++i){
 		isSon = fork();
-		std::cout << "================> " << isSon << std::endl;
 		if (isSon == -1)
 			std::cerr << "Fatal error: can't create process!" << std::endl;
 		else if(isSon == 0){
-			std::cout << "IF 0" << std::endl;
 			Kitchen processK(maxCookers);
-			processK.dispatch(); // fonctionne
-			for(int j = 0; j < maxCookers; ++i){
+			for(int j = 0; j < maxCookers; ++j){
 				processK.addOrder(pizzas.front());
 				pizzas.pop();
 			}
-			processK.dispatch(); //ne fonctionne pas
-			//POURQUOI ????
+			processK.dispatch();
 			exit(EXIT_SUCCESS);
 		}else
 			wait(NULL);
