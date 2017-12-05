@@ -8,7 +8,8 @@
 #include <iostream>
 #include "Cooker.h"
 
-Cooker::Cooker() : pizza(nullptr) {
+Cooker::Cooker() {
+
 }
 
 Cooker::~Cooker() = default;
@@ -16,11 +17,11 @@ Cooker::~Cooker() = default;
 int Cooker::getKitchen() const {
 	return kitchen;
 }
-
+/*
 const APizza &Cooker::getPizza() const {
 	return pizza;
 }
-
+*/
 void Cooker::cookPizza(std::string &pizza) {
 	std::cout << "Cooking the pizza " << pizza << std::endl;
 }

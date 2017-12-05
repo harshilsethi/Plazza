@@ -6,8 +6,8 @@
 */
 
 #include <criterion/criterion.h>
-#include "../Kitchen.h"
-#include "../Cooker.h"
+#include "../order/Kitchen.h"
+#include "../order/Cooker.h"
 
 Kitchen kitchen = new Kitchen(3);
 

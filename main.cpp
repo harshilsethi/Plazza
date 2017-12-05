@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Manager.h"
-#include "Order.h"
+#include "order/Manager.h"
+#include "order/Order.h"
 #include <ncurses.h>
 #include <menu.h>
 #include <cstring>

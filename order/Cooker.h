@@ -9,13 +9,13 @@
 #define PLAZZAV1_COOKER_H
 
 
-#include "Pizza/APizza.h"
+#include "../Pizza/APizza.h"
 
 class Cooker {
 private:
 	int kitchen;
 	int id;
-	APizza pizza;
+	//APizza pizza;
 	bool busy;
 	bool threadRun;
 public:
@@ -23,7 +23,7 @@ public:
 	~Cooker();
 
 	int getKitchen() const;
-	const APizza &getPizza() const;
+	//const APizza &getPizza() const;
 	void cookPizza(std::string &pizza);
 };
 
