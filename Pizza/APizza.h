@@ -13,7 +13,7 @@
 class APizza {
 public:
 	explicit APizza(const std::string &size);
-	virtual ~APizza() = default;;
+	virtual ~APizza() = default;
 
 	virtual std::string getSize();
 	virtual float getCookTime();
