@@ -67,14 +67,15 @@ std::queue<std::string> Manager::getPizzas() {
 
 void Manager::manageKitchens(int maxCookers) {
 	int nbKitchens = pizzas.size() / maxCookers;
+	pid_t isSon;
 
 	//security: limit of 10 processes
 	if (nbKitchens > 10)
 		nbKitchens = 10;
 	else if (nbKitchens < 1)
 		nbKitchens = 1;
-
-	pid_t isSon;
+	else if (pizzas.size() % maxCookers != 0)
+		nbKitchens++;
 
 	for (int i = 0; i < nbKitchens; ++i){
 		isSon = fork();

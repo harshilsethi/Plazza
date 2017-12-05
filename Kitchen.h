@@ -23,7 +23,7 @@ public:
 	Kitchen(int);
 	~Kitchen();
 	int getNbCookers();
-	std::list<Cooker> getCookers();
+	std::list<Cooker> &getCookers();
 	void addOrder(std::string &);
 	void dispatch();
 	bool getStatut();

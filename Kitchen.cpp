@@ -17,7 +17,7 @@ int Kitchen::getNbCookers() {
 	return nbCookers;
 }
 
-std::list<Cooker> Kitchen::getCookers() {
+std::list<Cooker> &Kitchen::getCookers() {
 	return cookers;
 }
 

@@ -13,7 +13,7 @@ int main() {
 	std::cout << "===================================" << std::endl << std::endl;
 	
 	std::queue<std::string> res = manager.getPizzas();
-	manager.manageKitchens(3);
+	manager.manageKitchens(6);
 	while(!res.empty()){
 		std::cout << res.front() << std::endl;
 		res.pop();
