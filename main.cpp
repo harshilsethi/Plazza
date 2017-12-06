@@ -4,51 +4,9 @@
 #include <ncurses.h>
 #include <menu.h>
 #include <cstring>
-/*
-WINDOW *create_newwin(int height, int width, int starty, int startx);
-void destroy_win(WINDOW *local_win);
-
-WINDOW *create_newwin(int height, int width, int starty, int startx)
-{	WINDOW *local_win;
-
-	local_win = newwin(height, width, starty, startx);
-	if(has_colors() == FALSE){
-		endwin();
-		wprintw(local_win, "Your terminal doesn't support color");
-		exit(1);
-	}
-	// Start color
-	init_pair(1, COLOR_RED,COLOR_BLUE);
-	// The parameters taken are
-	//1. win: the window on which to operate
-	//2. ls: character to be used for the left side of the window
-	//3. rs: character to be used for the right side of the window
-	//4. ts: character to be used for the top side of the window
-	//5. bs: character to be used for the bottom side of the window
-	//6. tl: character to be used for the top left corner of the window
-	//7. tr: character to be used for the top right corner of the window
-	//8. bl: character to be used for the bottom left corner of the window
-	//9. br: character to be used for the bottom right corner of the window
-	wborder(local_win,  '|', '|', '-' ,'_', '|', '|', '|', '|');
-	attron(A_BOLD);
-	mvwprintw(local_win,1,width/5, "Welcome to The PLAZZA PIZZA");
-	attroff(A_BOLD);
-	mvwprintw(local_win, 3, static_cast<int>((width / 2 ) - 12), "Menu");
-	mvwprintw(local_win,4,1," 1 - Margarita");
-	mvwprintw(local_win,5,1," 2 - Regina");
-	mvwprintw(local_win,6,1," 3 - American");
-	mvwprintw(local_win,7,1," 4 - Fantasia");
-	mvwprintw(local_win, 10, static_cast<int>((width / 2 ) - 12), "Size");
-	mvwprintw(local_win,11,1,"1 - M (Standard)");
-	mvwprintw(local_win,12,1,"2 - L (Large)");
-	mvwprintw(local_win,13,1,"3 - XL (Super)");
-
-
-
-	wrefresh(local_win);		// Show window
-
-	return local_win;
-}
+#include <ncurses.h>
+#include <iostream>
+#include <vector>
 
 void destroy_win(WINDOW *local_win)
 {
@@ -56,36 +14,46 @@ void destroy_win(WINDOW *local_win)
 	delwin(local_win);
 }
 
-void createCurse(std::vector<std::string> commands){
+WINDOW* createTitle(WINDOW* win)
+{
+	//wborder(win,  '|', '|', '-' ,'_', '|', '|', '|', '|');
+	wprintw(win,"\\ \\    / / ___     | |     __      ___    _ __     ___      o O O  | |_     ___      o O O   | _ \\  | |     /   \\   |_  /   |_  /   /   \\  \n"
+		" \\ \\/\\/ / / -_)    | |    / _|    / _ \\  | '  \\   / -_)    o       |  _|   / _ \\    o        |  _/  | |__   | - |    / /     / /    | - |  \n"
+		"  \\_/\\_/  \\___|   _|_|_   \\__|_   \\___/  |_|_|_|  \\___|            _\\__|   \\___/            _|_|_   |____|  |_|_|   /___|   /___|   |_|_|  ");
+	wrefresh(win);
+	return win;
+}
 
-	// For the calcul
-	int startx, starty, width, height;
-	int row, col;
-	char pizza;
-	char size;
-	char number;
+WINDOW* createMenuwin(WINDOW* local_win)
+{
+	wborder(local_win,  '|', '|', '-' ,'_', '|', '|', '|', '|');
+	mvwprintw(local_win, 1, 8, "     Menu");
+	mvwprintw(local_win,2,1,"      1 - Margarita");
+	mvwprintw(local_win,3,1,"      2 - Regina");
+	mvwprintw(local_win,4,1,"      3 - American");
+	mvwprintw(local_win,5,1,"      4 - Fantasia");
+	mvwprintw(local_win,7, 8, "     Size");
+	mvwprintw(local_win,8,1,"      1 - M (Standard)");
+	mvwprintw(local_win,9,1,"      2 - L (Large)");
+	mvwprintw(local_win,10,1,"      3 - XL (Super)");
+	wrefresh(local_win);
+	return local_win;
+}
+
+WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands)
+{
+	WINDOW *displayCommand;
+	int pizza, size, number;
+	int i = 2;
 	char endIt;
-	WINDOW* window;
 	std::string command;
-	//bool end = false;
-	// Initialize curses
-	initscr();
-	cbreak();
-	raw();
-	noecho();
-	keypad(stdscr, TRUE);
-	getmaxyx(stdscr,row,col);		// get the number of rows and columns
-
-	// Initialize Window Menu
-	height = 15;
-	width = 40;
-	starty = (LINES - height) /2 ;// Calculating for a center placement
-	startx = (COLS - width) / 2;
-	attron(COLOR_PAIR(1));
-	printw("Please choose your pizza \n Enter the number before the pizza \n");
-	refresh();
-	window = create_newwin(height, width, starty, startx);
-	refresh();
+	wborder(local_win,  '|', '|', '-' ,'_', '|', '|', '|', '|');
+	mvwprintw(local_win, 2, 3,"Please choose your pizza");
+	mvwprintw(local_win, 3, 3 ,"Enter the number before the pizza");
+	wrefresh(local_win);
+	displayCommand = newwin(12,40,14, 98);
+	wborder(displayCommand,  '|', '|', '-' ,'_', '|', '|', '|', '|');
+	wrefresh(displayCommand);
 	pizza = static_cast<char>(getch());
 	switch (pizza){
 		case '1':
@@ -101,13 +69,15 @@ void createCurse(std::vector<std::string> commands){
 			command = "Fantasia";
 			break;
 		default:
-			printw("Please Enter the correct number \n");
-			refresh();
+			mvwprintw(local_win, 2, 3,"Please Enter the correct number");
+			command = std::string("");
+			wrefresh(local_win);
 	}
-	printw(command.c_str());
-	refresh();
-	if(command != "") {
-		printw("Please choose your size \n Enter the number \n");
+	wgetch(local_win);
+	if(!command.empty()) {
+		mvwprintw(local_win, 4, 3, "Please choose your size");
+		mvwprintw(local_win,5,3, "Enter the number");
+		wrefresh(local_win);
 		size = static_cast<char>(getch());
 		switch (size) {
 			case '1':
@@ -122,47 +92,95 @@ void createCurse(std::vector<std::string> commands){
 				command.append("XL");
 				break;
 			default:
-				printw("Please Enter the correct number \n");
-				refresh();
+				command = std::string("");
+				mvwprintw(local_win,6,3,"Please Enter the correct number");
+				wrefresh(local_win);
 		}
-		refresh();
-		printw("Please choose the number of pizza you want \n Enter the number");
-		scanw("%d",&number);
-		command = command + " " + std::to_string(number) + "\n";
-		commands.push_back(command);
-		refresh();
+		if (!command.empty()) {
+			mvwprintw(local_win, 6, 3, "Please choose the number of pizza you want");
+			mvwprintw(local_win, 7, 3, "Enter the number");
+			wscanw(local_win, const_cast<char *>("%d"), &number);
+			wrefresh(local_win);
+			command = command + " " + std::to_string(number) + "\n";
+			commands.push_back(command);
+		}
+		wrefresh(local_win);
 	}
-	printw("%s" , command.c_str());
-	printw("Do you want to make another order \n Y for Yes and N for No \n");
-	endIt = getch();
-	if(endIt == 'Y') {
-		printw("Ok Here's your orders \n");
-		for(auto command : commands){
-			printw(command.c_str());
-			printw("\n");
+	mvwprintw(local_win,9,3,"Do you want to finish your order");
+	mvwprintw(local_win,10,3,"Y or y for Yes and N or n for No");
+	endIt = (char) wgetch(local_win);
+	if(endIt == 'Y' || endIt == 'y') {
+		destroy_win(local_win);
+		destroy_win(displayCommand);
+		local_win = newwin(12,50,14, 40);
+		createUserwin(local_win,commands);
+	} else if(endIt == 'N' || endIt == 'n') {
+		mvwprintw(displayCommand,1,3,"List of commands");
+		for(std::string command : commands){
+			mvwprintw(displayCommand,i,3,command.c_str());
+			wrefresh(displayCommand);
+			i++;
 		}
-		printw("Thank You and See You Again \n");
+	}
+	return local_win;
+}
 
-	} else {
-		erase();
-		createCurse(commands);
-	}
-	attroff(COLOR_PAIR(1));
-	getch();
-	command.empty();
+void createCurses(std::vector<std::string> commands)
+{
+	WINDOW *titleWin;
+	WINDOW *menuWin;
+	WINDOW *userWin;
+	// Initialize curses
+	int y, x, height, width, startx, starty;
+	initscr();
+	cbreak();
+	raw();
+	noecho();
+	keypad(stdscr, TRUE);
+	getmaxyx(stdscr,y,x);		/* get the number of rows and columns */
+	box(stdscr,'*','*');
+	//Create Windows
+	titleWin = newwin(10, x - 2, 5,1);
+	menuWin = newwin(12,30,14,1);
+	userWin = newwin(12,50,14, 40);
+	//start_color(););
 	refresh();
-	destroy_win(window);
+	titleWin = createTitle(titleWin);
+	menuWin = createMenuwin(menuWin);
+	userWin = createUserwin(userWin, commands);
+	refresh();
+	//Destroy window
+	mvprintw(y - 15 ,5,
+		 "        ,----,                                                                                           \n"
+			 "      ,/   .`|                                                                                           \n"
+			 "    ,`   .'  :  ,---,                                  ,-.                                               \n"
+			 "  ;    ;     /,--.' |                              ,--/ /|                 ,---,                         \n"
+			 ".'___,/    ,' |  |  :                      ,---, ,--. :/ |                /_ ./|   ,---.           ,--,  \n"
+			 "|    :     |  :  :  :                  ,-+-. /  |:  : ' /           ,---, |  ' :  '   ,'\\        ,'_ /|  \n"
+			 ";    |.';  ;  :  |  |,--.  ,--.--.    ,--.'|'   ||  '  /           /___/ \\.  : | /   /   |  .--. |  | :  \n"
+			 "`----'  |  |  |  :  '   | /       \\  |   |  ,\"' |'  |  :            .  \\  \\ ,' '.   ; ,. :,'_ /| :  . |  \n"
+			 "    '   :  ;  |  |   /' :.--.  .-. | |   | /  | ||  |   \\            \\  ;  `  ,''   | |: :|  ' | |  . .  \n"
+			 "    |   |  '  '  :  | | | \\__\\/: . . |   | |  | |'  : |. \\            \\  \\    ' '   | .; :|  | ' |  | |  \n"
+			 "    '   :  |  |  |  ' | : ,\" .--.; | |   | |  |/ |  | ' \\ \\            '  \\   | |   :    |:  | : ;  ; |  \n"
+			 "    ;   |.'   |  :  :_:,'/  /  ,.  | |   | |--'  '  : |--'              \\  ;  ;  \\   \\  / '  :  `--'   \\ \n"
+			 "    '---'     |  | ,'   ;  :   .'   \\|   |/      ;  |,'                  :  \\  \\  `----'  :  ,      .-./ \n"
+			 "              `--''     |  ,     .-./'---'       '--'                     \\  ' ;           `--`----'     \n"
+			 "                         `--`---'                                          `--`                          ");
+	refresh();
+	getch();
+	destroy_win(titleWin);
+	destroy_win(menuWin);
+	destroy_win(userWin);
 	endwin();
 }
 
 int main()
 {
 	std::vector<std::string> commands;
-	createCurse(commands);
+	createCurses(commands);
 	return 0;
-} */
-
-int main() {
+}
+/*int main() {
 	Manager manager;
 	std::string input1 = "Margarita L 3 ; American XL 3; Fantasia L 3";
 	Order order1(input1);
@@ -179,4 +197,4 @@ int main() {
 	}
 
 	return 0;
-}
+}*/
