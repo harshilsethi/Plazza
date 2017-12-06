@@ -20,7 +20,7 @@ private:
 public:
 	Team(int);
 	~Team();
-	void addCooker();
+	void addCooker(Cooker &);
 	Cooker &takeCooker();
 };
 

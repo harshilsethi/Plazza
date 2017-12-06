@@ -5,7 +5,6 @@
 // Cooker.cpp
 //
 
-#include <iostream>
 #include "Cooker.h"
 
 static int nextId = 0;
@@ -16,7 +15,6 @@ Cooker::Cooker() : pizza(nullptr) {
 }
 
 Cooker::~Cooker(){
-	delete cookerTh;
 }
 
 int Cooker::getId() const{
@@ -28,14 +26,25 @@ int Cooker::getKitchen() const {
 }
 
 const APizza &Cooker::getPizza() const {
-	return pizza;
+	return *pizza;
 }
 
 void Cooker::cookPizza(std::string pizza) {
+	cookerMtx.lock();
 	std::cout << "Cooking the pizza: " << pizza << std::endl;
+	cookerMtx.unlock();
+	threadRun = false; //at the end
 }
-/*
-void Cooker::setThread(std::string &aPizza) {
-	cookerTh = new std::thread(&Cooker::cookPizza, &aPizza);
+
+void Cooker::runThread(const std::string &aPizza) {
+	std::thread cookerTh(&Cooker::cookPizza, this, aPizza);
+	threadRun = true;
+	cookerTh.join();
 }
-*/
+
+void Cooker::reset() {
+	kitchen = -1; // not sure ...
+	pizza = nullptr;
+	busy = false;
+	threadRun = false;
+}

@@ -19,3 +19,14 @@ Team::~Team(){
 		cookers.pop();
 	}
 }
+
+void Team::addCooker(Cooker &aCooker) {
+	aCooker.reset();
+	cookers.push(&aCooker);
+}
+
+Cooker &Team::takeCooker() {
+	Cooker *temp = cookers.front();
+	cookers.pop();
+	return (*temp);
+}
