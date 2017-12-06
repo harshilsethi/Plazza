@@ -131,7 +131,7 @@ void createCurses(std::vector<std::string> commands)
 	WINDOW *menuWin;
 	WINDOW *userWin;
 	// Initialize curses
-	int y, x, height, width, startx, starty;
+	int y, x;
 	initscr();
 	cbreak();
 	raw();
