@@ -8,7 +8,7 @@
 #ifndef MANAGER_H__
 #define MANAGER_H__
 
-#include <zconf.h>
+#include <unistd.h>
 #include <string>
 #include <queue>
 #include <list>
@@ -27,7 +27,7 @@ public:
 	void manageKitchens(int);
 
 private:
-	id_t isSon;
+	pid_t isSon;
 	std::queue<std::string> pizzas;
 	std::list<Kitchen *> kitchens;
 };

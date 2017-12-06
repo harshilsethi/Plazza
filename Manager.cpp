@@ -7,6 +7,7 @@
 
 #include "Manager.h"
 #include <boost/algorithm/string.hpp>
+#include <sys/wait.h>
 
 Manager::Manager() {
 	std::cout << "Manager : I'm the Plazza's manager !" << std::endl;
@@ -66,7 +67,7 @@ std::queue<std::string> Manager::getPizzas() {
 }
 
 void Manager::manageKitchens(int maxCookers) {
-	int nbKitchens = pizzas.size() / maxCookers;
+	int nbKitchens = static_cast<int>(pizzas.size() / maxCookers);
 
 	//security: limit of 10 processes
 	if (nbKitchens > 10)
@@ -76,14 +77,15 @@ void Manager::manageKitchens(int maxCookers) {
 
 	for (int i = 0; i < nbKitchens; ++i){
 		isSon = fork();
-		if(isSon == 0){
+		if (isSon == 0) {
 			Kitchen processK(maxCookers);
-			for(int j = 0; j < maxCookers; ++i){
+			for (int j = 0; j < maxCookers; ++j) {
 				processK.addOrder(pizzas.front());
 				pizzas.pop();
 			}
 			processK.dispatch();
-		}else
-			wait();
+		} else {
+			wait(nullptr);
+		}
 	}
 }
