@@ -4,7 +4,7 @@
 #include <ncurses.h>
 #include <menu.h>
 #include <cstring>
-
+/*
 WINDOW *create_newwin(int height, int width, int starty, int startx);
 void destroy_win(WINDOW *local_win);
 
@@ -67,14 +67,14 @@ void createCurse(std::vector<std::string> commands){
 	char endIt;
 	WINDOW* window;
 	std::string command;
-	bool end = false;
+	//bool end = false;
 	// Initialize curses
 	initscr();
 	cbreak();
 	raw();
 	noecho();
 	keypad(stdscr, TRUE);
-	getmaxyx(stdscr,row,col);		/* get the number of rows and columns */
+	getmaxyx(stdscr,row,col);		// get the number of rows and columns
 
 	// Initialize Window Menu
 	height = 15;
@@ -160,14 +160,23 @@ int main()
 	std::vector<std::string> commands;
 	createCurse(commands);
 	return 0;
-}
-/*
+} */
+
 int main() {
 	Manager manager;
-	std::string input1 = "Margarita L 2 ; American XL 1";
+	std::string input1 = "Margarita L 3 ; American XL 3; Fantasia L 3";
 	Order order1(input1);
 
 	manager.convertInputIntoOrder(order1);
 
+	std::cout << "===================================" << std::endl << std::endl;
+
+	std::queue<std::string> res = manager.getPizzas();
+	manager.manageKitchens(6);
+	while(!res.empty()){
+		std::cout << res.front() << std::endl;
+		res.pop();
+	}
+
 	return 0;
-}*/
+}

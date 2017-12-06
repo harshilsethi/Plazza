@@ -30,16 +30,22 @@ void split5(const std::string& str, Container& cont,
 
 std::queue<std::string> Manager::convertInputIntoOrder(Order order) {
 	std::cout << order.getCommand() << std::endl;
-	std::string orderToConvert = order.getCommand();
+	std::string orderToConvert = order.getCommand(); // "Margarita L 2 ; American XL 1"
 	std::vector<std::string> result;
+	int pizzaCounter = 0;
 
 	ltrim(orderToConvert);
-	std::cout << orderToConvert << std::endl;
+	std::cout << orderToConvert << std::endl; // "MargaritaL2;AmericanXL1"
 	split5(orderToConvert, result);
 	std::copy(result.begin(), result.end(),
 		  std::ostream_iterator<std::string>(std::cout, "\n"));
-	for (auto &entry : result)
-		pizzas.push(entry);
+	for (auto &entry : result){
+		pizzaCounter = entry.back();
+		for (int i = 0; i < pizzaCounter - 48; ++i) {
+			pizzas.push(entry);
+			pizzas.back().pop_back();
+		}
+	}
 
 	return pizzas;
 	/*
@@ -57,4 +63,33 @@ std::queue<std::string> Manager::convertInputIntoOrder(Order order) {
 
 std::queue<std::string> Manager::getPizzas() {
 	return pizzas;
+}
+
+void Manager::manageKitchens(int maxCookers) {
+	int nbKitchens = pizzas.size() / maxCookers;
+	pid_t isSon;
+
+	//security: limit of 10 processes
+	if (nbKitchens > 10)
+		nbKitchens = 10;
+	else if (nbKitchens < 1)
+		nbKitchens = 1;
+	else if (pizzas.size() % maxCookers != 0)
+		nbKitchens++;
+
+	for (int i = 0; i < nbKitchens; ++i){
+		isSon = fork();
+		if (isSon == -1)
+			std::cerr << "Fatal error: can't create process!" << std::endl;
+		else if(isSon == 0){
+			Kitchen processK(maxCookers);
+			for(int j = 0; j < maxCookers; ++j){
+				processK.addOrder(pizzas.front());
+				pizzas.pop();
+			}
+			processK.dispatch();
+			exit(EXIT_SUCCESS);
+		}else
+			wait(NULL);
+	}
 }
