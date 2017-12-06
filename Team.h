@@ -20,8 +20,9 @@ private:
 public:
 	Team(int);
 	~Team();
-	void addCooker(Cooker &);
-	Cooker &takeCooker();
+	void getBackCooker(Cooker &);
+	Cooker takeCooker();
+	int howManyCookers();
 };
 
 

@@ -20,13 +20,19 @@ Team::~Team(){
 	}
 }
 
-void Team::addCooker(Cooker &aCooker) {
+void Team::getBackCooker(Cooker &aCooker) {
 	aCooker.reset();
 	cookers.push(&aCooker);
 }
 
-Cooker &Team::takeCooker() {
+Cooker Team::takeCooker() {
 	Cooker *temp = cookers.front();
 	cookers.pop();
 	return (*temp);
+}
+
+int Team::howManyCookers() {
+	int howMany = cookers.size();
+	std::cout << howMany << " cooker(s) left." << std::endl;
+	return howMany;
 }

@@ -9,12 +9,26 @@
 
 static int nextId = 0;
 
-Cooker::Cooker() : pizza(nullptr) {
+Cooker::Cooker(){
 	nextId++;
+	pizza = nullptr;
 	id = nextId;
 }
 
 Cooker::~Cooker(){
+}
+
+Cooker::Cooker(const Cooker &origin) {
+	id = origin.id;
+	kitchen = origin.kitchen;
+	pizza = origin.pizza;
+	threadRun = origin.threadRun;
+	busy = origin.busy;
+}
+
+Cooker Cooker::operator=(Cooker &origin) {
+	Cooker temp(origin);
+	return (temp);
 }
 
 int Cooker::getId() const{

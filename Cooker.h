@@ -25,13 +25,14 @@ private:
 public:
 	Cooker();
 	~Cooker();
-
+	Cooker(const Cooker &);
+	Cooker operator=(Cooker &);
 	int getId() const;
 	int getKitchen() const;
 	const APizza &getPizza() const;
 	void cookPizza(std::string);
 	void runThread(const std::string &);
-	void reset(); // reinit the attributs
+	void reset(); // reinit the cooker
 };
 
 
