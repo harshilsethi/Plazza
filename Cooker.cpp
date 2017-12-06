@@ -31,12 +31,12 @@ const APizza &Cooker::getPizza() const {
 	return pizza;
 }
 
-void Cooker::cookPizza(std::string &pizza) {
+void Cooker::cookPizza(std::string pizza) {
 
 	std::cout << "Cooking the pizza: " << pizza << std::endl;
 }
-
-void Cooker::setThread(std::string &pizza) {
-	cookerTh = new std::thread(&Cooker::cookPizza, pizza);
+/*
+void Cooker::setThread(std::string &aPizza) {
+	cookerTh = new std::thread(&Cooker::cookPizza, &aPizza);
 }
-
+*/

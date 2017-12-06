@@ -29,7 +29,7 @@ public:
 	int getId() const;
 	int getKitchen() const;
 	const APizza &getPizza() const;
-	void cookPizza(std::string &);
+	void cookPizza(std::string);
 	void setThread(std::string &);
 };
 
