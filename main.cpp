@@ -164,8 +164,10 @@ int main()
 } */
 
 int main() {
+	//CLASS TEAM: FREE PROBLEM
 	Team bravo(10);
 	bravo.howManyCookers();
+
 	Manager manager;
 	std::string input1 = "Margarita L 3 ; American XL 3; Fantasia L 3";
 	Order order1(input1);

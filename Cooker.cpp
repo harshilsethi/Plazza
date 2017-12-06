@@ -16,6 +16,7 @@ Cooker::Cooker(){
 }
 
 Cooker::~Cooker(){
+	delete pizza;
 }
 
 Cooker::Cooker(const Cooker &origin) {
