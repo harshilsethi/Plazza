@@ -8,7 +8,7 @@
 #include "Manager.h"
 #include <boost/algorithm/string.hpp>
 
-Manager::Manager() {
+Manager::Manager() : managerTeam(30){
 	std::cout << "Manager : I'm the Plazza's manager !" << std::endl;
 }
 
@@ -87,7 +87,7 @@ void Manager::manageKitchens(int maxCookers) {
 				processK.addOrder(pizzas.front());
 				pizzas.pop();
 			}
-			processK.dispatch();
+			processK.dispatch(managerTeam);
 			exit(EXIT_SUCCESS);
 		}else
 			wait(NULL);

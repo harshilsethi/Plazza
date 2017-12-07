@@ -30,6 +30,7 @@ public:
 private:
 	std::queue<std::string> pizzas;
 	std::list<Kitchen *> kitchens;
+	Team managerTeam;
 };
 
 #endif /* ! MANAGER_H__ */

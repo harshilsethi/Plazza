@@ -13,6 +13,7 @@
 #include <string>
 #include "AKitchen.h"
 #include "Cooker.h"
+#include "Team.h"
 
 class Kitchen : public AKitchen {
 private:
@@ -26,7 +27,9 @@ public:
 	int getNbCookers();
 	std::list<Cooker> &getCookers();
 	void addOrder(std::string &);
-	void dispatch();
+	std::string giveOrder();
+	void deleteOrder();
+	void dispatch(Team &);
 	bool getStatut();
 };
 
