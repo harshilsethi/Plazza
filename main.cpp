@@ -32,20 +32,20 @@ void createSimpleTitle(WINDOW *win)
 
 void createFooter(int y, int x)
 {
-	mvprintw(y, x, 		         "        ,----,                                                                                           ");
+	mvprintw(y, x, 		                 "        ,----,                                                                                           ");
 	mvprintw(y++, x, 			 "      ,/   .`|                                                                                           ");
 	mvprintw(y++, x, 			 "    ,`   .'  :  ,---,                                  ,-.                                               ");
-	mvprintw(y++, x,                   "			    ;    ;     /,--.' |                              ,--/ /|                 ,---,                         ");
+	mvprintw(y++, x,                         "  ,	  ,	 ;    ;	    ;    ;     /,--.' |                              ,--/ /|                 ,---,                         ");
 	mvprintw(y++, x, 			 ".'___,/    ,' |  |  :                      ,---, ,--. :/ |                /_ ./|   ,---.           ,--,  ");
 	mvprintw(y++, x, 			 "|    :     |  :  :  :                  ,-+-. /  |:  : ' /           ,---, |  ' :  '   ,'\\        ,'_ /|  ");
 	mvprintw(y++, x, 			 ";    |.';  ;  :  |  |,--.  ,--.--.    ,--.'|'   ||  '  /           /___/ \\.  : | /   /   |  .--. |  | :  ");
 	mvprintw(y++, x, 			 "`----'  |  |  |  :  '   | /       \\  |   |  ,\"' |'  |  :            .  \\  \\ ,' '.   ; ,. :,'_ /| :  . |  ");
 	mvprintw(y++, x, 			 "    '   :  ;  |  |   /' :.--.  .-. | |   | /  | ||  |   \\            \\  ;  `  ,''   | |: :|  ' | |  . .  ");
-	mvprintw(y++,x,		 "    |   |  '  '  :  | | | \\__\\/: . . |   | |  | |'  : |. \\            \\  \\    ' '   | .; :|  | ' |  | |  ");
+	mvprintw(y++,x,		                 "    |   |  '  '  :  | | | \\__\\/: . . |   | |  | |'  : |. \\            \\  \\    ' '   | .; :|  | ' |  | |  ");
 	mvprintw(y++,x, 			 "    '   :  |  |  |  ' | : ,\" .--.; | |   | |  |/ |  | ' \\ \\            '  \\   | |   :    |:  | : ;  ; |  ");
 	mvprintw(y++,x, 			 "    ;   |.'   |  :  :_:,'/  /  ,.  | |   | |--'  '  : |--'              \\  ;  ;  \\   \\  / '  :  `--'   \\ ");
 	mvprintw(y++,x, 			 "    '---'     |  | ,'   ;  :   .'   \\|   |/      ;  |,'                  :  \\  \\  `----'  :  ,      .-./ ");
-	mvprintw(y++,x,			 "              `--''     |  ,     .-./'---'       '--'                     \\  ' ;           `--`----'     ");
+	mvprintw(y++,x,			         "              `--''     |  ,     .-./'---'       '--'                     \\  ' ;           `--`----'     ");
 	mvprintw(y++,x , 			 "                         `--`---'                                          `--`                          ");
 	refresh();
 }
@@ -179,7 +179,7 @@ void createCurses(std::vector<std::string> commands)
 	keypad(stdscr, TRUE);
 	start_color();
 	init_pair(0,COLOR_BLACK, COLOR_WHITE);
-	wbkgd(stdscr, COLOR_PAIR(0));
+	bkgdset(COLOR_PAIR(0));
 	getmaxyx(stdscr,y,x);		/* get the number of rows and columns */
 	box(stdscr,'*','*');
 	//Create Windows
