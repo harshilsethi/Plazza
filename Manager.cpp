@@ -81,7 +81,7 @@ void Manager::manageKitchens(int maxCookers) {
 		isSon = fork();
 		if (isSon == -1)
 			std::cerr << "Fatal error: can't create process!" << std::endl;
-		else if(isSon == 0){
+		else if (isSon == 0) {
 			Kitchen processK(maxCookers);
 			for(int j = 0; j < maxCookers; ++j){
 				processK.addOrder(pizzas.front());
@@ -89,7 +89,7 @@ void Manager::manageKitchens(int maxCookers) {
 			}
 			processK.dispatch();
 			exit(EXIT_SUCCESS);
-		}else
-			wait(NULL);
+		} else
+			wait(nullptr);
 	}
 }
