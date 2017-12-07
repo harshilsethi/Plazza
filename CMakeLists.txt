@@ -21,5 +21,11 @@ set(SOURCE_FILES main.cpp
         Pizza/Fantasia.cpp
         Pizza/Fantasia.h
         Pizza/Regina.cpp
-        Pizza/Regina.h Manager.cpp Manager.h Kitchen.cpp Kitchen.h Team.cpp Team.h)
+        Pizza/Regina.h
+        Manager.cpp
+        Manager.h
+        Kitchen.cpp
+        Kitchen.h
+        Team.cpp
+        Team.h)
 add_executable(Plazzav1 ${SOURCE_FILES})
