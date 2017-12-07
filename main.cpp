@@ -164,7 +164,6 @@ int main()
 } */
 
 int main() {
-	//CLASS TEAM: FREE PROBLEM
 	Team bravo(10);
 	bravo.howManyCookers();
 
@@ -174,7 +173,9 @@ int main() {
 
 	manager.convertInputIntoOrder(order1);
 
-	std::cout << "===================================" << std::endl << std::endl;
+	std::cout << std::endl
+		  << "===================================" << std::endl
+		  << std::endl;
 
 	std::queue<std::string> res = manager.getPizzas();
 	manager.manageKitchens(6);
@@ -183,5 +184,5 @@ int main() {
 		res.pop();
 	}
 
-	return 0;
+	return (EXIT_SUCCESS);
 }
