@@ -18,9 +18,10 @@ class Team {
 private:
 	std::queue<Cooker *> cookers;
 public:
-	Team(int);
+	explicit Team(int);
 	~Team();
-	void getBackCooker(Cooker &);
+
+	void getBackCooker(Cooker &aCooker);
 	Cooker takeCooker();
 	int howManyCookers();
 };

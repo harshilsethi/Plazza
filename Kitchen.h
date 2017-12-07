@@ -14,14 +14,15 @@
 #include "AKitchen.h"
 #include "Cooker.h"
 
-class Kitchen : public AKitchen{
+class Kitchen : public AKitchen {
 private:
 	int nbCookers;
 	std::queue<std::string> orders;
 	std::list<Cooker> cookers;
 public:
-	Kitchen(int);
+	explicit Kitchen(int);
 	~Kitchen();
+
 	int getNbCookers();
 	std::list<Cooker> &getCookers();
 	void addOrder(std::string &);
