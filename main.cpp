@@ -8,6 +8,7 @@
 #include <iostream>
 #include <vector>
 
+static int numberOrder = 0;
 void destroy_win(WINDOW *local_win)
 {
 	wrefresh(local_win);
@@ -155,12 +156,13 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands)
 		local_win = newwin(12,50,14, 40);
 		createUserwin(local_win,commands);
 	} else if(endIt == 'N' || endIt == 'n') {
-		mvwprintw(displayCommand,1,3,"List of commands");
+		mvwprintw(displayCommand,1,3,"List of commands %d",numberOrder);
 		for(std::string command : commands){
 			mvwprintw(displayCommand,i,3,command.c_str());
 			wrefresh(displayCommand);
 			i++;
 		}
+		numberOrder++;
 	}
 	return local_win;
 }
