@@ -31,8 +31,8 @@ public:
 	int getId() const;
 	int getKitchen() const;
 	const APizza &getPizza() const;
-	void cookPizza(std::string);
-	void runThread(const std::string &);
+	void cookPizza(std::string, std::string, int);
+	void runThread(const std::string &, const std::string &, int);
 	void reset(); // reinit the cooker
 };
 
