@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2017
-** Piscine CPP
+** Plazza Project
 ** File description:
 ** APizza.h
 */

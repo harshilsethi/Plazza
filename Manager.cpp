@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2017
-** Piscine CPP
+** Plazza project
 ** File description:
 ** Manager.cpp
 */

@@ -1,8 +1,8 @@
 //
 // EPITECH PROJECT, 2017
-// 
+// Plazza Project
 // File description:
-//
+// Order.h
 //
 
 #ifndef PLAZZAV1_ORDER_H

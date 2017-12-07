@@ -13,7 +13,7 @@ Team::Team(int howMany) {
 	}
 }
 
-Team::~Team(){
+Team::~Team() {
 	while (!cookers.empty()){
 		delete cookers.front();
 		cookers.pop();

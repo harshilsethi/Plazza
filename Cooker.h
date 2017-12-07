@@ -25,6 +25,7 @@ private:
 public:
 	Cooker();
 	~Cooker();
+
 	Cooker(const Cooker &);
 	Cooker &operator=(Cooker const &);
 	int getId() const;
