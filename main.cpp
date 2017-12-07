@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Manager.h"
 #include "Order.h"
+#include "Team.h"
 #include <ncurses.h>
 #include <menu.h>
 #include <cstring>
@@ -170,16 +171,21 @@ int main(int argc,char *argv[]) {
 		int baseTime;
 		int cookersNb;
 		Manager manager;
+		Team bravo(10);
 
 		baseTime = static_cast<int>(strtol(argv[1], nullptr, 10));
 		cookersNb = static_cast<int>(strtol(argv[2], nullptr, 10));
 
+		bravo.howManyCookers();
+		std::cout << "1 T = " << baseTime << std::endl; //temp (for warnings)
 		std::string input1 = "Margarita L 3 ; American XL 3; Fantasia L 3";
 		Order order1(input1);
 
 		manager.convertInputIntoOrder(order1);
 
-		std::cout << "===================================" << std::endl << std::endl;
+		std::cout << std::endl
+			  << "===================================" << std::endl
+			  << std::endl;
 
 		std::queue<std::string> res = manager.getPizzas();
 		manager.manageKitchens(cookersNb);
@@ -188,5 +194,6 @@ int main(int argc,char *argv[]) {
 			res.pop();
 		}
 	}
-	return 0;
+
+	return (EXIT_SUCCESS);
 }
