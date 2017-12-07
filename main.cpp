@@ -183,5 +183,5 @@ int main() {
 		res.pop();
 	}
 
-	return 0;
+	return (EXIT_SUCCESS);
 }
