@@ -11,7 +11,6 @@
 #include <iostream>
 #include <string>
 #include <queue>
-#include "Kitchen.h"
 #include "Cooker.h"
 
 class Team {
