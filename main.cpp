@@ -14,18 +14,54 @@ void destroy_win(WINDOW *local_win)
 	delwin(local_win);
 }
 
+void createSimpleTitle(WINDOW *win)
+{
+	wattron(win,COLOR_PAIR(1));
+	wattron(win,A_BOLD);
+	mvwprintw(win,1, 35,"   _______   ___            __     ________  ________        __      ");
+	mvwprintw(win,2, 35,"  |   __ \"\\ |\"  |          /\"\"\\   (\"      \"\\(\"      \"\\      /\"\"\\     ");
+	mvwprintw(win,3, 35,"  (. |__) :)||  |         /    \\   \\___/   :)\\___/   :)    /    \\    ");
+	mvwprintw(win,4, 35,"  |:  ____/ |:  |        /' /\\  \\    /  ___/   /  ___/    /' /\\  \\   ");
+	mvwprintw(win,5, 35,"  (|  /      \\  |___    //  __'  \\  //  \\__   //  \\__    //  __'  \\  ");
+	mvwprintw(win,6, 35," /|__/ \\    ( \\_|:  \\  /   /  \\\\  \\(:   / \"\\ (:   / \"\\  /   /  \\\\  \\ ");
+	mvwprintw(win,7, 35,"(_______)    \\_______)(___/    \\___)\\_______) \\_______)(___/    \\___)");
+	wattroff(win,A_BOLD);
+	wattroff(win,COLOR_PAIR(1));
+	wrefresh(win);
+}
+
+void createFooter(int y, int x)
+{
+	mvprintw(y, x, 		         "        ,----,                                                                                           ");
+	mvprintw(y++, x, 			 "      ,/   .`|                                                                                           ");
+	mvprintw(y++, x, 			 "    ,`   .'  :  ,---,                                  ,-.                                               ");
+	mvprintw(y++, x,                   "			    ;    ;     /,--.' |                              ,--/ /|                 ,---,                         ");
+	mvprintw(y++, x, 			 ".'___,/    ,' |  |  :                      ,---, ,--. :/ |                /_ ./|   ,---.           ,--,  ");
+	mvprintw(y++, x, 			 "|    :     |  :  :  :                  ,-+-. /  |:  : ' /           ,---, |  ' :  '   ,'\\        ,'_ /|  ");
+	mvprintw(y++, x, 			 ";    |.';  ;  :  |  |,--.  ,--.--.    ,--.'|'   ||  '  /           /___/ \\.  : | /   /   |  .--. |  | :  ");
+	mvprintw(y++, x, 			 "`----'  |  |  |  :  '   | /       \\  |   |  ,\"' |'  |  :            .  \\  \\ ,' '.   ; ,. :,'_ /| :  . |  ");
+	mvprintw(y++, x, 			 "    '   :  ;  |  |   /' :.--.  .-. | |   | /  | ||  |   \\            \\  ;  `  ,''   | |: :|  ' | |  . .  ");
+	mvprintw(y++,x,		 "    |   |  '  '  :  | | | \\__\\/: . . |   | |  | |'  : |. \\            \\  \\    ' '   | .; :|  | ' |  | |  ");
+	mvprintw(y++,x, 			 "    '   :  |  |  |  ' | : ,\" .--.; | |   | |  |/ |  | ' \\ \\            '  \\   | |   :    |:  | : ;  ; |  ");
+	mvprintw(y++,x, 			 "    ;   |.'   |  :  :_:,'/  /  ,.  | |   | |--'  '  : |--'              \\  ;  ;  \\   \\  / '  :  `--'   \\ ");
+	mvprintw(y++,x, 			 "    '---'     |  | ,'   ;  :   .'   \\|   |/      ;  |,'                  :  \\  \\  `----'  :  ,      .-./ ");
+	mvprintw(y++,x,			 "              `--''     |  ,     .-./'---'       '--'                     \\  ' ;           `--`----'     ");
+	mvprintw(y++,x , 			 "                         `--`---'                                          `--`                          ");
+	refresh();
+}
+
 WINDOW* createTitle(WINDOW* win)
 {
 	//wborder(win,  '|', '|', '-' ,'_', '|', '|', '|', '|');
-	wprintw(win,"\\ \\    / / ___     | |     __      ___    _ __     ___      o O O  | |_     ___      o O O   | _ \\  | |     /   \\   |_  /   |_  /   /   \\  \n"
-		" \\ \\/\\/ / / -_)    | |    / _|    / _ \\  | '  \\   / -_)    o       |  _|   / _ \\    o        |  _/  | |__   | - |    / /     / /    | - |  \n"
-		"  \\_/\\_/  \\___|   _|_|_   \\__|_   \\___/  |_|_|_|  \\___|            _\\__|   \\___/            _|_|_   |____|  |_|_|   /___|   /___|   |_|_|  ");
-	wrefresh(win);
+	init_pair(1,COLOR_BLACK,139);
+	createSimpleTitle(win);
 	return win;
 }
 
 WINDOW* createMenuwin(WINDOW* local_win)
 {
+	init_pair(2,COLOR_BLACK, COLOR_YELLOW);
+	wbkgd(local_win, COLOR_PAIR(2));
 	wborder(local_win,  '|', '|', '-' ,'_', '|', '|', '|', '|');
 	mvwprintw(local_win, 1, 8, "     Menu");
 	mvwprintw(local_win,2,1,"      1 - Margarita");
@@ -47,11 +83,15 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands)
 	int i = 2;
 	char endIt;
 	std::string command;
+	init_pair(3,COLOR_BLACK, 85);
+	init_pair(4,COLOR_BLACK, 203);
+	wbkgd(local_win, COLOR_PAIR(3));
 	wborder(local_win,  '|', '|', '-' ,'_', '|', '|', '|', '|');
 	mvwprintw(local_win, 2, 3,"Please choose your pizza");
 	mvwprintw(local_win, 3, 3 ,"Enter the number before the pizza");
 	wrefresh(local_win);
 	displayCommand = newwin(12,40,14, 98);
+	wbkgd(displayCommand, COLOR_PAIR(4));
 	wborder(displayCommand,  '|', '|', '-' ,'_', '|', '|', '|', '|');
 	wrefresh(displayCommand);
 	pizza = static_cast<char>(getch());
@@ -106,7 +146,7 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands)
 		}
 		wrefresh(local_win);
 	}
-	mvwprintw(local_win,9,3,"Do you want to finish your order");
+	mvwprintw(local_win,9,3,"Do you want to make another order");
 	mvwprintw(local_win,10,3,"Y or y for Yes and N or n for No");
 	endIt = (char) wgetch(local_win);
 	if(endIt == 'Y' || endIt == 'y') {
@@ -137,40 +177,30 @@ void createCurses(std::vector<std::string> commands)
 	raw();
 	noecho();
 	keypad(stdscr, TRUE);
+	start_color();
+	init_pair(0,COLOR_BLACK, COLOR_WHITE);
+	wbkgd(stdscr, COLOR_PAIR(0));
 	getmaxyx(stdscr,y,x);		/* get the number of rows and columns */
 	box(stdscr,'*','*');
 	//Create Windows
 	titleWin = newwin(10, x - 2, 5,1);
 	menuWin = newwin(12,30,14,1);
 	userWin = newwin(12,50,14, 40);
-	//start_color(););
 	refresh();
+	//Display windows
 	titleWin = createTitle(titleWin);
 	menuWin = createMenuwin(menuWin);
 	userWin = createUserwin(userWin, commands);
 	refresh();
-	//Destroy window
-	mvprintw(y - 15 ,5,
-		 "        ,----,                                                                                           \n"
-			 "      ,/   .`|                                                                                           \n"
-			 "    ,`   .'  :  ,---,                                  ,-.                                               \n"
-			 "  ;    ;     /,--.' |                              ,--/ /|                 ,---,                         \n"
-			 ".'___,/    ,' |  |  :                      ,---, ,--. :/ |                /_ ./|   ,---.           ,--,  \n"
-			 "|    :     |  :  :  :                  ,-+-. /  |:  : ' /           ,---, |  ' :  '   ,'\\        ,'_ /|  \n"
-			 ";    |.';  ;  :  |  |,--.  ,--.--.    ,--.'|'   ||  '  /           /___/ \\.  : | /   /   |  .--. |  | :  \n"
-			 "`----'  |  |  |  :  '   | /       \\  |   |  ,\"' |'  |  :            .  \\  \\ ,' '.   ; ,. :,'_ /| :  . |  \n"
-			 "    '   :  ;  |  |   /' :.--.  .-. | |   | /  | ||  |   \\            \\  ;  `  ,''   | |: :|  ' | |  . .  \n"
-			 "    |   |  '  '  :  | | | \\__\\/: . . |   | |  | |'  : |. \\            \\  \\    ' '   | .; :|  | ' |  | |  \n"
-			 "    '   :  |  |  |  ' | : ,\" .--.; | |   | |  |/ |  | ' \\ \\            '  \\   | |   :    |:  | : ;  ; |  \n"
-			 "    ;   |.'   |  :  :_:,'/  /  ,.  | |   | |--'  '  : |--'              \\  ;  ;  \\   \\  / '  :  `--'   \\ \n"
-			 "    '---'     |  | ,'   ;  :   .'   \\|   |/      ;  |,'                  :  \\  \\  `----'  :  ,      .-./ \n"
-			 "              `--''     |  ,     .-./'---'       '--'                     \\  ' ;           `--`----'     \n"
-			 "                         `--`---'                                          `--`                          ");
-	refresh();
+	//Display thank you
+	//Display Thank You
+	createFooter(y - 15 ,(COLS - 2) / 5);
 	getch();
+	//Destroy windows
 	destroy_win(titleWin);
 	destroy_win(menuWin);
 	destroy_win(userWin);
+	getch();
 	endwin();
 }
 
