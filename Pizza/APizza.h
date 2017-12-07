@@ -9,10 +9,11 @@
 #define PIZZA_H__
 
 #include <string>
+#include <utility>
 
 class APizza {
 public:
-	explicit APizza(const std::string &size);
+	explicit APizza(std::string size);
 	virtual ~APizza() = default;;
 
 	virtual std::string getSize();
