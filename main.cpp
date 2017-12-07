@@ -162,21 +162,31 @@ int main()
 	return 0;
 } */
 
-int main() {
-	Manager manager;
-	std::string input1 = "Margarita L 3 ; American XL 3; Fantasia L 3";
-	Order order1(input1);
+int main(int argc,char *argv[]) {
+	if (argc < 3) {
+		std::cout << "In order to enter the Plazza, please specify the base time and the number of cookers " << std::endl;
+		std::cout << "Example : ./a.out [time] [cookers]" << std::endl;
+	} else {
+		int baseTime;
+		int cookersNb;
+		Manager manager;
 
-	manager.convertInputIntoOrder(order1);
+		baseTime = static_cast<int>(strtol(argv[1], nullptr, 10));
+		cookersNb = static_cast<int>(strtol(argv[2], nullptr, 10));
 
-	std::cout << "===================================" << std::endl << std::endl;
+		std::string input1 = "Margarita L 3 ; American XL 3; Fantasia L 3";
+		Order order1(input1);
 
-	std::queue<std::string> res = manager.getPizzas();
-	manager.manageKitchens(6);
-	while(!res.empty()){
-		std::cout << res.front() << std::endl;
-		res.pop();
+		manager.convertInputIntoOrder(order1);
+
+		std::cout << "===================================" << std::endl << std::endl;
+
+		std::queue<std::string> res = manager.getPizzas();
+		manager.manageKitchens(cookersNb);
+		while(!res.empty()){
+			std::cout << res.front() << std::endl;
+			res.pop();
+		}
 	}
-
 	return 0;
 }
