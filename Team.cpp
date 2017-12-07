@@ -14,9 +14,8 @@ Team::Team(int howMany) {
 }
 
 Team::~Team(){
-	for (unsigned int i = 0; i < cookers.size(); ++i){
-		Cooker *temp = cookers.front();
-		delete temp;
+	while (!cookers.empty()){
+		delete cookers.front();
 		cookers.pop();
 	}
 }
