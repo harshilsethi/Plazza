@@ -27,9 +27,15 @@ Cooker::Cooker(const Cooker &origin) {
 	busy = origin.busy;
 }
 
-Cooker Cooker::operator=(Cooker &origin) {
-	Cooker temp(origin);
-	return (temp);
+Cooker &Cooker::operator=(Cooker const &origin) {
+	if (this != &origin) {
+		id = origin.id;
+		kitchen = origin.kitchen;
+		pizza = origin.pizza;
+		threadRun = origin.threadRun;
+		busy = origin.busy;
+	}
+	return *this;
 }
 
 int Cooker::getId() const{
