@@ -89,7 +89,7 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands)
 	wbkgd(local_win, COLOR_PAIR(3));
 	wborder(local_win,  '|', '|', '-' ,'_', '|', '|', '|', '|');
 	mvwprintw(local_win, 2, 3,"Please choose your pizza");
-	mvwprintw(local_win, 3, 3 ,"Enter the number before the pizza");
+	mvwprintw(local_win, 3, 3 ,"Enter the number corresponding to the pizza");
 	wrefresh(local_win);
 	displayCommand = newwin(12,40,14, 98);
 	wbkgd(displayCommand, COLOR_PAIR(4));
@@ -116,8 +116,8 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands)
 	}
 	wgetch(local_win);
 	if(!command.empty()) {
-		mvwprintw(local_win, 4, 3, "Please choose your size");
-		mvwprintw(local_win,5,3, "Enter the number");
+		mvwprintw(local_win, 4, 3, "Which size do you want ?");
+		mvwprintw(local_win,5,3, "Please enter the corresponding number");
 		wrefresh(local_win);
 		size = static_cast<char>(getch());
 		switch (size) {
@@ -156,7 +156,7 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands)
 		local_win = newwin(12,50,14, 40);
 		createUserwin(local_win,commands);
 	} else if(endIt == 'N' || endIt == 'n') {
-		mvwprintw(displayCommand,1,3,"List of commands %d",numberOrder);
+		mvwprintw(displayCommand,1,3,"List of commands %d", numberOrder);
 		for(std::string command : commands){
 			mvwprintw(displayCommand,i,3,command.c_str());
 			wrefresh(displayCommand);
@@ -212,6 +212,7 @@ int main()
 	createCurses(commands);
 	return 0;
 }
+
 /*int main() {
 	Manager manager;
 	std::string input1 = "Margarita L 3 ; American XL 3; Fantasia L 3";
