@@ -46,10 +46,10 @@ void Kitchen::dispatch(Team &aTeam, int baseTime) { //????
 		cookers.push_back(aTeam.takeCooker());
 	}
 	for (it = cookers.begin(); it != cookers.end(); ++it){
-                if (orders.front().find("*XL") != std::string::npos){
+                if (orders.front().find("XL") != std::string::npos){
                         size = "XL";
                         pizza = orders.front().substr(0,orders.front().size() -2);
-                } else if (orders.front().find("*L") != std::string::npos){
+                } else if (orders.front().find("L") != std::string::npos){
                         size = "L";
                         pizza = orders.front().substr(0,orders.front().size() -1);
                 }else if (orders.front().find("*M")){
