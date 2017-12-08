@@ -196,7 +196,7 @@ void createCurses(std::vector<std::string> commands)
 	start_color();
 	init_pair(0,COLOR_BLACK, COLOR_WHITE);
 	bkgdset(COLOR_PAIR(0));
-	getmaxyx(stdscr,y,x);		/* get the number of rows and columns */
+	getmaxyx(stdscr,y,x);		//get the number of rows and columns
 	box(stdscr,'*','*');
 	//Create Windows
 	titleWin = newwin(10, x - 2, 5,1);
