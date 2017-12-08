@@ -1,8 +1,8 @@
 //
 // EPITECH PROJECT, 2017
-// 
+// Plazza Project
 // File description:
-//
+// Order.cpp
 //
 
 #include "Order.h"

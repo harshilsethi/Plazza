@@ -1,3 +1,10 @@
+//
+// EPITECH PROJECT, 2017
+// Plazza project
+// File description:
+// main.cpp
+//
+
 #include <iostream>
 #include "Manager.h"
 #include "Order.h"

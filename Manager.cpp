@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2017
-** Piscine CPP
+** Plazza project
 ** File description:
 ** Manager.cpp
 */
@@ -100,6 +100,6 @@ void Manager::manageKitchens(unsigned int maxCookers) {
 			processK.dispatch(managerTeam);
 			exit(EXIT_SUCCESS);
 		}else
-			wait(NULL);
+			wait(nullptr);
 	}
 }

@@ -1,13 +1,13 @@
 /*
 ** EPITECH PROJECT, 2017
-** Piscine CPP
+** Plazza Project
 ** File description:
 ** APizza.cpp
 */
 
 #include "APizza.h"
 
-APizza::APizza(const std::string &size) : size(size) {
+APizza::APizza(std::string size) : size(std::move(size)) {
 }
 
 std::string APizza::getSize() {

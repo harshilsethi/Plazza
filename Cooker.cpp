@@ -6,6 +6,10 @@
 //
 
 #include "Cooker.h"
+#include "Pizza/Margarita.h"
+#include "Pizza/American.h"
+#include "Pizza/Fantasia.h"
+#include "Pizza/Regina.h"
 
 static int nextId = 0;
 
@@ -50,15 +54,33 @@ const APizza &Cooker::getPizza() const {
 	return *pizza;
 }
 
-void Cooker::cookPizza(std::string pizza) {
+void Cooker::cookPizza(std::string pizza, std::string size, int timeBase) {
+	long int timeToWait;
 	cookerMtx.lock();
-	std::cout << "Cooker n°" << getId() << " Cooking the pizza: " << pizza << std::endl;
+	std::cout << "Cooking the pizza: " << pizza << std::endl;
+	if (pizza == "Margarita") {
+		APizza *pizzaCooked = new Margarita(size);
+		timeToWait = static_cast<long>(pizzaCooked->getCookTime() * timeBase);
+		std::this_thread::sleep_for(std::chrono::milliseconds(timeToWait));
+	} else if (pizza == "American") {
+		APizza *pizzaCooked = new American(size);
+		timeToWait = static_cast<long>(pizzaCooked->getCookTime() * timeBase);
+		std::this_thread::sleep_for(std::chrono::milliseconds(timeToWait));
+	} else if (pizza == "Fantasia") {
+		APizza *pizzaCooked = new Fantasia(size);
+		timeToWait = static_cast<long>(pizzaCooked->getCookTime() * timeBase);
+		std::this_thread::sleep_for(std::chrono::milliseconds(timeToWait));
+	} else if (pizza == "Regina") {
+		APizza *pizzaCooked = new Regina(size);
+		timeToWait = static_cast<long>(pizzaCooked->getCookTime() * timeBase);
+		std::this_thread::sleep_for(std::chrono::milliseconds(timeToWait));
+	}
 	cookerMtx.unlock();
 	threadRun = false; //at the end
 }
 
-void Cooker::runThread(const std::string &aPizza) {
-	std::thread cookerTh(&Cooker::cookPizza, this, aPizza);
+void Cooker::runThread(const std::string &aPizza, const std::string &aSize, int timeBase) {
+	std::thread cookerTh(&Cooker::cookPizza, this, aPizza, aSize, timeBase);
 	threadRun = true;
 	cookerTh.join();
 }

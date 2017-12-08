@@ -1,8 +1,8 @@
 //
 // EPITECH PROJECT, 2017
-// 
+// Plazza project
 // File description:
-//
+// AKitchen.cpp
 //
 
 #ifndef PLAZZAV1_AKITCHEN_H
