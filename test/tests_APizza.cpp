@@ -6,10 +6,10 @@
 */
 
 #include <criterion/criterion.h>
-#include "Margarita.h"
-#include "Regina.h"
-#include "American.h"
-#include "Fantasia.h"
+#include "../Pizza/Margarita.h"
+#include "../Pizza/Regina.h"
+#include "../Pizza/American.h"
+#include "../Pizza/Fantasia.h"
 
 Margarita margarita = new Margarita("XL");
 Regina regina = new Regina("L");

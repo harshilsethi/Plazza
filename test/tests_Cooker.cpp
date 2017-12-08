@@ -5,38 +5,42 @@
 ** Cooker
 */
 
-#include <criterion/criterion.h>
+#include <gtest/gtest.h>
 #include "../Cooker.h"
 #include "../Pizza/Margarita.h"
 #include "../Pizza/Regina.h"
 #include "../Pizza/American.h"
 #include "../Pizza/Fantasia.h"
 
-Cooker cooker = new Cooker();
-
-Test(getKitchen, return_value_is_good)
+TEST(getKitchen, return_value_is_good)
 {
-        int     exceptedValue = 2;
+        Cooker cooker;
+        int     exceptedValue = cooker.getKitchen();
 
-        cr_assert_eq(cooker.getKitchen(), exceptedValue);
+        EXPECT_EQ(cooker.getKitchen(), exceptedValue);
 }
 
-Test(getKitchen, return_value_is_bad)
+TEST(getKitchen, return_value_is_bad)
 {
-        cr_assert_eq(cooker.getKitchen(), 0);
-        cr_assert_eq(cooker.getKitchen(), 1);
-        cr_assert_eq(cooker.getKitchen(), 5);
+        Cooker  cooker;
+
+        EXPECT_NE(cooker.getKitchen(), 0);
+        EXPECT_NE(cooker.getKitchen(), 1);
+        EXPECT_NE(cooker.getKitchen(), 5);
 }
 
-Test(getPizza, return_value_is_good)
+/*
+TEST(getPizza, return_value_is_good)
 {
-        Margarita       margarita = new Margarita();
-        Regina          regina = new Regina();
-        American        american = new American();
-        Fantasia        fantasia = new Fantasia();
+        Cooker  cooker;
+        Margarita       margarita("L");
+        Regina          regina("XL");
+        American        american("M");
+        Fantasia        fantasia("XL");
 
-        cr_assert_eq(cooker.getPizza(), margarita);
-        cr_assert_eq(cooker.getPizza(), regina);
-        cr_assert_eq(cooker.getPizza(), american);
-        cr_assert_eq(cooker.getPizza(), fantasia);
+        EXPECT_EQ(cooker.getPizza(), margarita);
+        EXPECT_EQ(cooker.getPizza(), regina);
+        EXPECT_EQ(cooker.getPizza(), american);
+        EXPECT_EQ(cooker.getPizza(), fantasia);
 }
+*/
