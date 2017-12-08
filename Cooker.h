@@ -9,28 +9,31 @@
 #define COOKER_H__
 
 #include <iostream>
+#include <string>
 #include <thread>
 #include <mutex>
 #include "Pizza/APizza.h"
 
 class Cooker {
 private:
-	std::thread *cookerTh;
 	std::mutex cookerMtx;
 	int kitchen;
 	int id;
-	APizza pizza;
+	APizza *pizza; // pointeur ?
 	bool busy;
 	bool threadRun;
 public:
 	Cooker();
 	~Cooker();
 
+	Cooker(const Cooker &);
+	Cooker &operator=(Cooker const &);
 	int getId() const;
 	int getKitchen() const;
 	const APizza &getPizza() const;
-	void cookPizza(std::string);
-	void setThread(std::string &);
+	void cookPizza(std::string, std::string, int);
+	void runThread(const std::string &, const std::string &, int);
+	void reset(); // reinit the cooker
 };
 
 

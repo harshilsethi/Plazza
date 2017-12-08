@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2017
-** Piscine CPP
+** Plazza Project
 ** File description:
 ** Manager.h
 */
@@ -25,11 +25,12 @@ public:
 
 	std::queue<std::string> convertInputIntoOrder(Order order);
 	std::queue<std::string> getPizzas();
-	void manageKitchens(int);
+	void manageKitchens(unsigned int);
 
 private:
 	std::queue<std::string> pizzas;
 	std::list<Kitchen *> kitchens;
+	Team managerTeam;
 };
 
 #endif /* ! MANAGER_H__ */
