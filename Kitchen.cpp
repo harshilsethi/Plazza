@@ -38,6 +38,8 @@ void Kitchen::dispatch(Team &aTeam) { //????
 	std::cout << "Cooking !" << std::endl;
 	std::list<Cooker>::iterator it;
 	std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>" << orders.size() << std::endl;
+        std::string pizzaName;
+        std::string pizzaSize;
 
 	for (unsigned int i = 0; i < orders.size(); ++i){
 		cookers.push_back(aTeam.takeCooker());

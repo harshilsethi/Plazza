@@ -50,7 +50,6 @@ std::queue<std::string> Manager::convertInputIntoOrder(Order order) {
                 }
 		for (int i = 0; i < pizzaCounter; ++i) {
 			pizzas.push(entry);
-			pizzas.back().pop_back();
 		}
 	}
 
