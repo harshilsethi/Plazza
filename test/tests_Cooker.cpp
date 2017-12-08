@@ -24,7 +24,7 @@ TEST(getKitchen, return_value_is_bad)
 {
         Cooker  cooker;
 
-        EXPECT_NE(cooker.getKitchen(), 0);
+        EXPECT_NE(cooker.getKitchen(), 4);
         EXPECT_NE(cooker.getKitchen(), 1);
         EXPECT_NE(cooker.getKitchen(), 5);
 }
