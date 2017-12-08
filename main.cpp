@@ -84,7 +84,7 @@ WINDOW* createMenuwin(WINDOW* local_win)
 	return local_win;
 }
 
-WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands)
+WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> *commands)
 {
 	WINDOW *displayCommand;
 	int pizza, size, number;
@@ -152,7 +152,7 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands)
 			wscanw(local_win, const_cast<char *>("%d"), &number);
 			wrefresh(local_win);
 			command = command + " " + std::to_string(number) + " ; ";
-			commands.push_back(command);
+			commands->push_back(command);
 		}
 		wrefresh(local_win);
 	}
@@ -166,7 +166,7 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands)
 		createUserwin(local_win, commands);
 	} else if(endIt == 'N' || endIt == 'n') {
 		mvwprintw(displayCommand,1,3,"List of commands %d", numberOrder);
-		for(std::string command : commands){
+		for(std::string command : *commands){
 			mvwprintw(displayCommand,i,3,command.c_str());
 			wrefresh(displayCommand);
 			i++;
@@ -176,7 +176,7 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands)
 	return local_win;
 }
 
-void createCurses(std::vector<std::string> commands)
+void createCurses(std::vector<std::string> *commands)
 {
 	WINDOW *titleWin;
 	WINDOW *menuWin;
@@ -231,7 +231,7 @@ int main(int argc,char *argv[]) { //./a.out []
 		baseTime = static_cast<int>(strtol(argv[1], nullptr, 10));
 		cookersNb = static_cast<int>(strtol(argv[2], nullptr, 10));
 
-		createCurses(commands);
+		createCurses(&commands);
 		manager.setTime(baseTime);
 
 		std::cout << "1 T = " << baseTime << std::endl; //temp (for warnings)
