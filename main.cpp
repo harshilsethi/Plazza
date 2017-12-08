@@ -176,7 +176,7 @@ int main(int argc,char *argv[]) { //./a.out []
 		cookersNb = static_cast<int>(strtol(argv[2], nullptr, 10));
 
 		std::cout << "1 T = " << baseTime << std::endl; //temp (for warnings)
-		std::string input1 = "Margarita L 3 ; American XL 3; Fantasia L 3";
+		std::string input1 = "Margarita L 2 ; American XL 11; Fantasia L 7";
 		Order order1(input1);
 
 		manager.convertInputIntoOrder(order1);
@@ -187,10 +187,10 @@ int main(int argc,char *argv[]) { //./a.out []
 
 		std::queue<std::string> res = manager.getPizzas();
 		manager.manageKitchens(cookersNb);
-		while(!res.empty()){
+		/*while(!res.empty()){
 			std::cout << res.front() << std::endl;
 			res.pop();
-		}
+		}*/
 	}
 
 	return (EXIT_SUCCESS);
