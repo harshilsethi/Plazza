@@ -84,7 +84,7 @@ WINDOW* createMenuwin(WINDOW* local_win)
 	return local_win;
 }
 
-WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands, Order *order)
+WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands, Order &order)
 {
 	WINDOW *displayCommand;
 	int pizza, size, number;
@@ -153,7 +153,9 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands, Orde
 			wscanw(local_win, const_cast<char *>("%d"), &number);
 			wrefresh(local_win);
 			command = command + " " + std::to_string(number) + " ; ";
-			commandToTransfer = command;
+			commandToTransfer.append(command);
+			order.setCommand(commandToTransfer);
+			std::cout << "Order.getCommand : " << order.getCommand() << std::endl;
 			commands.push_back(command);
 		}
 		wrefresh(local_win);
@@ -167,7 +169,10 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands, Orde
 		local_win = newwin(12,50,14, 40);
 		createUserwin(local_win, commands, order);
 	} else if(endIt == 'N' || endIt == 'n') {
-		order->setCommand(commandToTransfer);
+		std::cout << "COMMAND TO TRANSFER : " << commandToTransfer << std::endl;
+
+		order.setCommand(commandToTransfer);
+		std::cout << "Order.getCommand : " << order.getCommand() << std::endl;
 		mvwprintw(displayCommand,1,3,"List of commands %d", numberOrder);
 		for(std::string command : commands){
 			mvwprintw(displayCommand,i,3,command.c_str());
@@ -206,7 +211,7 @@ void createCurses(std::vector<std::string> commands)
 	//Display windows
 	titleWin = createTitle(titleWin);
 	menuWin = createMenuwin(menuWin);
-	userWin = createUserwin(userWin, commands, &order);
+	userWin = createUserwin(userWin, commands, order);
 	refresh();
 	//Display thank you
 	//Display Thank You
@@ -220,13 +225,6 @@ void createCurses(std::vector<std::string> commands)
 	endwin();
 }
 
-int main()
-{
-	std::vector<std::string> commands;
-	createCurses(commands);
-	return 0;
-}
-
 int main(int argc,char *argv[]) { //./a.out []
 
 	if (argc < 3) {
@@ -236,16 +234,25 @@ int main(int argc,char *argv[]) { //./a.out []
 		int baseTime;
 		int cookersNb;
 		Manager manager;
+		std::vector<std::string> commands;
+		std::string commandsToTransfer;
 
 		baseTime = static_cast<int>(strtol(argv[1], nullptr, 10));
 		cookersNb = static_cast<int>(strtol(argv[2], nullptr, 10));
 
+		createCurses(commands);
 		manager.setTime(baseTime);
 
 		std::cout << "1 T = " << baseTime << std::endl; //temp (for warnings)
 		std::string input1 = "Margarita L 2 ; American XL 11; Fantasia L 7";
-		Order order1(input1);
 
+		for (const auto &command : commands) {
+			std::cout << "COMMAND : " << command << std::endl;
+			commandsToTransfer.append(command);
+			commandsToTransfer.append(";");
+		}
+
+		Order order1(commandsToTransfer);
 		manager.convertInputIntoOrder(order1);
 
 		std::cout << std::endl

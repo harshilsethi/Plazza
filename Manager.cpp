@@ -29,7 +29,7 @@ void split5(const std::string& str, Container& cont,
 }
 
 std::queue<std::string> Manager::convertInputIntoOrder(Order order) {
-	std::cout << order.getCommand() << std::endl;
+	std::cout << "ORDER.GETCOMMAND " << order.getCommand() << std::endl;
 	std::string orderToConvert = order.getCommand(); // "Margarita L 2 ; American XL 1"
 	std::vector<std::string> result;
 	int pizzaCounter;
