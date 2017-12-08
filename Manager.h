@@ -25,7 +25,7 @@ public:
 
 	std::queue<std::string> convertInputIntoOrder(Order order);
 	std::queue<std::string> getPizzas();
-	void manageKitchens(int);
+	void manageKitchens(unsigned int);
 
 private:
 	std::queue<std::string> pizzas;

@@ -43,7 +43,7 @@ void Kitchen::dispatch(Team &aTeam) { //????
 		cookers.push_back(aTeam.takeCooker());
 	}
 	for (it = cookers.begin(); it != cookers.end(); ++it){
-		it->cookPizza(orders.front());
+		it->runThread(orders.front());
 		orders.pop();
 	}
 

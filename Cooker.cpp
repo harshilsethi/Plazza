@@ -52,7 +52,7 @@ const APizza &Cooker::getPizza() const {
 
 void Cooker::cookPizza(std::string pizza) {
 	cookerMtx.lock();
-	std::cout << "Cooking the pizza: " << pizza << std::endl;
+	std::cout << "Cooker n°" << getId() << " Cooking the pizza: " << pizza << std::endl;
 	cookerMtx.unlock();
 	threadRun = false; //at the end
 }

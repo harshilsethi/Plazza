@@ -65,7 +65,7 @@ std::queue<std::string> Manager::getPizzas() {
 	return pizzas;
 }
 
-void Manager::manageKitchens(int maxCookers) {
+void Manager::manageKitchens(unsigned int maxCookers) {
 	int nbKitchens = pizzas.size() / maxCookers;
 	pid_t isSon;
 
@@ -78,15 +78,19 @@ void Manager::manageKitchens(int maxCookers) {
 		nbKitchens++;
 
 	for (int i = 0; i < nbKitchens; ++i){
+		Kitchen processK(maxCookers);
+		std::cout << std::endl << pizzas.size() << " - " << maxCookers << " = " << pizzas.size() - maxCookers << std::endl << std::endl;
+		for(unsigned int j = 0; j < maxCookers; ++j){
+			processK.addOrder(pizzas.front());
+			pizzas.pop();
+		}
+		if (pizzas.size() < maxCookers){
+			maxCookers = pizzas.size();
+		}
 		isSon = fork();
 		if (isSon == -1)
 			std::cerr << "Fatal error: can't create process!" << std::endl;
 		else if(isSon == 0){
-			Kitchen processK(maxCookers);
-			for(int j = 0; j < maxCookers; ++j){
-				processK.addOrder(pizzas.front());
-				pizzas.pop();
-			}
 			processK.dispatch(managerTeam);
 			exit(EXIT_SUCCESS);
 		}else
