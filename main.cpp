@@ -182,6 +182,8 @@ int main(int argc,char *argv[]) { //./a.out []
 		baseTime = static_cast<int>(strtol(argv[1], nullptr, 10));
 		cookersNb = static_cast<int>(strtol(argv[2], nullptr, 10));
 
+		manager.setTime(baseTime);
+
 		std::cout << "1 T = " << baseTime << std::endl; //temp (for warnings)
 		std::string input1 = "Margarita L 2 ; American XL 11; Fantasia L 7";
 		Order order1(input1);

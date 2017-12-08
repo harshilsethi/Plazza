@@ -29,7 +29,7 @@ public:
 	void addOrder(std::string &);
 	std::string giveOrder();
 	void deleteOrder();
-	void dispatch(Team &);
+	void dispatch(Team &, int);
 	bool getStatut();
 };
 

@@ -33,7 +33,7 @@ void Kitchen::deleteOrder() {
 	orders.pop();
 }
 
-void Kitchen::dispatch(Team &aTeam) { //????
+void Kitchen::dispatch(Team &aTeam, int baseTime) { //????
 	//fait faire les pizzas par les cuisiniers
 	std::cout << "Cooking !" << std::endl;
 	std::list<Cooker>::iterator it;
@@ -56,7 +56,7 @@ void Kitchen::dispatch(Team &aTeam) { //????
                         size = "M";
                         pizza = orders.front().substr(0,orders.front().size() -1);
                 }
-                it->runThread(pizza, size, ); //timeBase
+                it->runThread(pizza, size, baseTime); //timeBase
 		orders.pop();
 	}
 
