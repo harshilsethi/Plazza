@@ -120,6 +120,7 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands)
 		mvwprintw(local_win,5,3, "Please enter the corresponding number");
 		wrefresh(local_win);
 		size = static_cast<char>(getch());
+		getch();
 		switch (size) {
 			case '1':
 				command = command + " " + "M";
