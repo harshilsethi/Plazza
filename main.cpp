@@ -77,13 +77,15 @@ WINDOW* createMenuwin(WINDOW* local_win)
 	return local_win;
 }
 
-WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands)
+WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands, Order *order)
 {
 	WINDOW *displayCommand;
 	int pizza, size, number;
 	int i = 2;
 	char endIt;
 	std::string command;
+	std::string commandToTransfer;
+
 	init_pair(3,COLOR_BLACK, 85);
 	init_pair(4,COLOR_BLACK, 203);
 	wbkgd(local_win, COLOR_PAIR(3));
@@ -143,7 +145,8 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands)
 			mvwprintw(local_win, 7, 3, "Enter the number");
 			wscanw(local_win, const_cast<char *>("%d"), &number);
 			wrefresh(local_win);
-			command = command + " " + std::to_string(number) + "\n";
+			command = command + " " + std::to_string(number) + " ; ";
+			commandToTransfer = command;
 			commands.push_back(command);
 		}
 		wrefresh(local_win);
@@ -155,8 +158,9 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands)
 		destroy_win(local_win);
 		destroy_win(displayCommand);
 		local_win = newwin(12,50,14, 40);
-		createUserwin(local_win,commands);
+		createUserwin(local_win, commands, order);
 	} else if(endIt == 'N' || endIt == 'n') {
+		order->setCommand(commandToTransfer);
 		mvwprintw(displayCommand,1,3,"List of commands %d", numberOrder);
 		for(std::string command : commands){
 			mvwprintw(displayCommand,i,3,command.c_str());
@@ -173,6 +177,8 @@ void createCurses(std::vector<std::string> commands)
 	WINDOW *titleWin;
 	WINDOW *menuWin;
 	WINDOW *userWin;
+	Order order;
+
 	// Initialize curses
 	int y, x;
 	initscr();
@@ -193,7 +199,7 @@ void createCurses(std::vector<std::string> commands)
 	//Display windows
 	titleWin = createTitle(titleWin);
 	menuWin = createMenuwin(menuWin);
-	userWin = createUserwin(userWin, commands);
+	userWin = createUserwin(userWin, commands, &order);
 	refresh();
 	//Display thank you
 	//Display Thank You
