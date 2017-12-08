@@ -26,11 +26,14 @@ public:
 	std::queue<std::string> convertInputIntoOrder(Order order);
 	std::queue<std::string> getPizzas();
 	void manageKitchens(unsigned int);
+	void setTime(int);
+	int getTime();
 
 private:
 	std::queue<std::string> pizzas;
 	std::list<Kitchen *> kitchens;
 	Team managerTeam;
+	int baseTime;
 };
 
 #endif /* ! MANAGER_H__ */

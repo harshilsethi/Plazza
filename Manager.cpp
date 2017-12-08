@@ -67,6 +67,14 @@ std::queue<std::string> Manager::convertInputIntoOrder(Order order) {
 	} */
 }
 
+void Manager::setTime(int timeBase) {
+	baseTime = timeBase;
+}
+
+int Manager::getTime() {
+	return (baseTime);
+}
+
 std::queue<std::string> Manager::getPizzas() {
 	return pizzas;
 }
@@ -96,7 +104,7 @@ void Manager::manageKitchens(unsigned int maxCookers) {
 		if (isSon == -1)
 			std::cerr << "Fatal error: can't create process!" << std::endl;
 		else if(isSon == 0){
-			processK.dispatch(managerTeam);
+			processK.dispatch(managerTeam, baseTime);
 			exit(EXIT_SUCCESS);
 		}else
 			wait(nullptr);
