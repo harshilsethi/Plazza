@@ -17,12 +17,11 @@ SET(SRC ../Pizza/APizza.h ../Pizza/APizza.cpp
         ../Cooker.h ../Cooker.cpp
         ../Order.h ../Order.cpp
         ../Manager.h ../Manager.cpp
+        ../Kitchen.h ../Kitchen.cpp
         ../Team.h ../Team.cpp)
 
 SET(TEST_SOURCES tests_Cooker.cpp MainGTest.cpp)
 
 add_executable(tests ${SRC} ${TEST_SOURCES})
-
-
 
 target_link_libraries(tests gtest)
