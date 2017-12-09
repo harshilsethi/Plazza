@@ -27,7 +27,6 @@ Cooker::Cooker(const Cooker &origin) {
 	id = origin.id;
 	kitchen = origin.kitchen;
 	pizza = origin.pizza;
-	threadRun = origin.threadRun;
 	busy = origin.busy;
 }
 
@@ -36,7 +35,6 @@ Cooker &Cooker::operator=(Cooker const &origin) {
 		id = origin.id;
 		kitchen = origin.kitchen;
 		pizza = origin.pizza;
-		threadRun = origin.threadRun;
 		busy = origin.busy;
 	}
 	return *this;
@@ -76,12 +74,12 @@ void Cooker::cookPizza(std::string pizza, std::string size, int timeBase) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(timeToWait));
 	}
 	cookerMtx.unlock();
-	threadRun = false; //at the end
+	busy = false; //at the end
 }
 
 void Cooker::runThread(const std::string &aPizza, const std::string &aSize, int timeBase) {
 	std::thread cookerTh(&Cooker::cookPizza, this, aPizza, aSize, timeBase);
-	threadRun = true;
+	busy = true;
 	cookerTh.join();
 }
 
@@ -89,5 +87,4 @@ void Cooker::reset() {
 	kitchen = -1; // not sure ...
 	pizza = nullptr;
 	busy = false;
-	threadRun = false;
 }

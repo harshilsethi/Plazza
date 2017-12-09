@@ -21,7 +21,6 @@ private:
 	int id;
 	APizza *pizza; // pointeur ?
 	bool busy;
-	bool threadRun;
 public:
 	Cooker();
 	~Cooker();
