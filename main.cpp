@@ -8,7 +8,7 @@
 #include <iostream>
 #include <vector>
 
-static int numberOrder = 0;
+static int numberOrder = 1;
 void destroy_win(WINDOW *local_win)
 {
 	wrefresh(local_win);
@@ -77,12 +77,14 @@ WINDOW* createMenuwin(WINDOW* local_win)
 	return local_win;
 }
 
-WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands)
+WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> *commands, std::list<Order> orders)
 {
 	WINDOW *displayCommand;
+	std::string result;
 	int pizza, size, number;
 	int i = 2;
-	char endIt;
+	int j = 2;
+	char endOrder, endPro;
 	std::string command;
 	init_pair(3,COLOR_BLACK, 85);
 	init_pair(4,COLOR_BLACK, 203);
@@ -143,37 +145,65 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> commands)
 			mvwprintw(local_win, 7, 3, "Enter the number");
 			wscanw(local_win, const_cast<char *>("%d"), &number);
 			wrefresh(local_win);
-			command = command + " " + std::to_string(number) + "\n";
-			commands.push_back(command);
+			command = command + " " + std::to_string(number);
+			commands->push_back(command);
 		}
 		wrefresh(local_win);
 	}
-	mvwprintw(local_win,9,3,"Do you want to make another order");
+	mvwprintw(local_win,9,3,"Do you want to add pizza to this order");
 	mvwprintw(local_win,10,3,"Y or y for Yes and N or n for No");
-	endIt = (char) wgetch(local_win);
-	if(endIt == 'Y' || endIt == 'y') {
+	endOrder = (char) wgetch(local_win);
+	if(endOrder == 'Y' || endOrder == 'y') {
 		destroy_win(local_win);
 		destroy_win(displayCommand);
 		local_win = newwin(12,50,14, 40);
-		createUserwin(local_win,commands);
-	} else if(endIt == 'N' || endIt == 'n') {
-		mvwprintw(displayCommand,1,3,"List of commands %d", numberOrder);
-		for(std::string command : commands){
-			mvwprintw(displayCommand,i,3,command.c_str());
+		createUserwin(local_win,commands, orders);
+	} else if(endOrder == 'N' || endOrder == 'n') {
+		mvwprintw(displayCommand, 1, 3, "List of Pizza of commands");
+		for (std::string command : *commands) {
+			result = result + command + ";";
+			mvwprintw(displayCommand, i, 3, command.c_str());
 			wrefresh(displayCommand);
 			i++;
 		}
-		numberOrder++;
+		wclear(local_win);
+		wrefresh(local_win);
+		Order order(result);
+		orders.push_back(order);
+		mvwprintw(local_win, 1, 3, "Do you want to make another order");
+		endPro = (char) wgetch(local_win);
+		if (endPro == 'Y' || endPro == 'y') {
+			commands->clear();
+			numberOrder++;
+			destroy_win(local_win);
+			destroy_win(displayCommand);
+			local_win = newwin(12, 50, 14, 40);
+			createUserwin(local_win, commands, orders);
+		} else if(endPro == 'N' || endPro == 'n'){
+			wclear(displayCommand);
+			i = 1;
+			mvwprintw(displayCommand, 1, 3, "You have total of %d orders", numberOrder);
+			for(Order order : orders)
+			{
+				mvwprintw(displayCommand,j,3, "Order %d ", i);
+				i++;
+				j++;
+				mvwprintw(displayCommand, j, 3, order.getCommand().c_str());
+				j++;
+			}
+			wrefresh(displayCommand);
+		}
 	}
 	return local_win;
 }
 
-void createCurses(std::vector<std::string> commands)
+void createCurses(std::list<Order> orders)
 {
 	WINDOW *titleWin;
 	WINDOW *menuWin;
 	WINDOW *userWin;
 	// Initialize curses
+	std::vector<std::string> commands;
 	int y, x;
 	initscr();
 	cbreak();
@@ -193,7 +223,7 @@ void createCurses(std::vector<std::string> commands)
 	//Display windows
 	titleWin = createTitle(titleWin);
 	menuWin = createMenuwin(menuWin);
-	userWin = createUserwin(userWin, commands);
+	userWin = createUserwin(userWin, &commands, orders);
 	refresh();
 	//Display thank you
 	//Display Thank You
@@ -207,13 +237,11 @@ void createCurses(std::vector<std::string> commands)
 	endwin();
 }
 
-int main()
-{
-	std::vector<std::string> commands;
-	createCurses(commands);
+int main() {
+	std::list<Order> orders;
+	createCurses(orders);
 	return 0;
 }
-
 /*int main() {
 	Manager manager;
 	std::string input1 = "Margarita L 3 ; American XL 3; Fantasia L 3";
