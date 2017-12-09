@@ -90,16 +90,16 @@ void Manager::manageKitchens(unsigned int maxCookers) {
 		nbKitchens = 1;
 	else if (pizzas.size() % maxCookers != 0)
 		nbKitchens++;
-
 	for (int i = 0; i < nbKitchens; ++i){
 		Kitchen processK(maxCookers);
+		if (pizzas.size() < maxCookers){
+			maxCookers = pizzas.size();
+		}
 		for(unsigned int j = 0; j < maxCookers; ++j){
 			processK.addOrder(pizzas.front());
 			pizzas.pop();
 		}
-		if (pizzas.size() < maxCookers){
-			maxCookers = pizzas.size();
-		}
+
 		isSon = fork();
 		if (isSon == -1)
 			std::cerr << "Fatal error: can't create process!" << std::endl;
