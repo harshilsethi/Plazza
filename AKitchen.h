@@ -9,11 +9,14 @@
 #define PLAZZAV1_AKITCHEN_H
 
 
+#include "Pizza/PizzaFactory.h"
+
 class AKitchen {
 private:
 	int id;
 public:
 	int getId() const;
+	PizzaFactory pizzaFactory;
 };
 
 

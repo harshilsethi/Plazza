@@ -151,7 +151,7 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> *commands)
 			mvwprintw(local_win, 7, 3, "Enter the number");
 			wscanw(local_win, const_cast<char *>("%d"), &number);
 			wrefresh(local_win);
-			command = command + " " + std::to_string(number) + " ; ";
+			command = command + " " + std::to_string(number);
 			commands->push_back(command);
 		}
 		wrefresh(local_win);
