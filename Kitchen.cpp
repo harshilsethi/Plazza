@@ -46,7 +46,7 @@ void Kitchen::dispatch(Team &aTeam, int baseTime) { //????
 		cookers.push_back(aTeam.takeCooker());
 	}
 	for (it = cookers.begin(); it != cookers.end(); ++it){
-		it->setKitchen(this);
+		//it->setKitchen(this);
                 if (orders.front().find("XL") != std::string::npos){
                         size = "XL";
                         pizza = orders.front().substr(0,orders.front().size() -2);
@@ -60,6 +60,7 @@ void Kitchen::dispatch(Team &aTeam, int baseTime) { //????
                 it->runThread(pizza, size, baseTime); //timeBase
 		orders.pop();
 	}
+	std::cout << " NB : " << getNbOfBusyCookers() << std::endl;
 }
 
 void Kitchen::updateStatus() {
@@ -72,9 +73,9 @@ void Kitchen::updateStatus() {
 
 int Kitchen::getNbOfBusyCookers() {
 	int nbOfBusyCookers = 0;
-	for (auto &cooker : getCookers()) {
+	/*for (auto &cooker : getCookers()) {
 		if (cooker.isBusy())
 			nbOfBusyCookers++;
-	}
+	}*/
 	return nbOfBusyCookers;
 }

@@ -17,7 +17,7 @@ static int nextId = 0;
 Cooker::Cooker() {
 	nextId++;
 	pizza = nullptr;
-	kitchen = nullptr
+	//kitchen = nullptr;
 	id = nextId;
 }
 
@@ -25,7 +25,7 @@ Cooker::~Cooker(){
 	delete pizza;
 }
 
-Cooker::Cooker(const Cooker &origin) : kitchen(origin.kitchen) {
+Cooker::Cooker(const Cooker &origin) /*: kitchen(origin.kitchen) */{
 	id = origin.id;
 	pizza = origin.pizza;
 	busy = origin.busy;
@@ -34,7 +34,7 @@ Cooker::Cooker(const Cooker &origin) : kitchen(origin.kitchen) {
 Cooker &Cooker::operator=(Cooker const &origin) {
 	if (this != &origin) {
 		id = origin.id;
-		kitchen = origin.kitchen;
+		//kitchen = origin.kitchen;
 		pizza = origin.pizza;
 		busy = origin.busy;
 	}
@@ -44,15 +44,15 @@ Cooker &Cooker::operator=(Cooker const &origin) {
 int Cooker::getId() const{
 	return (id);
 }
-
+/*
 Kitchen *Cooker::getKitchen() const {
 	return kitchen;
 }
 
 void Cooker::setKitchen(Kitchen *kitchen) {
-	this->kitchen = kitchen;
+//	this->kitchen = kitchen;
 }
-
+*/
 const APizza &Cooker::getPizza() const {
 	return *pizza;
 }
@@ -60,8 +60,8 @@ const APizza &Cooker::getPizza() const {
 void Cooker::cookPizza(std::string pizza, std::string size, int timeBase) {
 	long int timeToWait;
 	cookerMtx.lock();
-	Kitchen *kitchen = getKitchen();
-	kitchen->updateStatus();
+	//Kitchen *kitchen = getKitchen();
+	//kitchen->updateStatus();
 	std::cout << "Cooking the pizza: " << pizza << std::endl;
 	if (pizza == "Margarita") {
 		APizza *pizzaCooked = new Margarita(size);
@@ -81,8 +81,8 @@ void Cooker::cookPizza(std::string pizza, std::string size, int timeBase) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(timeToWait));
 	}
 	cookerMtx.unlock();
-	kitchen->updateStatus();
 	busy = false; //at the end
+	//kitchen->updateStatus();
 }
 
 void Cooker::runThread(const std::string &aPizza, const std::string &aSize, int timeBase) {
