@@ -160,9 +160,13 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> *commands)
 	mvwprintw(local_win,10,3,"Y or y for Yes and N or n for No");
 	endIt = (char) wgetch(local_win);
 	if(endIt == 'Y' || endIt == 'y') {
-		destroy_win(local_win);
-		destroy_win(displayCommand);
-		local_win = newwin(12,50,14, 40);
+		//destroy_win(local_win);
+		//destroy_win(displayCommand);
+		//local_win = newwin(12,50,14, 40);
+		wclear(local_win);
+		wclear(displayCommand);
+		wrefresh(local_win);
+		wrefresh(displayCommand);
 		createUserwin(local_win, commands);
 	} else if(endIt == 'N' || endIt == 'n') {
 		mvwprintw(displayCommand,1,3,"List of commands %d", numberOrder);
