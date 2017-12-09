@@ -154,9 +154,13 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> *commands, std
 	mvwprintw(local_win,10,3,"Y or y for Yes and N or n for No");
 	endOrder = (char) wgetch(local_win);
 	if(endOrder == 'Y' || endOrder == 'y') {
-		destroy_win(local_win);
-		destroy_win(displayCommand);
-		local_win = newwin(12,50,14, 40);
+		//destroy_win(local_win);
+		//destroy_win(displayCommand);
+		//local_win = newwin(12,50,14, 40);
+		wclear(local_win);
+		wclear(displayCommand);
+		wrefresh(local_win);
+		wrefresh(displayCommand);
 		createUserwin(local_win,commands, orders);
 	} else if(endOrder == 'N' || endOrder == 'n') {
 		mvwprintw(displayCommand, 1, 3, "List of Pizza of commands");
