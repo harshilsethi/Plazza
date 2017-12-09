@@ -179,9 +179,13 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> *commands, std
 		if (endPro == 'Y' || endPro == 'y') {
 			commands->clear();
 			numberOrder++;
-			destroy_win(local_win);
-			destroy_win(displayCommand);
-			local_win = newwin(12, 50, 14, 40);
+			//destroy_win(local_win);
+			//destroy_win(displayCommand);
+			//local_win = newwin(12, 50, 14, 40);
+			wclear(local_win);
+			wclear(displayCommand);
+			wrefresh(local_win);
+			wrefresh(displayCommand);
 			createUserwin(local_win, commands, orders);
 		} else if(endPro == 'N' || endPro == 'n'){
 			wclear(displayCommand);
