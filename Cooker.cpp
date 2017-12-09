@@ -10,12 +10,14 @@
 #include "Pizza/American.h"
 #include "Pizza/Fantasia.h"
 #include "Pizza/Regina.h"
+#include "Kitchen.h"
 
 static int nextId = 0;
 
-Cooker::Cooker(){
+Cooker::Cooker() {
 	nextId++;
 	pizza = nullptr;
+	kitchen = nullptr
 	id = nextId;
 }
 
@@ -23,9 +25,8 @@ Cooker::~Cooker(){
 	delete pizza;
 }
 
-Cooker::Cooker(const Cooker &origin) {
+Cooker::Cooker(const Cooker &origin) : kitchen(origin.kitchen) {
 	id = origin.id;
-	kitchen = origin.kitchen;
 	pizza = origin.pizza;
 	busy = origin.busy;
 }
@@ -44,8 +45,12 @@ int Cooker::getId() const{
 	return (id);
 }
 
-int Cooker::getKitchen() const {
+Kitchen *Cooker::getKitchen() const {
 	return kitchen;
+}
+
+void Cooker::setKitchen(Kitchen *kitchen) {
+	this->kitchen = kitchen;
 }
 
 const APizza &Cooker::getPizza() const {
@@ -55,6 +60,8 @@ const APizza &Cooker::getPizza() const {
 void Cooker::cookPizza(std::string pizza, std::string size, int timeBase) {
 	long int timeToWait;
 	cookerMtx.lock();
+	Kitchen *kitchen = getKitchen();
+	kitchen->updateStatus();
 	std::cout << "Cooking the pizza: " << pizza << std::endl;
 	if (pizza == "Margarita") {
 		APizza *pizzaCooked = new Margarita(size);
@@ -74,6 +81,7 @@ void Cooker::cookPizza(std::string pizza, std::string size, int timeBase) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(timeToWait));
 	}
 	cookerMtx.unlock();
+	kitchen->updateStatus();
 	busy = false; //at the end
 }
 
@@ -84,7 +92,11 @@ void Cooker::runThread(const std::string &aPizza, const std::string &aSize, int 
 }
 
 void Cooker::reset() {
-	kitchen = -1; // not sure ...
+	//kitchen = -1; // not sure ...
 	pizza = nullptr;
 	busy = false;
+}
+
+bool Cooker::isBusy() {
+	return busy;
 }

@@ -11,12 +11,14 @@
 #include <list>
 #include <queue>
 #include <string>
-#include "AKitchen.h"
 #include "Cooker.h"
 #include "Team.h"
+#include "Pizza/PizzaFactory.h"
 
-class Kitchen : public AKitchen {
+class Kitchen {
 private:
+	int id;
+	PizzaFactory pizzaFactory;
 	int nbCookers;
 	std::queue<std::string> orders;
 	std::list<Cooker> cookers;
@@ -30,7 +32,8 @@ public:
 	std::string giveOrder();
 	void deleteOrder();
 	void dispatch(Team &, int);
-	bool getStatut();
+	int getNbOfBusyCookers();
+	void updateStatus();
 };
 
 
