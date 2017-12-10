@@ -34,13 +34,7 @@ TEST(getPizza, return_value_is_good)
 {
         Cooker  cooker;
         Margarita       margarita("L");
-        Regina          regina("XL");
-        American        american("M");
-        Fantasia        fantasia("XL");
 
         EXPECT_EQ(cooker.getPizza(), margarita);
-        EXPECT_EQ(cooker.getPizza(), regina);
-        EXPECT_EQ(cooker.getPizza(), american);
-        EXPECT_EQ(cooker.getPizza(), fantasia);
 }
 */

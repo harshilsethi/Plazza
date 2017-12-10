@@ -29,7 +29,3 @@ set(SOURCE_FILES main.cpp
         Team.cpp
         Team.h)
 add_executable(Plazzav1 ${SOURCE_FILES})
-
-include_directories(Pizza)
-
-add_subdirectory(test)
