@@ -84,7 +84,7 @@ WINDOW* createMenuwin(WINDOW* local_win)
 	return local_win;
 }
 
-WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> *commands, std::list<Order> orders)
+WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> *commands, std::list<Order> *orders)
 {
 	WINDOW *displayCommand;
 	std::string result;
@@ -180,7 +180,7 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> *commands, std
 		wclear(local_win);
 		wrefresh(local_win);
 		Order order(result);
-		orders.push_back(order);
+		orders->push_back(order);
 		mvwprintw(local_win, 1, 3, "Do you want to make another order");
 		endPro = (char) wgetch(local_win);
 		if (endPro == 'Y' || endPro == 'y') {
@@ -198,7 +198,7 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> *commands, std
 			wclear(displayCommand);
 			i = 1;
 			mvwprintw(displayCommand, 1, 3, "You have total of %d orders", numberOrder);
-			for(Order order : orders)
+			for(Order order : *orders)
 			{
 				mvwprintw(displayCommand,j,3, "Order %d ", i);
 				i++;
@@ -212,7 +212,7 @@ WINDOW* createUserwin(WINDOW *local_win, std::vector<std::string> *commands, std
 	return local_win;
 }
 
-void createCurses(std::list<Order> orders)
+void createCurses(std::list<Order> *orders)
 {
 	WINDOW *titleWin;
 	WINDOW *menuWin;
@@ -276,7 +276,7 @@ int main(int argc,char *argv[]) { //./a.out []
 		baseTime = static_cast<int>(strtol(argv[1], nullptr, 10));
 		cookersNb = static_cast<int>(strtol(argv[2], nullptr, 10));
 
-		createCurses(orders);
+		createCurses(&orders);
 		manager.setTime(baseTime);
 
 		std::cout << "1 T = " << baseTime << std::endl; //temp (for warnings)
