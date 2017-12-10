@@ -10,7 +10,7 @@
 
 Manager::Manager() : managerTeam(30){
 	std::cout << "Manager : I'm the Plazza's manager !" << std::endl;
-	orderID = 0;
+	orderID = 1;
 }
 
 Manager::~Manager() {

@@ -19,7 +19,7 @@ private:
 	std::mutex cookerMtx;
 	int kitchen;
 	int id;
-	APizza *pizza; // pointeur ?
+	APizza *pizza;
 	bool busy;
 public:
 	Cooker();
