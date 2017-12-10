@@ -271,6 +271,7 @@ int main(int argc,char *argv[]) { //./a.out []
 		std::vector<std::string> commands;
 		std::string commandsToTransfer;
 		std::list<Order> orders;
+		std::list<Order> ordersToTransfer;
 
 		baseTime = static_cast<int>(strtol(argv[1], nullptr, 10));
 		cookersNb = static_cast<int>(strtol(argv[2], nullptr, 10));
@@ -282,7 +283,7 @@ int main(int argc,char *argv[]) { //./a.out []
 		std::string input1 = "Margarita L 2 ; American XL 11; Fantasia L 7";
 		std::string input2 = "Fantasia XL 4; Regina M 6";
 		//Order order1(input1);
-		Order order2(input2);
+		//Order order2(input2);
 
 		for (const auto &command : commands) {
 			std::cout << "COMMAND : " << command << std::endl;
@@ -290,8 +291,12 @@ int main(int argc,char *argv[]) { //./a.out []
 			commandsToTransfer.append(";");
 		}
 
-		Order order1(commandsToTransfer);
-		manager.convertInputIntoOrder(order1);
+		for (auto &order : orders) {
+			launchOrder(&manager, order, cookersNb);
+		}
+
+		//Order order1(commandsToTransfer);
+		//manager.convertInputIntoOrder(order1);
 
 		std::cout << std::endl
 			  << "===================================" << std::endl
