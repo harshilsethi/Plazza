@@ -12,6 +12,7 @@
 #include <string>
 #include <queue>
 #include <list>
+#include <map>
 #include <iostream>
 #include <algorithm>
 #include <sys/wait.h>
@@ -28,12 +29,16 @@ public:
 	void manageKitchens(unsigned int);
 	void setTime(int);
 	int getTime();
+        unsigned int getOrderID();
+        void nextOrderID();
 
 private:
+//        std::map<unsigned int, std::queue<std::string>> orders;
 	std::queue<std::string> pizzas;
 	std::list<Kitchen *> kitchens;
 	Team managerTeam;
 	int baseTime;
+        unsigned int orderID;
 };
 
 #endif /* ! MANAGER_H__ */

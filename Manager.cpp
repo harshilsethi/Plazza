@@ -10,6 +10,7 @@
 
 Manager::Manager() : managerTeam(30){
 	std::cout << "Manager : I'm the Plazza's manager !" << std::endl;
+	orderID = 0;
 }
 
 Manager::~Manager() {
@@ -77,6 +78,14 @@ int Manager::getTime() {
 
 std::queue<std::string> Manager::getPizzas() {
 	return pizzas;
+}
+
+unsigned int Manager::getOrderID() {
+	return orderID;
+}
+
+void Manager::nextOrderID() {
+	++orderID;
 }
 
 void Manager::manageKitchens(unsigned int maxCookers) {
