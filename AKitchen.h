@@ -1,8 +1,8 @@
 //
 // EPITECH PROJECT, 2017
-// 
+// Plazza project
 // File description:
-//
+// AKitchen.cpp
 //
 
 #ifndef PLAZZAV1_AKITCHEN_H
@@ -14,9 +14,9 @@
 class AKitchen {
 private:
 	int id;
-	PizzaFactory pizzaFactory;
 public:
 	int getId() const;
+	PizzaFactory pizzaFactory;
 };
 
 

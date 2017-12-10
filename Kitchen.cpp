@@ -25,7 +25,39 @@ void Kitchen::addOrder(std::string &anOrder) {
 	orders.push(anOrder);
 }
 
-void Kitchen::dispatch() {
-	//fait faire les pizzas par les cuisinier
+std::string Kitchen::giveOrder() {
+	return (orders.front());
+}
+
+void Kitchen::deleteOrder() {
+	orders.pop();
+}
+
+void Kitchen::dispatch(Team &aTeam, int baseTime) { //????
+	//fait faire les pizzas par les cuisiniers
 	std::cout << "Cooking !" << std::endl;
+	std::list<Cooker>::iterator it;
+	std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>" << orders.size() << std::endl;
+        std::string pizza;
+        std::string size;
+
+
+	for (unsigned int i = 0; i < orders.size(); ++i){
+		cookers.push_back(aTeam.takeCooker());
+	}
+	for (it = cookers.begin(); it != cookers.end(); ++it){
+                if (orders.front().find("XL") != std::string::npos){
+                        size = "XL";
+                        pizza = orders.front().substr(0,orders.front().size() -2);
+                } else if (orders.front().find("L") != std::string::npos){
+                        size = "L";
+                        pizza = orders.front().substr(0,orders.front().size() -1);
+                }else if (orders.front().find("*M")){
+                        size = "M";
+                        pizza = orders.front().substr(0,orders.front().size() -1);
+                }
+                it->runThread(pizza, size, baseTime); //timeBase
+		orders.pop();
+	}
+
 }

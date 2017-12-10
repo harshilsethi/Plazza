@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2017
-** Piscine CPP
+** Plazza Project
 ** File description:
 ** Manager.h
 */
@@ -12,6 +12,7 @@
 #include <string>
 #include <queue>
 #include <list>
+#include <map>
 #include <iostream>
 #include <algorithm>
 #include <sys/wait.h>
@@ -25,11 +26,19 @@ public:
 
 	std::queue<std::string> convertInputIntoOrder(Order order);
 	std::queue<std::string> getPizzas();
-	void manageKitchens(int);
+	void manageKitchens(unsigned int);
+	void setTime(int);
+	int getTime();
+        unsigned int getOrderID();
+        void nextOrderID();
 
 private:
+//        std::map<unsigned int, std::queue<std::string>> orders;
 	std::queue<std::string> pizzas;
 	std::list<Kitchen *> kitchens;
+	Team managerTeam;
+	int baseTime;
+        unsigned int orderID;
 };
 
 #endif /* ! MANAGER_H__ */

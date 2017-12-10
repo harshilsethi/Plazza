@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2017
-** Piscine CPP
+** Plazza project
 ** File description:
 ** Manager.cpp
 */
@@ -8,8 +8,9 @@
 #include "Manager.h"
 #include <boost/algorithm/string.hpp>
 
-Manager::Manager() {
+Manager::Manager() : managerTeam(30){
 	std::cout << "Manager : I'm the Plazza's manager !" << std::endl;
+	orderID = 1;
 }
 
 Manager::~Manager() {
@@ -29,10 +30,11 @@ void split5(const std::string& str, Container& cont,
 }
 
 std::queue<std::string> Manager::convertInputIntoOrder(Order order) {
-	std::cout << order.getCommand() << std::endl;
+	std::cout << "ORDER.GETCOMMAND " << order.getCommand() << std::endl;
 	std::string orderToConvert = order.getCommand(); // "Margarita L 2 ; American XL 1"
 	std::vector<std::string> result;
-	int pizzaCounter = 0;
+	int pizzaCounter;
+        int cpt;
 
 	ltrim(orderToConvert);
 	std::cout << orderToConvert << std::endl; // "MargaritaL2;AmericanXL1"
@@ -40,10 +42,15 @@ std::queue<std::string> Manager::convertInputIntoOrder(Order order) {
 	std::copy(result.begin(), result.end(),
 		  std::ostream_iterator<std::string>(std::cout, "\n"));
 	for (auto &entry : result){
-		pizzaCounter = entry.back();
-		for (int i = 0; i < pizzaCounter - 48; ++i) {
+                pizzaCounter = 0;
+                cpt = 1;
+                while (entry.back() > 47 && entry.back() < 58){
+                        pizzaCounter = pizzaCounter + ((entry.back() - 48) * cpt);
+                        cpt = cpt * 10;
+                        entry.pop_back();
+                }
+		for (int i = 0; i < pizzaCounter; ++i) {
 			pizzas.push(entry);
-			pizzas.back().pop_back();
 		}
 	}
 
@@ -61,11 +68,27 @@ std::queue<std::string> Manager::convertInputIntoOrder(Order order) {
 	} */
 }
 
+void Manager::setTime(int timeBase) {
+	baseTime = timeBase;
+}
+
+int Manager::getTime() {
+	return (baseTime);
+}
+
 std::queue<std::string> Manager::getPizzas() {
 	return pizzas;
 }
 
-void Manager::manageKitchens(int maxCookers) {
+unsigned int Manager::getOrderID() {
+	return orderID;
+}
+
+void Manager::nextOrderID() {
+	++orderID;
+}
+
+void Manager::manageKitchens(unsigned int maxCookers) {
 	int nbKitchens = pizzas.size() / maxCookers;
 	pid_t isSon;
 
@@ -76,20 +99,23 @@ void Manager::manageKitchens(int maxCookers) {
 		nbKitchens = 1;
 	else if (pizzas.size() % maxCookers != 0)
 		nbKitchens++;
-
 	for (int i = 0; i < nbKitchens; ++i){
+		Kitchen processK(maxCookers);
+		if (pizzas.size() < maxCookers){
+			maxCookers = pizzas.size();
+		}
+		for(unsigned int j = 0; j < maxCookers; ++j){
+			processK.addOrder(pizzas.front());
+			pizzas.pop();
+		}
+
 		isSon = fork();
 		if (isSon == -1)
 			std::cerr << "Fatal error: can't create process!" << std::endl;
 		else if(isSon == 0){
-			Kitchen processK(maxCookers);
-			for(int j = 0; j < maxCookers; ++j){
-				processK.addOrder(pizzas.front());
-				pizzas.pop();
-			}
-			processK.dispatch();
+			processK.dispatch(managerTeam, baseTime);
 			exit(EXIT_SUCCESS);
 		}else
-			wait(NULL);
+			wait(nullptr);
 	}
 }
