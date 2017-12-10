@@ -33,6 +33,7 @@ public:
 	void cookPizza(std::string, std::string, int);
 	void runThread(const std::string &, const std::string &, int);
 	void reset(); // reinit the cooker
+	bool isBusy();
 };
 
 

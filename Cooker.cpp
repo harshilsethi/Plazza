@@ -88,3 +88,7 @@ void Cooker::reset() {
 	pizza = nullptr;
 	busy = false;
 }
+
+bool Cooker::isBusy() {
+	return busy;
+}

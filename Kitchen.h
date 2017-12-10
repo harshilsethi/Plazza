@@ -31,6 +31,7 @@ public:
 	void deleteOrder();
 	void dispatch(Team &, int);
 	bool getStatut();
+	int getNbOfBusyCookers();
 };
 
 
