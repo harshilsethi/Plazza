@@ -13,12 +13,14 @@
 #include <thread>
 #include <mutex>
 #include "Pizza/APizza.h"
-#include "Kitchen.h"
+//#include "Kitchen.h"
+
+class Kitchen;
 
 class Cooker {
 private:
 	std::mutex cookerMtx;
-	//Kitchen *kitchen;
+	Kitchen *kitchen;
 	int id;
 	APizza *pizza; // pointeur ?
 	bool busy;
@@ -29,8 +31,8 @@ public:
 	Cooker(const Cooker &);
 	Cooker &operator=(Cooker const &);
 	int getId() const;
-	//Kitchen *getKitchen() const;
-	//void setKitchen(Kitchen *kitchen);
+	Kitchen *getKitchen() const;
+	void setKitchen(Kitchen *kitchen);
 	const APizza &getPizza() const;
 	void cookPizza(std::string, std::string, int);
 	void runThread(const std::string &, const std::string &, int);

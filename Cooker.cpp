@@ -44,15 +44,15 @@ Cooker &Cooker::operator=(Cooker const &origin) {
 int Cooker::getId() const{
 	return (id);
 }
-/*
+
 Kitchen *Cooker::getKitchen() const {
 	return kitchen;
 }
 
 void Cooker::setKitchen(Kitchen *kitchen) {
-//	this->kitchen = kitchen;
+	this->kitchen = kitchen;
 }
-*/
+
 const APizza &Cooker::getPizza() const {
 	return *pizza;
 }
@@ -60,8 +60,8 @@ const APizza &Cooker::getPizza() const {
 void Cooker::cookPizza(std::string pizza, std::string size, int timeBase) {
 	long int timeToWait;
 	cookerMtx.lock();
-	//Kitchen *kitchen = getKitchen();
-	//kitchen->updateStatus();
+	Kitchen *kitchen = getKitchen();
+	kitchen->updateStatus();
 	std::cout << "Cooking the pizza: " << pizza << std::endl;
 	if (pizza == "Margarita") {
 		APizza *pizzaCooked = new Margarita(size);
@@ -82,7 +82,7 @@ void Cooker::cookPizza(std::string pizza, std::string size, int timeBase) {
 	}
 	cookerMtx.unlock();
 	busy = false; //at the end
-	//kitchen->updateStatus();
+	kitchen->updateStatus();
 }
 
 void Cooker::runThread(const std::string &aPizza, const std::string &aSize, int timeBase) {
