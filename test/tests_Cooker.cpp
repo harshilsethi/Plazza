@@ -12,6 +12,20 @@
 #include "../Pizza/American.h"
 #include "../Pizza/Fantasia.h"
 
+TEST(getId, return_value_is_good)
+{
+        Cooker cooker;
+
+        EXPECT_EQ(cooker.getId(), 1);
+}
+
+TEST(getId, return_value_is_bad)
+{
+        Cooker cooker;
+
+        EXPECT_NE(cooker.getId(), -1);
+}
+
 TEST(getKitchen, return_value_is_good)
 {
         Cooker cooker;
