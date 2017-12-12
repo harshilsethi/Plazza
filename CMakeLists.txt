@@ -27,5 +27,5 @@ set(SOURCE_FILES main.cpp
         Kitchen.cpp
         Kitchen.h
         Team.cpp
-        Team.h)
+        Team.h WindowFront.h WindowFront.cpp)
 add_executable(Plazzav1 ${SOURCE_FILES})
