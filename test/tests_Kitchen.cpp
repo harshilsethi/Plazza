@@ -24,17 +24,27 @@ TEST(getNbCookers, return_value_is_bad)
         EXPECT_NE(kitchen.getNbCookers(), 1);
         EXPECT_NE(kitchen.getNbCookers(), 5);
 }
-/*
-Test(getCookers, return_value_is_good)
+
+TEST(giveOrder, return_value_is_good)
 {
-	std::list<Cooker> cookers;
-	Cooker chef;
+        std::queue<std::string> orders;
+        std::string margarita = "margarita";
 
-        cookers.push_back(chef);
-
-	cr_assert_eq(kitchen.getCookers(), cookers);
+        orders.push(margarita);
+        EXPECT_EQ(orders.front(), margarita);
 }
 
+TEST(giveOrder, return_value_is_bad)
+{
+        std::queue<std::string> orders;
+        std::string margarita = "margarita";
+        std::string regina = "regina";
+
+        orders.push(margarita);
+        EXPECT_NE(orders.front(), regina);
+}
+
+/*
 Test(getStatus, return_value_is_good)
 {
         if(kitchen)
