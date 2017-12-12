@@ -9,32 +9,30 @@
 #include "../Cooker.h"
 #include "../Pizza/Margarita.h"
 
-TEST(getId, return_value_is_good)
-{
+class CookerTest : public ::testing::Test {
+protected:
         Cooker cooker;
+};
 
+TEST_F(CookerTest, getId_good)
+{
         EXPECT_EQ(cooker.getId(), 1);
 }
 
-TEST(getId, return_value_is_bad)
+TEST_F(CookerTest, getId_bad)
 {
-        Cooker cooker;
-
         EXPECT_NE(cooker.getId(), -1);
 }
 
-TEST(getKitchen, return_value_is_good)
+TEST_F(CookerTest, getKitchen_good)
 {
-        Cooker cooker;
         int     exceptedValue = cooker.getKitchen();
 
         EXPECT_EQ(cooker.getKitchen(), exceptedValue);
 }
 
-TEST(getKitchen, return_value_is_bad)
+TEST_F(CookerTest, getKitchen_bad)
 {
-        Cooker  cooker;
-
         EXPECT_NE(cooker.getKitchen(), 0);
         EXPECT_NE(cooker.getKitchen(), 1);
         EXPECT_NE(cooker.getKitchen(), 5);

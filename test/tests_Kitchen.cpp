@@ -13,7 +13,7 @@ Kitchen kitchen(3);
 
 TEST(getNbCookers, return_value_is_good)
 {
-	int	exceptedValue = 3;
+	int exceptedValue = 3;
 
 	EXPECT_EQ(kitchen.getNbCookers(), exceptedValue);
 }
@@ -33,7 +33,14 @@ TEST(giveOrder, return_value_is_good)
         orders.push(margarita);
         EXPECT_EQ(orders.front(), margarita);
 }
+/*
+TEST(getCookers, return_value_is_good)
+{
+        std::list<Cooker> cookers;
 
+        EXPECT_EQ(kitchen.getCookers(), cookers);
+}
+*/
 TEST(giveOrder, return_value_is_bad)
 {
         std::queue<std::string> orders;
