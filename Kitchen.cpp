@@ -5,6 +5,7 @@
 ** Kitchen.cpp
 */
 
+#include <future>
 #include "Kitchen.h"
 
 Kitchen::Kitchen(int _nbCookers) {
@@ -38,7 +39,6 @@ void Kitchen::dispatch(Team &aTeam, int baseTime) {
         std::string pizza;
         std::string size;
 
-
 	for (unsigned int i = 0; i < orders.size(); ++i){
 		cookers.push_back(aTeam.takeCooker());
 	}
@@ -57,7 +57,7 @@ void Kitchen::dispatch(Team &aTeam, int baseTime) {
                 it->runThread(pizza, size, baseTime); //timeBase
 		orders.pop();
 	}
-	std::cout << " NB : " << getNbOfBusyCookers() << std::endl;
+	//std::cout << " NB : " << getNbOfBusyCookers() << std::endl;
 }
 
 void Kitchen::updateStatus() {

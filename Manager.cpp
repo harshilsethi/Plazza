@@ -55,17 +55,6 @@ std::queue<std::string> Manager::convertInputIntoOrder(Order order) {
 	}
 
 	return pizzas;
-	/*
-	 *
-	 * 	std::string delimiter = ";";
-	size_t pos = 0;
-	std::string token;
-	while ((pos = orderToConvert.find(delimiter)) != std::string::npos) {
-		token = orderToConvert.substr(0, pos);
-		std::cout << token << std::endl;
-		pizzas.push(token);
-		orderToConvert.erase(0, pos + delimiter.length());
-	} */
 }
 
 void Manager::setTime(int timeBase) {
@@ -90,7 +79,6 @@ void Manager::nextOrderID() {
 
 void Manager::manageKitchens(unsigned int maxCookers) {
 	int nbKitchens = pizzas.size() / maxCookers;
-	//pid_t isSon; //useless in New version
 
 	//security: limit of 10 processes
 	if (nbKitchens > 10)
@@ -109,7 +97,6 @@ void Manager::manageKitchens(unsigned int maxCookers) {
 			pizzas.pop();
 		}
 
-		//New version:
 		switch (fork()){
 			case -1:
 				perror("Fatal error: can't create process!"); //instead of std::cerr ? maybe ?
@@ -119,18 +106,7 @@ void Manager::manageKitchens(unsigned int maxCookers) {
 				exit(0);
 			default:
 				std::cout << std::endl;
-				//wait(nullptr);
 		}
-/*		//Old version:
-		isSon = fork();
-		if (isSon == -1)
-			std::cerr << "Fatal error: can't create process!" << std::endl;
-		else if(isSon == 0){
-			processK.dispatch(managerTeam, baseTime);
-			exit(EXIT_SUCCESS);
-		}else
-			wait(nullptr);
-		*/
 	}
 }
 /*
