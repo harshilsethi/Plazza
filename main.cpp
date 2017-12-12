@@ -58,9 +58,7 @@ int main(int argc,char *argv[]) { //./a.out []
 		}
 
 		for (auto &order : orders) {
-			std::cout << "COMMAND : " << order.getCommand() << std::endl;
-
-			//launchOrder(&manager, order, cookersNb);
+			launchOrder(&manager, order, cookersNb);
 		}
 
 		//Order order1(commandsToTransfer);
