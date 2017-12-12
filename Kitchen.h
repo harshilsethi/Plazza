@@ -34,6 +34,7 @@ public:
 	void dispatch(Team &, int);
 	int getNbOfBusyCookers();
 	void updateStatus();
+	void quit();
 };
 
 

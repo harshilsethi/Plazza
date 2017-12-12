@@ -63,6 +63,7 @@ void Kitchen::dispatch(Team &aTeam, int baseTime) {
 void Kitchen::updateStatus() {
 	if (getNbOfBusyCookers() <= 0) {
 		// début timer et quand timer = 5 T destruction process + threads associés
+		quit();
 	} else {
 		// Stop timer
 	}
@@ -70,9 +71,20 @@ void Kitchen::updateStatus() {
 
 int Kitchen::getNbOfBusyCookers() {
 	int nbOfBusyCookers = 0;
-	/*for (auto &cooker : getCookers()) {
+	for (auto &cooker : getCookers()) {
 		if (cooker.isBusy())
 			nbOfBusyCookers++;
-	}*/
+	}
 	return nbOfBusyCookers;
+}
+
+void Kitchen::quit() {
+	try {
+		while (!cookers.empty()) {
+			delete cookers.back();
+			cookers.pop_back();
+		}
+	} catch (std::exception &e) {
+	}
+	exit(0);
 }
