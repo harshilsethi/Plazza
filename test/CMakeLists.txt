@@ -3,7 +3,6 @@ project(PlazzaTests)
 
 include_directories(${gtest_SOURCE_DIR}/include
                         lib/googletest/googlemock/include
-                        ../order
                         ../Pizza)
 
 add_subdirectory(lib/googletest)
@@ -14,15 +13,15 @@ SET(SRC ../Pizza/APizza.h ../Pizza/APizza.cpp
         ../Pizza/Fantasia.h ../Pizza/Fantasia.cpp
         ../Pizza/Margarita.h ../Pizza/Margarita.cpp
         ../Pizza/PizzaFactory.h ../Pizza/PizzaFactory.cpp
-        ../order/AKitchen.h ../order/AKitchen.cpp
-        ../order/Cooker.h ../order/Cooker.cpp
-        ../order/Order.h ../order/Order.cpp
-        ../order/Manager.h ../order/Manager.cpp)
+        ../AKitchen.h ../AKitchen.cpp
+        ../Cooker.h ../Cooker.cpp
+        ../Order.h ../Order.cpp
+        ../Manager.h ../Manager.cpp
+        ../Kitchen.h ../Kitchen.cpp
+        ../Team.h ../Team.cpp)
 
 SET(TEST_SOURCES tests_Cooker.cpp MainGTest.cpp)
 
 add_executable(tests ${SRC} ${TEST_SOURCES})
-
-
 
 target_link_libraries(tests gtest)

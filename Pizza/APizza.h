@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2017
-** Piscine CPP
+** Plazza Project
 ** File description:
 ** APizza.h
 */
@@ -9,11 +9,12 @@
 #define PIZZA_H__
 
 #include <string>
+#include <utility>
 
 class APizza {
 public:
-	explicit APizza(const std::string &size);
-	virtual ~APizza() = default;
+	explicit APizza(std::string size);
+	virtual ~APizza() = default;;
 
 	virtual std::string getSize();
 	virtual float getCookTime();
