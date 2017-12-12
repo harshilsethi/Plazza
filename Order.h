@@ -18,7 +18,7 @@ public:
 	virtual ~Order();
 
 	int getId() const;
-	std::string getCommand();
+	std::string getCommand()const;
 	void setCommand(std::string command);
 
 private:

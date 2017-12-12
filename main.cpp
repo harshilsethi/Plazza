@@ -31,14 +31,14 @@ int main(int argc,char *argv[]) { //./a.out []
 		int baseTime;
 		int cookersNb;
 		Manager manager;
-		std::vector<std::string> lastCommand;
+		//std::vector<std::string> commands;
 		std::string commandsToTransfer;
 		std::list<Order> orders;
 		std::list<Order> ordersToTransfer;
 		WindowFront windowFront;
 
 		orders = windowFront.getOrders();
-		lastCommand = windowFront.getLastCommands();
+		//commands = windowFront.getLastCommands();
 
 		baseTime = static_cast<int>(strtol(argv[1], nullptr, 10));
 		cookersNb = static_cast<int>(strtol(argv[2], nullptr, 10));
@@ -51,14 +51,16 @@ int main(int argc,char *argv[]) { //./a.out []
 		//Order order1(input1);
 		//Order order2(input2);
 
-		for (const auto &command : lastCommand) {
-			std::cout << "COMMAND : " << command << std::endl;
-			commandsToTransfer.append(command);
+		for (const auto &command : orders) {
+			std::cout << "COMMAND : " << command.getCommand() << std::endl;
+			commandsToTransfer.append(command.getCommand());
 			commandsToTransfer.append(";");
 		}
 
 		for (auto &order : orders) {
-			launchOrder(&manager, order, cookersNb);
+			std::cout << "COMMAND : " << order.getCommand() << std::endl;
+
+			//launchOrder(&manager, order, cookersNb);
 		}
 
 		//Order order1(commandsToTransfer);

@@ -310,9 +310,6 @@ WINDOW* WindowFront::createUserwin(WINDOW *local_win /*std::vector<std::string> 
 		if (endPro == 'Y' || endPro == 'y') {
 			lastCommand.clear();
 			numberOrder++;
-			//destroy_win(local_win);
-			//destroy_win(displayCommand);
-			//local_win = newwin(12, 50, 14, 40);
 			wclear(local_win);
 			wclear(displayCommand);
 			wrefresh(local_win);
