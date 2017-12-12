@@ -5,26 +5,26 @@
 ** Kitchen
 */
 
-#include <criterion/criterion.h>
-#include "../order/Kitchen.h"
-#include "../order/Cooker.h"
+#include <gtest/gtest.h>
+#include "../Kitchen.h"
+#include "../Cooker.h"
 
-Kitchen kitchen = new Kitchen(3);
+Kitchen kitchen(3);
 
-Test(getNbCookers, return_value_is_good)
+TEST(getNbCookers, return_value_is_good)
 {
 	int	exceptedValue = 3;
 
-	cr_assert_eq(kitchen.getNbCookers(), exceptedValue);
+	EXPECT_EQ(kitchen.getNbCookers(), exceptedValue);
 }
 
-Test(getNbCookers, return_value_is_bad)
+TEST(getNbCookers, return_value_is_bad)
 {
-	cr_assert_neq(kitchen.getNbCookers(), 0);
-	cr_assert_neq(kitchen.getNbCookers(), 1);
-	cr_assert_neq(kitchen.getNbCookers(), 5);
+        EXPECT_NE(kitchen.getNbCookers(), 0);
+        EXPECT_NE(kitchen.getNbCookers(), 1);
+        EXPECT_NE(kitchen.getNbCookers(), 5);
 }
-
+/*
 Test(getCookers, return_value_is_good)
 {
 	std::list<Cooker> cookers;
@@ -42,3 +42,4 @@ Test(getStatus, return_value_is_good)
         else
                 cr_assert_eq(kitchen.getStatus(), false);
 }
+*/

@@ -8,9 +8,6 @@
 #include <gtest/gtest.h>
 #include "../Cooker.h"
 #include "../Pizza/Margarita.h"
-#include "../Pizza/Regina.h"
-#include "../Pizza/American.h"
-#include "../Pizza/Fantasia.h"
 
 TEST(getId, return_value_is_good)
 {
