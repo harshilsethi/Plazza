@@ -24,63 +24,37 @@ void launchOrder (Manager *manager, Order anOrder, int cookersNb){
 }
 
 int main(int argc,char *argv[]) { //./a.out []
+	int baseTime;
+	int cookersNb;
 	if (argc < 3) {
-		std::cout << "In order to enter the Plazza, please specify the base time and the number of cookers " << std::endl;
-		std::cout << "Example : ./a.out [time] [cookers]" << std::endl;
+		std::cout << "Default parameters assigned : base time is 2000 ms and there are 5 cookers per kitchen" << std::endl;
+		baseTime = 2000;
+		cookersNb = 5;
 	} else {
-		int baseTime;
-		int cookersNb;
-		Manager manager;
-		//std::vector<std::string> commands;
-		std::string commandsToTransfer;
-		std::list<Order> orders;
-		std::list<Order> ordersToTransfer;
-		WindowFront windowFront;
-
-		orders = windowFront.getOrders();
-		//commands = windowFront.getLastCommands();
-
 		baseTime = static_cast<int>(strtol(argv[1], nullptr, 10));
 		cookersNb = static_cast<int>(strtol(argv[2], nullptr, 10));
-
-		manager.setTime(baseTime);
-
-		std::cout << "1 T = " << baseTime << std::endl; //temp (for warnings)
-		std::string input1 = "Margarita L 2 ; American XL 11; Fantasia L 7";
-		std::string input2 = "Fantasia XL 4; Regina M 6";
-		//Order order1(input1);
-		//Order order2(input2);
-
-		for (const auto &command : orders) {
-			std::cout << "COMMAND : " << command.getCommand() << std::endl;
-			commandsToTransfer.append(command.getCommand());
-			commandsToTransfer.append(";");
-		}
-
-		for (auto &order : orders) {
-			std::cout << "COMMAND : " << order.getCommand() << std::endl;
-
-			launchOrder(&manager, order, cookersNb);
-		}
-
-		//Order order1(commandsToTransfer);
-		//manager.convertInputIntoOrder(order1);
-
-		std::cout << std::endl
-			  << "===================================" << std::endl
-			  << std::endl;
-
-//		launchOrder(&manager, order1, cookersNb);
-//		launchOrder(&manager, order2, cookersNb);
-
-		std::queue<std::string> res = manager.getPizzas();
-		manager.manageKitchens(cookersNb);
-
-		/*while(!res.empty()){
-			std::cout << res.front() << std::endl;
-			res.pop();
-		}*/
 	}
+	Manager manager;
+	std::list<Order> orders;
+	WindowFront windowFront;
+
+	orders = windowFront.getOrders();
+
+	manager.setTime(baseTime);
+
+	std::cout << "1 T = " << baseTime << std::endl; //temp (for warnings)
+
+	for (auto &order : orders) {
+		std::cout << "COMMAND : " << order.getCommand() << std::endl;
+		launchOrder(&manager, order, cookersNb);
+	}
+
+	std::cout << std::endl
+		  << "===================================" << std::endl
+		  << std::endl;
+
+	std::queue<std::string> res = manager.getPizzas();
+	manager.manageKitchens(cookersNb);
 
 	return (EXIT_SUCCESS);
 }
