@@ -41,6 +41,7 @@ TEST(giveOrder, return_value_is_bad)
         std::string regina = "regina";
 
         orders.push(margarita);
+        orders.push(regina);
         EXPECT_NE(orders.front(), regina);
 }
 
