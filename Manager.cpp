@@ -126,7 +126,7 @@ list<int> Manager::getKitchenStatus() {
 
 	for (auto &kitchen : kitchens) {
 		cookers.add(kitchen.getNbOfBusyCookers());
-	}
+	}*/
 	// (1, 2, 0, 5)
 	/*
 	 * a.out 2000 5
