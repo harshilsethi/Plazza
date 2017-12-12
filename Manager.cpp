@@ -119,3 +119,21 @@ void Manager::manageKitchens(unsigned int maxCookers) {
 			wait(nullptr);
 	}
 }
+/*
+list<int> Manager::getKitchenStatus() {
+	list<Kitchen> kitchens = getKitchen();
+	list<int> cookers;
+
+	for (auto &kitchen : kitchens) {
+		cookers.add(kitchen.getNbOfBusyCookers());
+	}
+	// (1, 2, 0, 5)
+	/*
+	 * a.out 2000 5
+	 * Kitchen 1 = 1 busy cooker / 5
+	 * Kitchen 2 = 2 busy cookers / 5
+	 * Kitchen 3 = 0 busy cooker / 5
+	 * Kitchen 4 = 5 busy cookers / 5
+	 */
+/*	return cookers;
+}*/
