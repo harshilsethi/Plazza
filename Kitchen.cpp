@@ -33,11 +33,8 @@ void Kitchen::deleteOrder() {
 	orders.pop();
 }
 
-void Kitchen::dispatch(Team &aTeam, int baseTime) { //????
-	//fait faire les pizzas par les cuisiniers
-	std::cout << "Cooking !" << std::endl;
+void Kitchen::dispatch(Team &aTeam, int baseTime) {
 	std::list<Cooker>::iterator it;
-	std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>" << orders.size() << std::endl;
         std::string pizza;
         std::string size;
 

@@ -33,16 +33,15 @@ int main(int argc,char *argv[]) { //./a.out []
 	} else {
 		baseTime = static_cast<int>(strtol(argv[1], nullptr, 10));
 		cookersNb = static_cast<int>(strtol(argv[2], nullptr, 10));
+		std::cout << "Base time chosen : 1 T = " << baseTime << " ms" << std::endl; //temp (for warnings)
+		std::cout << "Number of cookers per kitchen choosen : " << cookersNb << std::endl; //temp (for warnings)
 	}
 	Manager manager;
 	std::list<Order> orders;
 	WindowFront windowFront;
 
 	orders = windowFront.getOrders();
-
 	manager.setTime(baseTime);
-
-	std::cout << "1 T = " << baseTime << std::endl; //temp (for warnings)
 
 	for (auto &order : orders) {
 		std::cout << "COMMAND : " << order.getCommand() << std::endl;
