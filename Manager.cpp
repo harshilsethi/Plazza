@@ -10,7 +10,7 @@
 
 Manager::Manager() : managerTeam(30){
 	std::cout << "Manager : I'm the Plazza's manager !" << std::endl;
-	orderID = 0;
+	orderID = 1;
 }
 
 Manager::~Manager() {
@@ -30,7 +30,7 @@ void split5(const std::string& str, Container& cont,
 }
 
 std::queue<std::string> Manager::convertInputIntoOrder(Order order) {
-	std::cout << order.getCommand() << std::endl;
+	std::cout << "ORDER.GETCOMMAND " << order.getCommand() << std::endl;
 	std::string orderToConvert = order.getCommand(); // "Margarita L 2 ; American XL 1"
 	std::vector<std::string> result;
 	int pizzaCounter;
@@ -99,16 +99,16 @@ void Manager::manageKitchens(unsigned int maxCookers) {
 		nbKitchens = 1;
 	else if (pizzas.size() % maxCookers != 0)
 		nbKitchens++;
-
 	for (int i = 0; i < nbKitchens; ++i){
 		Kitchen processK(maxCookers);
+		if (pizzas.size() < maxCookers){
+			maxCookers = pizzas.size();
+		}
 		for(unsigned int j = 0; j < maxCookers; ++j){
 			processK.addOrder(pizzas.front());
 			pizzas.pop();
 		}
-		if (pizzas.size() < maxCookers){
-			maxCookers = pizzas.size();
-		}
+
 		isSon = fork();
 		if (isSon == -1)
 			std::cerr << "Fatal error: can't create process!" << std::endl;

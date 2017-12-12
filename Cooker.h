@@ -22,7 +22,7 @@ private:
 	std::mutex cookerMtx;
 	Kitchen *kitchen;
 	int id;
-	APizza *pizza; // pointeur ?
+	APizza *pizza;
 	bool busy;
 public:
 	Cooker();

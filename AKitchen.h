@@ -14,9 +14,9 @@
 class AKitchen {
 private:
 	int id;
-	PizzaFactory pizzaFactory;
 public:
 	int getId() const;
+	PizzaFactory pizzaFactory;
 };
 
 
