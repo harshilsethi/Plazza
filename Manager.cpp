@@ -90,7 +90,7 @@ void Manager::nextOrderID() {
 
 void Manager::manageKitchens(unsigned int maxCookers) {
 	int nbKitchens = pizzas.size() / maxCookers;
-	pid_t isSon;
+	//pid_t isSon; //useless in New version
 
 	//security: limit of 10 processes
 	if (nbKitchens > 10)
@@ -109,6 +109,18 @@ void Manager::manageKitchens(unsigned int maxCookers) {
 			pizzas.pop();
 		}
 
+		//New version:
+		switch (fork()){
+			case -1:
+				perror("Fatal error: can't create process!"); //instead of std::cerr ? maybe ?
+				exit(1);
+			case 0:
+				processK.dispatch(managerTeam, baseTime);
+			default:
+			std::cout << std::endl;
+				//wait(nullptr);
+		}
+/*		//Old version:
 		isSon = fork();
 		if (isSon == -1)
 			std::cerr << "Fatal error: can't create process!" << std::endl;
@@ -117,5 +129,6 @@ void Manager::manageKitchens(unsigned int maxCookers) {
 			exit(EXIT_SUCCESS);
 		}else
 			wait(nullptr);
+		*/
 	}
 }
