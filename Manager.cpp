@@ -116,8 +116,9 @@ void Manager::manageKitchens(unsigned int maxCookers) {
 				exit(1);
 			case 0:
 				processK.dispatch(managerTeam, baseTime);
+				exit(0);
 			default:
-			std::cout << std::endl;
+				std::cout << std::endl;
 				//wait(nullptr);
 		}
 /*		//Old version:
