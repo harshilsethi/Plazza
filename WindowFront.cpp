@@ -363,7 +363,7 @@ WINDOW* WindowFront::createMenuwin(WINDOW *local_win)
 }
 
 std::list<Order> WindowFront::getOrders() const {
-	return std::list<Order>();
+	return orders;
 }
 
 const std::vector<std::string> &WindowFront::getLastCommands() const {
