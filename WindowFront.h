@@ -20,8 +20,6 @@
 #include <ncurses.h>
 #include <vector>
 
-static int numberOrder = 1;
-
 class WindowFront {
 public:
 	WindowFront();

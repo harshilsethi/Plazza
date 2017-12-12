@@ -4,6 +4,8 @@
 
 #include "WindowFront.h"
 
+static int numberOrder = 1;
+
 void destroy_win(WINDOW *local_win)
 {
 	wrefresh(local_win);
