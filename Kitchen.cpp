@@ -6,6 +6,7 @@
 */
 
 #include <future>
+#include <zconf.h>
 #include "Kitchen.h"
 
 Kitchen::Kitchen(int _nbCookers) {
@@ -62,8 +63,9 @@ void Kitchen::dispatch(Team &aTeam, int baseTime) {
 
 void Kitchen::updateStatus() {
 	if (getNbOfBusyCookers() <= 0) {
-		// début timer et quand timer = 5 T destruction process + threads associés
+		std::cout << "NO BUSY COOKERS" << std::endl;
 		//quit();
+		// début timer et quand timer = 5 T destruction process + threads associés
 	} else {
 		// Stop timer
 	}

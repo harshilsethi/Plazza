@@ -102,6 +102,7 @@ void Manager::manageKitchens(unsigned int maxCookers) {
 				perror("Fatal error: can't create process!"); //instead of std::cerr ? maybe ?
 				exit(1);
 			case 0:
+			std::cout << " CASE 0 " << std::endl;
 				processK.dispatch(managerTeam, baseTime);
 				exit(0);
 			default:
