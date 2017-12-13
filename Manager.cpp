@@ -88,6 +88,7 @@ void Manager::manageKitchens(unsigned int maxCookers) {
 	else if (pizzas.size() % maxCookers != 0)
 		nbKitchens++;
 	for (int i = 0; i < nbKitchens; ++i){
+		std::cout << "COOKING " << std::endl;
 		Kitchen processK(maxCookers);
 		if (pizzas.size() < maxCookers){
 			maxCookers = pizzas.size();

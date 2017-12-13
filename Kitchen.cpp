@@ -73,10 +73,10 @@ void Kitchen::updateStatus() {
 
 int Kitchen::getNbOfBusyCookers() {
 	int nbOfBusyCookers = 0;
-	for (auto &cooker : getCookers()) {
+	/*for (auto &cooker : getCookers()) {
 		if (cooker.isBusy())
 			nbOfBusyCookers++;
-	}
+	}*/
 	return nbOfBusyCookers;
 }
 

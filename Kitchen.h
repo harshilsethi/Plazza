@@ -22,6 +22,7 @@ private:
 	int nbCookers;
 	std::queue<std::string> orders;
 	std::list<Cooker> cookers;
+	pid_t pid;
 public:
 	explicit Kitchen(int);
 	~Kitchen();
