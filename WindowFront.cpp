@@ -91,7 +91,7 @@ void WindowFront::createCurses()
 	destroy_win(titleWin);
 	destroy_win(menuWin);
 	destroy_win(userWin);
-	getch();
+	//getch();
 	endwin();
 }
 /*
@@ -346,10 +346,10 @@ WINDOW* WindowFront::createUserwin(WINDOW *local_win /*std::vector<std::string> 
 			}
 		}
 	}
-	while (flag){
+	while (command.empty() && flag){
 		i = 1;
 		wclear(local_win);
-		wgetch(local_win);
+		//wgetch(local_win);
 		wrefresh(local_win);
 		mvwprintw(local_win,5,3,"Do you want to remake the order ");
 		mvwprintw(local_win,6,3,"Enter Y or y to continue and N or n to exit ");
@@ -363,9 +363,9 @@ WINDOW* WindowFront::createUserwin(WINDOW *local_win /*std::vector<std::string> 
 				result = result + command + ";";
 				mvwprintw(displayCommand, i, 3, command.c_str());
 				wrefresh(displayCommand);
-				flag = false;
 				i++;
 			}
+			flag = false;
 			break;
 		}
 		wrefresh(local_win);
