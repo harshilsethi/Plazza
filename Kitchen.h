@@ -24,9 +24,10 @@ private:
 	std::list<Cooker> cookers;
 	pid_t pid;
 public:
-	explicit Kitchen(int);
+	explicit Kitchen(int,int);
 	~Kitchen();
 
+        int getId();
 	int getNbCookers();
 	std::list<Cooker> &getCookers();
 	void addOrder(std::string &);

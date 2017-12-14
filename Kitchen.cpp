@@ -9,11 +9,16 @@
 #include <zconf.h>
 #include "Kitchen.h"
 
-Kitchen::Kitchen(int _nbCookers) {
+Kitchen::Kitchen(int _id, int _nbCookers) {
+        id = _id;
 	nbCookers = _nbCookers;
 }
 
 Kitchen::~Kitchen() = default;
+
+int Kitchen::getId() {
+        return id;
+}
 
 int Kitchen::getNbCookers() {
 	return nbCookers;

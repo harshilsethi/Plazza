@@ -14,6 +14,10 @@ Manager::Manager() : managerTeam(30){
 }
 
 Manager::~Manager() {
+        while(!kitchens.empty()){
+                delete kitchens.front();
+                kitchens.pop_front();
+        }
 	std::cout << "Manager : Here is the end of the day, see you !" << std::endl;
 }
 
@@ -89,22 +93,25 @@ void Manager::manageKitchens(unsigned int maxCookers) {
 		nbKitchens++;
 	for (int i = 0; i < nbKitchens; ++i){
 		std::cout << "COOKING " << std::endl;
-		Kitchen processK(maxCookers);
+                kitchens.push_front(new Kitchen(i, maxCookers));        //new list version
+		//Kitchen processK(maxCookers);                         //old version
 		if (pizzas.size() < maxCookers){
 			maxCookers = pizzas.size();
 		}
 		for(unsigned int j = 0; j < maxCookers; ++j){
-			processK.addOrder(pizzas.front());
+                        kitchens.front()->addOrder(pizzas.front());     //new list version
+			//processK.addOrder(pizzas.front());            //old version
 			pizzas.pop();
 		}
 
 		switch (fork()){
 			case -1:
-				perror("Fatal error: can't create process!"); //instead of std::cerr ? maybe ?
+                        std::cerr << "Fatal error: can't create process!" << std::endl;
 				exit(1);
 			case 0:
 			std::cout << " CASE 0 " << std::endl;
-				processK.dispatch(managerTeam, baseTime);
+                                kitchens.front()->dispatch(managerTeam, baseTime);      //new list version
+				//processK.dispatch(managerTeam, baseTime);             //old version
 				exit(0);
 			default:
 				std::cout << std::endl;
