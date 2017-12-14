@@ -48,7 +48,7 @@ void Kitchen::dispatch(Team &aTeam, int baseTime) {
 	for (unsigned int i = 0; i < orders.size(); ++i){
 		cookers.push_back(aTeam.takeCooker());
 	}
-	std::cout << "SIZE : " << cookers.size() << std::endl;
+	std::cout << "Nb of busy cookers : " << cookers.size() << std::endl;
 	for (it = cookers.begin(); it != cookers.end(); ++it){
 		it->setKitchen(this);
                 if (orders.front().find("XL") != std::string::npos){
@@ -78,12 +78,7 @@ void Kitchen::updateStatus() {
 }
 
 int Kitchen::getNbOfBusyCookers() {
-	int nbOfBusyCookers = 0;
-	/*for (auto &cooker : getCookers()) {
-		if (cooker.isBusy())
-			nbOfBusyCookers++;
-	}*/
-	return nbOfBusyCookers;
+	return static_cast<int>(cookers.size());
 }
 
 void Kitchen::quit() {/*
