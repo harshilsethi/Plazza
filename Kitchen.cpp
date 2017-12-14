@@ -50,7 +50,7 @@ void Kitchen::dispatch(Team &aTeam, int baseTime) {
 	}
 	std::cout << "SIZE : " << cookers.size() << std::endl;
 	for (it = cookers.begin(); it != cookers.end(); ++it){
-		//it->setKitchen(this);
+		it->setKitchen(this);
                 if (orders.front().find("XL") != std::string::npos){
                         size = "XL";
                         pizza = orders.front().substr(0,orders.front().size() -2);
