@@ -107,6 +107,7 @@ void Manager::manageKitchens(unsigned int maxCookers, PizzaFactory *factory) {
 				exit(1);
 			case 0:
                                 kitchens.front()->dispatch(managerTeam, baseTime, factory);
+				getKitchenStatus();
 				exit(0);
 			default:
 				std::cout << std::endl;
@@ -118,15 +119,15 @@ std::list<Kitchen *> Manager::getKitchens() {
 	return kitchens;
 }
 
-std::list<int> Manager::getKitchenStatus() {
+std::map<int, int> Manager::getKitchenStatus() {
 	std::list<Kitchen *> kitchens = getKitchens();
-	std::list<int> cookers;
+	std::map<int, int> cookers;
 
 	for (auto &kitchen : kitchens) {
-		cookers.push_back(kitchen->getNbOfBusyCookers());
+		cookers.insert(std::pair<int,int>(kitchen->getId(), kitchen->getNbOfBusyCookers()));
 	}
 	std::cout << "==== KITCHEN STATUS ====" << std::endl;
-	for (auto &value : cookers)
-		std::cout << " VALUE " <<  value << std::endl;
+	for (auto const &line : cookers)
+		std::cout << "Kitchen : " << line.first <<  " // Cookers : " <<  line.second << std::endl;
 	return cookers;
 }

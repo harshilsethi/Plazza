@@ -32,7 +32,7 @@ public:
         unsigned int getOrderID();
         void nextOrderID();
 	std::list<Kitchen *> getKitchens();
-	std::list<int> getKitchenStatus();
+	std::map<int, int> getKitchenStatus();
 
 private:
 	std::queue<std::string> pizzas;
