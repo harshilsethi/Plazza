@@ -63,10 +63,9 @@ void Kitchen::dispatch(Team &aTeam, int baseTime, PizzaFactory *factory) {
 			size = "M";
 			pizza = orders.front().substr(0,orders.front().size() -1);
 		}
-		it->runThread(pizza, size, baseTime, factory); //timeBase
+		it->runThread(pizza, size, baseTime, factory);
 		orders.pop();
 	}
-	//std::cout << " NB : " << getNbOfBusyCookers() << std::endl;
 }
 
 void Kitchen::updateStatus() {
@@ -83,7 +82,7 @@ void Kitchen::updateStatus() {
 }
 
 int Kitchen::getNbOfBusyCookers() {
-	return static_cast<int>(cookers.size());
+	return nbBusyCookers;
 }
 
 void Kitchen::quit() {

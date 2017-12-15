@@ -31,6 +31,8 @@ public:
 	int getTime();
         unsigned int getOrderID();
         void nextOrderID();
+	std::list<Kitchen *> getKitchens();
+	std::list<int> getKitchenStatus();
 
 private:
 	std::queue<std::string> pizzas;

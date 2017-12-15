@@ -19,7 +19,7 @@
 void launchOrder (Manager *manager, Order anOrder, int cookersNb, PizzaFactory *factory){
 	manager->convertInputIntoOrder(anOrder);
 	manager->manageKitchens(cookersNb, factory);
-	std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>> ORDER #" << manager->getOrderID() << " READY !" << std::endl;
+	//std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>> ORDER #" << manager->getOrderID() << " READY !" << std::endl;
 	manager->nextOrderID();
 }
 
@@ -33,8 +33,8 @@ int main(int argc,char *argv[]) { //./a.out []
 	} else {
 		baseTime = static_cast<int>(strtol(argv[1], nullptr, 10));
 		cookersNb = static_cast<int>(strtol(argv[2], nullptr, 10));
-		std::cout << "Base time chosen : 1 T = " << baseTime << " ms" << std::endl; //temp (for warnings)
-		std::cout << "Number of cookers per kitchen choosen : " << cookersNb << std::endl; //temp (for warnings)
+		std::cout << "Base time chosen : 1 T = " << baseTime << " ms" << std::endl;
+		std::cout << "Number of cookers per kitchen choosen : " << cookersNb << std::endl;
 	}
 	Manager manager;
 	std::list<Order> orders;
