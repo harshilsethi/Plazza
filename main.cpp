@@ -54,12 +54,5 @@ int main(int argc,char *argv[]) { //./a.out []
 
 	std::queue<std::string> res = manager.getPizzas();
 	manager.manageKitchens(cookersNb);
-
-		/*while(!res.empty()){
-			std::cout << res.front() << std::endl;
-			res.pop();
-		}*/
-	}
-
 	return (EXIT_SUCCESS);
 }
