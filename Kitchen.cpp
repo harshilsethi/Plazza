@@ -74,7 +74,7 @@ void Kitchen::updateStatus() {
 	std::cout << "\e[31m" << nbMaxCookers - nbBusyCookers << " cookers still free in kitchen " << this->getId() << " !\e[0m" << std::endl;
 	std::cout << "BUSY COOKERS : " << nbBusyCookers << std::endl;
 	if (nbBusyCookers == 0) {
-		//quit();
+		quit();
 		std::cout << "Timer Start" << std::endl;
 		nbBusyCookers = nbMaxCookers;
 		// début timer et quand timer = 5 T destruction process + threads associés
@@ -85,13 +85,14 @@ int Kitchen::getNbOfBusyCookers() {
 	return static_cast<int>(cookers.size());
 }
 
-void Kitchen::quit() {/*
+void Kitchen::quit() {
 	try {
 		while (!cookers.empty()) {
-			delete cookers.back();
+			cookers.back().reset();
 			cookers.pop_back();
 		}
 	} catch (std::exception &e) {
 	}
-	exit(0);*/
+	std::cout << " QUIT : cookers.size() de Kitchen id# " << getId() << " : " << cookers.size() << std::endl;
+	exit(0);
 }
