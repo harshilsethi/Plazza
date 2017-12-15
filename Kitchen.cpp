@@ -11,7 +11,7 @@
 
 Kitchen::Kitchen(int _id, int _nbCookers) {
         id = _id;
-	nbCookers = _nbCookers;
+        nbCookers = _nbCookers;
         nbMaxCookers = _nbCookers;
 }
 
@@ -22,36 +22,36 @@ int Kitchen::getId() {
 }
 
 int Kitchen::getNbCookers() {
-	return nbCookers;
+        return nbCookers;
 }
 
 std::list<Cooker> &Kitchen::getCookers() {
-	return cookers;
+        return cookers;
 }
 
 void Kitchen::addOrder(std::string &anOrder) {
-	orders.push(anOrder);
+        orders.push(anOrder);
 }
 
 std::string Kitchen::giveOrder() {
-	return (orders.front());
+        return (orders.front());
 }
 
 void Kitchen::deleteOrder() {
-	orders.pop();
+        orders.pop();
 }
 
 void Kitchen::dispatch(Team &aTeam, int baseTime) {
-	std::list<Cooker>::iterator it;
+        std::list<Cooker>::iterator it;
         std::string pizza;
         std::string size;
 
-	for (unsigned int i = 0; i < orders.size(); ++i){
-		cookers.push_back(aTeam.takeCooker());
-	}
-	std::cout << "Nb of busy cookers : " << cookers.size() << std::endl;
-	for (it = cookers.begin(); it != cookers.end(); ++it){
-		it->setKitchen(this);
+        for (unsigned int i = 0; i < orders.size(); ++i){
+                cookers.push_back(aTeam.takeCooker());
+        }
+        std::cout << "Nb of busy cookers : " << cookers.size() << std::endl;
+        for (it = cookers.begin(); it != cookers.end(); ++it){
+                it->setKitchen(this);
                 if (orders.front().find("XL") != std::string::npos){
                         size = "XL";
                         pizza = orders.front().substr(0,orders.front().size() -2);
@@ -63,19 +63,19 @@ void Kitchen::dispatch(Team &aTeam, int baseTime) {
                         pizza = orders.front().substr(0,orders.front().size() -1);
                 }
                 it->runThread(pizza, size, baseTime); //timeBase
-		orders.pop();
-	}
-	//std::cout << " NB : " << getNbOfBusyCookers() << std::endl;
+                orders.pop();
+        }
+        //std::cout << " NB : " << getNbOfBusyCookers() << std::endl;
 }
 
 void Kitchen::updateStatus() {
-	if (getNbOfBusyCookers() <= 0) {
-		std::cout << "NO BUSY COOKERS" << std::endl;
-	} else {
-		// Stop timer
-	}
+        if (getNbOfBusyCookers() <= 0) {
+                std::cout << "NO BUSY COOKERS" << std::endl;
+        } else {
+                // Stop timer
+        }
         nbCookers--;
-        std::cout << nbCookers << " cookers still free in kitchen " << this->getId() << " !" << std::endl;
+        std::cout << "\e[31m" << nbCookers << " cookers still free in kitchen " << this->getId() << " !\e[0m" << std::endl;
         if(nbCookers == 0) {
                 //quit();
                 std::cout << "Timer Start" << std::endl;
@@ -85,7 +85,7 @@ void Kitchen::updateStatus() {
 }
 
 int Kitchen::getNbOfBusyCookers() {
-	return static_cast<int>(cookers.size());
+        return static_cast<int>(cookers.size());
 }
 
 void Kitchen::quit() {/*

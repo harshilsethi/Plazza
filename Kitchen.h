@@ -20,7 +20,7 @@ private:
 	int id;
 	PizzaFactory pizzaFactory;
 	int nbCookers;
-        int nbMaxCookers;
+	int nbMaxCookers;
 	std::queue<std::string> orders;
 	std::list<Cooker> cookers;
 	pid_t pid;
@@ -28,7 +28,7 @@ public:
 	explicit Kitchen(int,int);
 	~Kitchen();
 
-        int getId();
+	int getId();
 	int getNbCookers();
 	std::list<Cooker> &getCookers();
 	void addOrder(std::string &);
