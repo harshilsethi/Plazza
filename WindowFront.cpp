@@ -1,5 +1,8 @@
 //
-// Created by Du Tran Uy on 11/12/2017.
+// EPITECH PROJECT, 2017
+// Plazza Project
+// File description:
+// WindowFront.cpp
 //
 
 #include "WindowFront.h"

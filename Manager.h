@@ -33,7 +33,6 @@ public:
         void nextOrderID();
 
 private:
-//        std::map<unsigned int, std::queue<std::string>> orders;
 	std::queue<std::string> pizzas;
 	std::list<Kitchen *> kitchens;
 	Team managerTeam;
