@@ -12,12 +12,13 @@
 Kitchen::Kitchen(int _id, int _nbCookers) {
         id = _id;
 	nbCookers = _nbCookers;
+        nbMaxCookers = _nbCookers;
 }
 
 Kitchen::~Kitchen() = default;
 
 int Kitchen::getId() {
-        return id;
+        return id + 1;
 }
 
 int Kitchen::getNbCookers() {
@@ -70,11 +71,17 @@ void Kitchen::dispatch(Team &aTeam, int baseTime) {
 void Kitchen::updateStatus() {
 	if (getNbOfBusyCookers() <= 0) {
 		std::cout << "NO BUSY COOKERS" << std::endl;
-		//quit();
-		// début timer et quand timer = 5 T destruction process + threads associés
 	} else {
 		// Stop timer
 	}
+        nbCookers--;
+        std::cout << nbCookers << " cookers still free in kitchen " << this->getId() << " !" << std::endl;
+        if(nbCookers == 0) {
+                //quit();
+                std::cout << "Timer Start" << std::endl;
+                nbCookers = nbMaxCookers;
+                // début timer et quand timer = 5 T destruction process + threads associés
+        }
 }
 
 int Kitchen::getNbOfBusyCookers() {

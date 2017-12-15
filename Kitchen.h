@@ -20,6 +20,7 @@ private:
 	int id;
 	PizzaFactory pizzaFactory;
 	int nbCookers;
+        int nbMaxCookers;
 	std::queue<std::string> orders;
 	std::list<Cooker> cookers;
 	pid_t pid;

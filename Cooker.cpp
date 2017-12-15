@@ -61,7 +61,7 @@ void Cooker::cookPizza(std::string pizza, std::string size, int timeBase) {
 	long int timeToWait;
 	cookerMtx.lock();
 	Kitchen *kitchen = getKitchen();
-	kitchen->updateStatus();
+	//kitchen->updateStatus();
 	std::cout << "Cooking the pizza: " << pizza << " in kitchen " << kitchen->getId() << std::endl;
 	if (pizza == "Margarita") {
 		APizza *pizzaCooked = new Margarita(size);
