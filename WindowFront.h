@@ -4,12 +4,9 @@
 ** File description:
 ** Window.h
 */
-//
-// Created by Du Tran Uy on 11/12/2017.
-//
 
-#ifndef PLAZZAV1_WINDOW_H
-#define PLAZZAV1_WINDOW_H
+#ifndef WINDOW_H
+#define WINDOW_H
 
 #include <list>
 #include "Order.h"
@@ -42,4 +39,5 @@ private:
 void destroy_win(WINDOW *local_win);
 void createSimpleTitle(WINDOW *win);
 void createFooter(int y, int x);
-#endif //PLAZZAV1_WINDOW_H
+
+#endif //WINDOW_H

@@ -34,14 +34,13 @@ void split5(const std::string& str, Container& cont,
 }
 
 std::queue<std::string> Manager::convertInputIntoOrder(Order order) {
-	std::cout << "ORDER.GETCOMMAND " << order.getCommand() << std::endl;
-	std::string orderToConvert = order.getCommand(); // "Margarita L 2 ; American XL 1"
+	std::string orderToConvert = order.getCommand();
 	std::vector<std::string> result;
 	int pizzaCounter;
         int cpt;
 
 	ltrim(orderToConvert);
-	std::cout << orderToConvert << std::endl; // "MargaritaL2;AmericanXL1"
+	std::cout << orderToConvert << std::endl;
 	split5(orderToConvert, result);
 	std::copy(result.begin(), result.end(),
 		  std::ostream_iterator<std::string>(std::cout, "\n"));
@@ -59,6 +58,17 @@ std::queue<std::string> Manager::convertInputIntoOrder(Order order) {
 	}
 
 	return pizzas;
+	/*
+	 *
+	 * 	std::string delimiter = ";";
+	size_t pos = 0;
+	std::string token;
+	while ((pos = orderToConvert.find(delimiter)) != std::string::npos) {
+		token = orderToConvert.substr(0, pos);
+		std::cout << token << std::endl;
+		pizzas.push(token);
+		orderToConvert.erase(0, pos + delimiter.length());
+	} */
 }
 
 void Manager::setTime(int timeBase) {

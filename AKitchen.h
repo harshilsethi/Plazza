@@ -5,9 +5,8 @@
 // AKitchen.cpp
 //
 
-#ifndef PLAZZAV1_AKITCHEN_H
-#define PLAZZAV1_AKITCHEN_H
-
+#ifndef AKITCHEN_H
+#define AKITCHEN_H
 
 #include "Pizza/PizzaFactory.h"
 
@@ -19,5 +18,4 @@ public:
 	PizzaFactory pizzaFactory;
 };
 
-
-#endif //PLAZZAV1_AKITCHEN_H
+#endif //AKITCHEN_H
