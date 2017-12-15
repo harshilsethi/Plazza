@@ -57,26 +57,26 @@ const APizza &Cooker::getPizza() const {
 	return *pizza;
 }
 
-void Cooker::cookPizza(std::string pizza, std::string size, int timeBase) {
+void Cooker::cookPizza(std::string pizza, std::string size, int timeBase, PizzaFactory *factory) {
 	long int timeToWait;
 	cookerMtx.lock();
 	Kitchen *kitchen = getKitchen();
 	//kitchen->updateStatus();
 	std::cout << "Cooking the pizza: " << pizza << " in kitchen " << kitchen->getId() << std::endl;
 	if (pizza == "Margarita") {
-		APizza *pizzaCooked = new Margarita(size);
+		std::unique_ptr<APizza> pizzaCooked = factory->createPizza(factory->MARGARITA, size);
 		timeToWait = static_cast<long>(pizzaCooked->getCookTime() * timeBase);
 		std::this_thread::sleep_for(std::chrono::milliseconds(timeToWait));
 	} else if (pizza == "American") {
-		APizza *pizzaCooked = new American(size);
+		std::unique_ptr<APizza> pizzaCooked = factory->createPizza(factory->AMERICAN, size);
 		timeToWait = static_cast<long>(pizzaCooked->getCookTime() * timeBase);
 		std::this_thread::sleep_for(std::chrono::milliseconds(timeToWait));
 	} else if (pizza == "Fantasia") {
-		APizza *pizzaCooked = new Fantasia(size);
+		std::unique_ptr<APizza> pizzaCooked = factory->createPizza(factory->FANTASIA, size);
 		timeToWait = static_cast<long>(pizzaCooked->getCookTime() * timeBase);
 		std::this_thread::sleep_for(std::chrono::milliseconds(timeToWait));
 	} else if (pizza == "Regina") {
-		APizza *pizzaCooked = new Regina(size);
+		std::unique_ptr<APizza> pizzaCooked = factory->createPizza(factory->REGINA, size);
 		timeToWait = static_cast<long>(pizzaCooked->getCookTime() * timeBase);
 		std::this_thread::sleep_for(std::chrono::milliseconds(timeToWait));
 	}
@@ -85,8 +85,8 @@ void Cooker::cookPizza(std::string pizza, std::string size, int timeBase) {
 	kitchen->updateStatus(timeBase);
 }
 
-void Cooker::runThread(const std::string &aPizza, const std::string &aSize, int timeBase) {
-	std::thread cookerTh(&Cooker::cookPizza, this, aPizza, aSize, timeBase);
+void Cooker::runThread(const std::string &aPizza, const std::string &aSize, int timeBase, PizzaFactory *factory) {
+	std::thread cookerTh(&Cooker::cookPizza, this, aPizza, aSize, timeBase, factory);
 	busy = true;
 	cookerTh.join();
 }

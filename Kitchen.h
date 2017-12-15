@@ -38,7 +38,7 @@ public:
 	void addOrder(std::string &);
 	std::string giveOrder();
 	void deleteOrder();
-	void dispatch(Team &, int);
+	void dispatch(Team &, int, PizzaFactory *);
 	int getNbOfBusyCookers();
 	void updateStatus(int);
 	void quit();

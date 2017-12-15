@@ -16,9 +16,9 @@
 #include <iostream>
 #include <vector>
 
-void launchOrder (Manager *manager, Order anOrder, int cookersNb){
+void launchOrder (Manager *manager, Order anOrder, int cookersNb, PizzaFactory *factory){
 	manager->convertInputIntoOrder(anOrder);
-	manager->manageKitchens(cookersNb);
+	manager->manageKitchens(cookersNb, factory);
 	std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>> ORDER #" << manager->getOrderID() << " READY !" << std::endl;
 	manager->nextOrderID();
 }
@@ -39,13 +39,14 @@ int main(int argc,char *argv[]) { //./a.out []
 	Manager manager;
 	std::list<Order> orders;
 	WindowFront windowFront;
+	PizzaFactory factory;
 
 	orders = windowFront.getOrders();
 	manager.setTime(baseTime);
 
 	for (auto &order : orders) {
 		std::cout << "COMMAND : " << order.getCommand() << std::endl;
-		launchOrder(&manager, order, cookersNb);
+		launchOrder(&manager, order, cookersNb, &factory);
 	}
 
 	std::cout << std::endl
@@ -53,6 +54,6 @@ int main(int argc,char *argv[]) { //./a.out []
 		  << std::endl;
 
 	std::queue<std::string> res = manager.getPizzas();
-	manager.manageKitchens(cookersNb);
+	manager.manageKitchens(cookersNb, &factory);
 	return (EXIT_SUCCESS);
 }
