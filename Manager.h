@@ -26,7 +26,7 @@ public:
 
 	std::queue<std::string> convertInputIntoOrder(Order order);
 	std::queue<std::string> getPizzas();
-	void manageKitchens(unsigned int);
+	void manageKitchens(unsigned int, PizzaFactory *);
 	void setTime(int);
 	int getTime();
         unsigned int getOrderID();

@@ -41,7 +41,7 @@ void Kitchen::deleteOrder() {
 	orders.pop();
 }
 
-void Kitchen::dispatch(Team &aTeam, int baseTime) {
+void Kitchen::dispatch(Team &aTeam, int baseTime, PizzaFactory *factory) {
 	std::list<Cooker>::iterator it;
 	std::string pizza;
 	std::string size;
@@ -63,7 +63,7 @@ void Kitchen::dispatch(Team &aTeam, int baseTime) {
 			size = "M";
 			pizza = orders.front().substr(0,orders.front().size() -1);
 		}
-		it->runThread(pizza, size, baseTime); //timeBase
+		it->runThread(pizza, size, baseTime, factory); //timeBase
 		orders.pop();
 	}
 	//std::cout << " NB : " << getNbOfBusyCookers() << std::endl;

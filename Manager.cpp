@@ -80,7 +80,7 @@ void Manager::nextOrderID() {
 	++orderID;
 }
 
-void Manager::manageKitchens(unsigned int maxCookers) {
+void Manager::manageKitchens(unsigned int maxCookers, PizzaFactory *factory) {
 	int nbKitchens = pizzas.size() / maxCookers;
 
 	//security: limit of 10 processes
@@ -109,7 +109,7 @@ void Manager::manageKitchens(unsigned int maxCookers) {
 				exit(1);
 			case 0:
 			std::cout << " CASE 0 " << std::endl;
-                                kitchens.front()->dispatch(managerTeam, baseTime);      //new list version
+                                kitchens.front()->dispatch(managerTeam, baseTime, factory);      //new list version
 				//processK.dispatch(managerTeam, baseTime);             //old version
 				exit(0);
 			default:
