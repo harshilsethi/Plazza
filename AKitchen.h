@@ -5,19 +5,17 @@
 // AKitchen.cpp
 //
 
-#ifndef PLAZZAV1_AKITCHEN_H
-#define PLAZZAV1_AKITCHEN_H
-
+#ifndef AKITCHEN_H
+#define AKITCHEN_H
 
 #include "Pizza/PizzaFactory.h"
 
 class AKitchen {
 private:
 	int id;
-	PizzaFactory pizzaFactory;
 public:
 	int getId() const;
+	PizzaFactory pizzaFactory;
 };
 
-
-#endif //PLAZZAV1_AKITCHEN_H
+#endif //AKITCHEN_H
