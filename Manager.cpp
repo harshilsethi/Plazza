@@ -104,7 +104,6 @@ void Manager::manageKitchens(unsigned int maxCookers, PizzaFactory *factory) {
                         std::cerr << "Fatal error: can't create process!" << std::endl;
 				exit(1);
 			case 0:
-			std::cout << " CASE 0 " << std::endl;
                                 kitchens.front()->dispatch(managerTeam, baseTime, factory);
 				exit(0);
 			default:
