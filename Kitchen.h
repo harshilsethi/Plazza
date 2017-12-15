@@ -11,6 +11,7 @@
 #include <list>
 #include <queue>
 #include <string>
+#include <chrono>
 #include "Cooker.h"
 #include "Team.h"
 #include "Pizza/PizzaFactory.h"
@@ -39,6 +40,7 @@ public:
 	int getNbOfBusyCookers();
 	void updateStatus();
 	void quit();
+	void timer();
 };
 
 
