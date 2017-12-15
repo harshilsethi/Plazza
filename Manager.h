@@ -40,6 +40,7 @@ private:
 	Team managerTeam;
 	int baseTime;
         unsigned int orderID;
+        unsigned int idKitchen;
 };
 
 #endif /* ! MANAGER_H__ */

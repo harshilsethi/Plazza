@@ -11,6 +11,7 @@
 Manager::Manager() : managerTeam(30){
 	std::cout << "Manager : I'm the Plazza's manager !" << std::endl;
 	orderID = 1;
+        idKitchen = 0;
 }
 
 Manager::~Manager() {
@@ -90,7 +91,8 @@ void Manager::manageKitchens(unsigned int maxCookers, PizzaFactory *factory) {
 	else if (pizzas.size() % maxCookers != 0)
 		nbKitchens++;
 	for (int i = 0; i < nbKitchens; ++i){
-                kitchens.push_front(new Kitchen(i, maxCookers));
+                kitchens.push_front(new Kitchen(idKitchen, maxCookers));
+                ++idKitchen;
 		if (pizzas.size() < maxCookers){
 			maxCookers = pizzas.size();
 		}
