@@ -75,7 +75,7 @@ void Kitchen::updateStatus() {
                 // Stop timer
         }
         nbCookers--;
-        std::cout << "\e[31m" << nbCookers << " cookers still free in kitchen " << this->getId() << " !\e[0m" << std::endl;
+        std::cout << "\e[31m" << nbMaxCookers - nbCookers << " cookers still free in kitchen " << this->getId() << " !\e[0m" << std::endl;
         if(nbCookers == 0) {
                 //quit();
                 std::cout << "Timer Start" << std::endl;
