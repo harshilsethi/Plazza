@@ -10,82 +10,79 @@
 #include "Kitchen.h"
 
 Kitchen::Kitchen(int _id, int _nbCookers) {
-        id = _id;
-        nbCookers = _nbCookers;
-        nbMaxCookers = _nbCookers;
+	id = _id;
+	nbBusyCookers = 0;
+	nbMaxCookers = _nbCookers;
 }
 
 Kitchen::~Kitchen() = default;
 
 int Kitchen::getId() {
-        return id + 1;
+	return id + 1;
 }
 
 int Kitchen::getNbCookers() {
-        return nbCookers;
+	return nbBusyCookers;
 }
 
 std::list<Cooker> &Kitchen::getCookers() {
-        return cookers;
+	return cookers;
 }
 
 void Kitchen::addOrder(std::string &anOrder) {
-        orders.push(anOrder);
+	orders.push(anOrder);
 }
 
 std::string Kitchen::giveOrder() {
-        return (orders.front());
+	return (orders.front());
 }
 
 void Kitchen::deleteOrder() {
-        orders.pop();
+	orders.pop();
 }
 
 void Kitchen::dispatch(Team &aTeam, int baseTime) {
-        std::list<Cooker>::iterator it;
-        std::string pizza;
-        std::string size;
+	std::list<Cooker>::iterator it;
+	std::string pizza;
+	std::string size;
 
-        for (unsigned int i = 0; i < orders.size(); ++i){
-                cookers.push_back(aTeam.takeCooker());
-        }
-        std::cout << "Nb of busy cookers : " << cookers.size() << std::endl;
-        for (it = cookers.begin(); it != cookers.end(); ++it){
-                it->setKitchen(this);
-                if (orders.front().find("XL") != std::string::npos){
-                        size = "XL";
-                        pizza = orders.front().substr(0,orders.front().size() -2);
-                } else if (orders.front().find("L") != std::string::npos){
-                        size = "L";
-                        pizza = orders.front().substr(0,orders.front().size() -1);
-                }else if (orders.front().find("*M")){
-                        size = "M";
-                        pizza = orders.front().substr(0,orders.front().size() -1);
-                }
-                it->runThread(pizza, size, baseTime); //timeBase
-                orders.pop();
-        }
-        //std::cout << " NB : " << getNbOfBusyCookers() << std::endl;
+	for (unsigned int i = 0; i < orders.size(); ++i){
+		cookers.push_back(aTeam.takeCooker());
+		nbBusyCookers++;
+	}
+	std::cout << "Nb of busy cookers : " << nbBusyCookers << std::endl;
+	for (it = cookers.begin(); it != cookers.end(); ++it){
+		it->setKitchen(this);
+		if (orders.front().find("XL") != std::string::npos){
+			size = "XL";
+			pizza = orders.front().substr(0,orders.front().size() -2);
+		} else if (orders.front().find("L") != std::string::npos){
+			size = "L";
+			pizza = orders.front().substr(0,orders.front().size() -1);
+		}else if (orders.front().find("*M")){
+			size = "M";
+			pizza = orders.front().substr(0,orders.front().size() -1);
+		}
+		it->runThread(pizza, size, baseTime); //timeBase
+		orders.pop();
+	}
+	//std::cout << " NB : " << getNbOfBusyCookers() << std::endl;
 }
 
 void Kitchen::updateStatus() {
-        if (getNbOfBusyCookers() <= 0) {
-                std::cout << "NO BUSY COOKERS" << std::endl;
-        } else {
-                // Stop timer
-        }
-        nbCookers--;
-        std::cout << "\e[31m" << nbMaxCookers - nbCookers << " cookers still free in kitchen " << this->getId() << " !\e[0m" << std::endl;
-        if(nbCookers == 0) {
-                //quit();
-                std::cout << "Timer Start" << std::endl;
-                nbCookers = nbMaxCookers;
-                // début timer et quand timer = 5 T destruction process + threads associés
-        }
+	nbBusyCookers--;
+	std::cout << "\e[31m" << nbMaxCookers - nbBusyCookers << " cookers still free in kitchen " << this->getId() << " !\e[0m" << std::endl;
+	std::cout << "BUSY COOKERS : " << nbBusyCookers << std::endl;
+	if (nbBusyCookers == 0) {
+		//quit();
+		std::cout << "Timer Start" << std::endl;
+		nbBusyCookers = nbMaxCookers;
+		// début timer et quand timer = 5 T destruction process + threads associés
+	}
 }
 
 int Kitchen::getNbOfBusyCookers() {
-        return static_cast<int>(cookers.size());
+	return static_cast<int>(cookers.size());
 }
 
 void Kitchen::quit() {/*

@@ -58,17 +58,6 @@ std::queue<std::string> Manager::convertInputIntoOrder(Order order) {
 	}
 
 	return pizzas;
-	/*
-	 *
-	 * 	std::string delimiter = ";";
-	size_t pos = 0;
-	std::string token;
-	while ((pos = orderToConvert.find(delimiter)) != std::string::npos) {
-		token = orderToConvert.substr(0, pos);
-		std::cout << token << std::endl;
-		pizzas.push(token);
-		orderToConvert.erase(0, pos + delimiter.length());
-	} */
 }
 
 void Manager::setTime(int timeBase) {

@@ -19,11 +19,12 @@ class Kitchen {
 private:
 	int id;
 	PizzaFactory pizzaFactory;
-	int nbCookers;
+	int nbBusyCookers;
 	int nbMaxCookers;
 	std::queue<std::string> orders;
 	std::list<Cooker> cookers;
 	pid_t pid;
+
 public:
 	explicit Kitchen(int,int);
 	~Kitchen();
