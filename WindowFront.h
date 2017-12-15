@@ -40,4 +40,4 @@ void destroy_win(WINDOW *local_win);
 void createSimpleTitle(WINDOW *win);
 void createFooter(int y, int x);
 
-#endif //PLAZZAV1_WINDOW_H
+#endif //WINDOW_H
