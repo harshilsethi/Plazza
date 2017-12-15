@@ -82,7 +82,7 @@ void Cooker::cookPizza(std::string pizza, std::string size, int timeBase, PizzaF
 	}
 	cookerMtx.unlock();
 	busy = false; //at the end
-	kitchen->updateStatus();
+	kitchen->updateStatus(timeBase);
 }
 
 void Cooker::runThread(const std::string &aPizza, const std::string &aSize, int timeBase, PizzaFactory *factory) {

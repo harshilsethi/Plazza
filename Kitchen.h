@@ -15,6 +15,7 @@
 #include "Cooker.h"
 #include "Team.h"
 #include "Pizza/PizzaFactory.h"
+#include "Manager.h"
 
 class Kitchen {
 private:
@@ -25,6 +26,7 @@ private:
 	std::queue<std::string> orders;
 	std::list<Cooker> cookers;
 	pid_t pid;
+	int time;
 
 public:
 	explicit Kitchen(int,int);
@@ -38,9 +40,10 @@ public:
 	void deleteOrder();
 	void dispatch(Team &, int, PizzaFactory *);
 	int getNbOfBusyCookers();
-	void updateStatus();
+	void updateStatus(int);
 	void quit();
-	void timer();
+	void timer(int);
+
 };
 
 

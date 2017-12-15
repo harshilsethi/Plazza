@@ -68,7 +68,7 @@ void Kitchen::dispatch(Team &aTeam, int baseTime, PizzaFactory *factory) {
 	}
 }
 
-void Kitchen::updateStatus() {
+void Kitchen::updateStatus(int timeBase) {
 	nbBusyCookers--;
 	std::cout << "\e[31m" << nbMaxCookers - nbBusyCookers << " cookers still free in kitchen " << this->getId() << " !\e[0m" << std::endl;
 	std::cout << "BUSY COOKERS : " << nbBusyCookers << std::endl;
@@ -76,7 +76,7 @@ void Kitchen::updateStatus() {
 		std::cout << "Timer Start" << std::endl;
 		nbBusyCookers = nbMaxCookers;
 		// début timer et quand timer = 5 T destruction process + threads associés
-		timer();
+		timer(timeBase);
 		quit();
 	}
 }
@@ -97,12 +97,11 @@ void Kitchen::quit() {
 	exit(0);
 }
 
-void Kitchen::timer() {
-	std::cout << "Start" << std::endl;
+void Kitchen::timer(int timeBase) {
 	auto start = std::chrono::high_resolution_clock::now();
-	for(int i=0;i<10;++i) {
-		std::cout << (10-i) << std::endl;
-		std::this_thread::sleep_until(start + (i+1)*std::chrono::seconds(1));
+        int baseTime = 5;
+	for(int i = 0; i < baseTime; ++i) {
+		std::cout << (baseTime-i) << "T" << std::endl;
+		std::this_thread::sleep_until(start + (i + 1) * std::chrono::milliseconds(timeBase));
 	}
-	std::cout << "DONE" << std::endl;
 }
