@@ -22,7 +22,7 @@ int Kitchen::getId() {
 	return id + 1;
 }
 
-int Kitchen::getNbCookers() {
+int Kitchen::getNbBusyCookers() {
 	return nbBusyCookers;
 }
 
@@ -98,9 +98,6 @@ void Kitchen::updateStatus(int timeBase) {
 void Kitchen::setNbOfBusyCookers(int add) {
         nbBusyCookers = nbBusyCookers + add;
 }
-int Kitchen::getNbOfBusyCookers() {
-	return nbBusyCookers;
-}
 
 void Kitchen::quit() {
 	try {
@@ -116,6 +113,10 @@ void Kitchen::quit() {
         if (val != 0)
                 std::cerr << "Warning: kitchen" << getId() << " hasn't been deleted";
 	exit(0);
+}
+
+int Kitchen::getNbMaxCookers() {
+	return nbMaxCookers;
 }
 
 void Kitchen::timer(int timeBase) {

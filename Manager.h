@@ -33,6 +33,7 @@ public:
         void nextOrderID();
 	std::list<Kitchen *> getKitchens();
 	std::list<int> getKitchenStatus();
+	int getNbOfFreeCookers();
 
 private:
 	std::queue<std::string> pizzas;
