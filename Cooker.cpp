@@ -82,6 +82,7 @@ void Cooker::cookPizza(std::string pizza, std::string size, int timeBase, PizzaF
 	}
 	cookerMtx.unlock();
 	busy = false; //at the end
+        kitchen->setNbOfBusyCookers(-1);
 	kitchen->updateStatus(timeBase);
 }
 

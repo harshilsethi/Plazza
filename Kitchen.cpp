@@ -4,10 +4,11 @@
 ** File description:
 ** Kitchen.cpp
 */
-
+#include <iostream>
 #include <future>
 #include <zconf.h>
 #include "Kitchen.h"
+#include <fstream>
 
 Kitchen::Kitchen(int _id, int _nbCookers) {
 	id = _id;
@@ -69,9 +70,22 @@ void Kitchen::dispatch(Team &aTeam, int baseTime, PizzaFactory *factory) {
 }
 
 void Kitchen::updateStatus(int timeBase) {
-	nbBusyCookers--;
+        std::fstream file;
+        std::string path;
+        path = "Txt/kitchen" + std::to_string(getId()) + ".txt";
+        file.open(path, std::ios::out | std::ios::trunc);
+        if (file){
+                file << "|----------------|" << std::endl;
+                file << "|    Kitchen" << getId() << "    |" << std::endl;
+                file << "|----------------|" << std::endl;
+                file << "|  busy cookers  |" << std::endl;
+                file << "|      " << nbBusyCookers << "/" << nbMaxCookers << "       |" << std::endl;
+                file << "|----------------|" << std::endl;
+        }
+        file.close();
 	std::cout << "\e[31m" << nbMaxCookers - nbBusyCookers << " cookers still free in kitchen " << this->getId() << " !\e[0m" << std::endl;
 	std::cout << "BUSY COOKERS : " << nbBusyCookers << std::endl;
+
 	if (nbBusyCookers == 0) {
 		std::cout << "Timer Start" << std::endl;
 		nbBusyCookers = nbMaxCookers;
@@ -81,6 +95,9 @@ void Kitchen::updateStatus(int timeBase) {
 	}
 }
 
+void Kitchen::setNbOfBusyCookers(int add) {
+        nbBusyCookers = nbBusyCookers + add;
+}
 int Kitchen::getNbOfBusyCookers() {
 	return nbBusyCookers;
 }
@@ -94,6 +111,10 @@ void Kitchen::quit() {
 	} catch (std::exception &e) {
 	}
 	std::cout << " QUIT : cookers.size() de Kitchen id# " << getId() << " : " << cookers.size() << std::endl;
+        std::string path = "Txt/kitchen" + std::to_string(getId()) + ".txt";
+        int val = std::remove(path.c_str());
+        if (val != 0)
+                std::cerr << "Warning: kitchen" << getId() << " hasn't been deleted";
 	exit(0);
 }
 

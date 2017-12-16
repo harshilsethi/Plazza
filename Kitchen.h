@@ -33,6 +33,7 @@ public:
 	~Kitchen();
 
 	int getId();
+        void setNbOfBusyCookers(int);
 	int getNbCookers();
 	std::list<Cooker> &getCookers();
 	void addOrder(std::string &);
