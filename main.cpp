@@ -7,14 +7,7 @@
 
 #include <iostream>
 #include "Manager.h"
-#include "Order.h"
 #include "WindowFront.h"
-#include <ncurses.h>
-#include <menu.h>
-#include <cstring>
-#include <ncurses.h>
-#include <iostream>
-#include <vector>
 
 void launchOrder (Manager *manager, Order anOrder, int cookersNb, PizzaFactory *factory){
 	manager->convertInputIntoOrder(anOrder);
@@ -33,6 +26,9 @@ int main(int argc,char *argv[]) { //./a.out []
 	} else {
 		baseTime = static_cast<int>(strtol(argv[1], nullptr, 10));
 		cookersNb = static_cast<int>(strtol(argv[2], nullptr, 10));
+		if((!baseTime) || (!cookersNb))
+			throw std::invalid_argument("\e[91mPlease choose numbers for the base time & the number of cookers\e[0m");
+
 		std::cout << "Base time chosen : 1 T = " << baseTime << " ms" << std::endl;
 		std::cout << "Number of cookers per kitchen choosen : " << cookersNb << std::endl;
 	}
