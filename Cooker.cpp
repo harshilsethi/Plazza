@@ -61,7 +61,8 @@ void Cooker::cookPizza(std::string pizza, std::string size, int timeBase, PizzaF
 	long int timeToWait;
 	cookerMtx.lock();
 	Kitchen *kitchen = getKitchen();
-	//kitchen->updateStatus();
+        //kitchen->setNbOfBusyCookers(1);
+	kitchen->updateStatus(timeBase);
 	std::cout << "Cooking the pizza: " << pizza << " in kitchen " << kitchen->getId() << std::endl;
 	if (pizza == "Margarita") {
 		std::unique_ptr<APizza> pizzaCooked = factory->createPizza(factory->MARGARITA, size);
