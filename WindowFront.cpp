@@ -312,7 +312,7 @@ WINDOW* WindowFront::createUserwin(WINDOW *local_win /*std::vector<std::string> 
 			wrefresh(displayCommand);
 			createUserwin(local_win);
 		} else if (endOrder == 'N' || endOrder == 'n') {
-			mvwprintw(displayCommand, 1, 3, "List of Pizza of commands");
+			mvwprintw(displayCommand, 1, 3, "List of commands");
 			for (std::string command : lastCommand) {
 				result = result + command + ";";
 				mvwprintw(displayCommand, i, 3, command.c_str());
@@ -337,7 +337,7 @@ WINDOW* WindowFront::createUserwin(WINDOW *local_win /*std::vector<std::string> 
 			} else {//if (endPro == 'N' || endPro == 'n') {
 				wclear(displayCommand);
 				i = 1;
-				mvwprintw(displayCommand, 1, 3, "You have total of %d orders", numberOrder);
+				mvwprintw(displayCommand, 1, 3, "You have a total of %d order(s)", numberOrder);
 				for (Order order : orders) {
 					mvwprintw(displayCommand, j, 3, "Order %d ", i);
 					i++;
