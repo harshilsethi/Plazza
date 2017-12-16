@@ -104,6 +104,7 @@ void Manager::manageKitchens(unsigned int maxCookers, PizzaFactory *factory) {
 		nbKitchens = 1;
 	else if (pizzas.size() % maxCookers != 0)
 		nbKitchens++;
+
 	for (int i = 0; i < nbKitchens; ++i) {
 		/*kitchens.push_front(new Kitchen(idKitchen, maxCookers));
 		++idKitchen;*/
@@ -122,11 +123,12 @@ void Manager::manageKitchens(unsigned int maxCookers, PizzaFactory *factory) {
 				std::cerr << "Fatal error: can't create process!" << std::endl;
 				exit(1);
 			case 0:
+			std::cout << "ENFANT" << std::endl;
 				//if ((kitchens.front()->getNbMaxCookers() - kitchens.front()->getNbBusyCookers()) > 0)
 					kitchens.front()->dispatch(managerTeam, baseTime, factory);
 				exit(0);
 			default:
-				std::cout << std::endl;
+				std::cout << "PERE " << std::endl;
 		}
 	}
 }

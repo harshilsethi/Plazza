@@ -38,22 +38,27 @@ int main(int argc,char *argv[]) { //./a.out []
 	}
 	Manager manager;
 	std::list<Order> orders;
-	WindowFront windowFront;
-	PizzaFactory factory;
 
-	orders = windowFront.getOrders();
-	manager.setTime(baseTime);
+	int isNewOrder = 0;
+	do {
+		WindowFront *windowFront = new WindowFront();
+		PizzaFactory factory;
 
-	for (auto &order : orders) {
-		std::cout << "COMMAND : " << order.getCommand() << std::endl;
-		launchOrder(&manager, order, cookersNb, &factory);
-	}
+		orders = windowFront->getOrders();
+		manager.setTime(baseTime);
+
+		for (auto &order : orders) {
+			std::cout << "COMMAND : " << order.getCommand() << std::endl;
+			launchOrder(&manager, order, cookersNb, &factory);
+		}
+		isNewOrder = windowFront->getOrderFlag();
+		delete windowFront;
+	} while (isNewOrder);
 
 	std::cout << std::endl
 		  << "===================================" << std::endl
 		  << std::endl;
 
 	std::queue<std::string> res = manager.getPizzas();
-	manager.manageKitchens(cookersNb, &factory);
 	return (EXIT_SUCCESS);
 }

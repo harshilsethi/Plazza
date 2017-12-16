@@ -326,27 +326,24 @@ WINDOW* WindowFront::createUserwin(WINDOW *local_win /*std::vector<std::string> 
 			mvwprintw(local_win, 1, 3, "Do you want to make another order ");
 			mvwprintw(local_win, 2, 3, "Enter Y or y to continue or any key to exit");
 			endPro = (char) wgetch(local_win);
+			//displayCommand_ = displayCommand;
+			//local_win_ = local_win;
 			if (endPro == 'Y' || endPro == 'y') {
-				lastCommand.clear();
-				numberOrder++;
-				wclear(local_win);
-				wclear(displayCommand);
-				wrefresh(local_win);
-				wrefresh(displayCommand);
-				createUserwin(local_win);
+				orderFlag = 1;
 			} else {//if (endPro == 'N' || endPro == 'n') {
-				wclear(displayCommand);
-				i = 1;
-				mvwprintw(displayCommand, 1, 3, "You have total of %d orders", numberOrder);
-				for (Order order : orders) {
-					mvwprintw(displayCommand, j, 3, "Order %d ", i);
-					i++;
-					j++;
-					mvwprintw(displayCommand, j, 3, order.getCommand().c_str());
-					j++;
-				}
-				wrefresh(displayCommand);
+				orderFlag = 0;
 			}
+			wclear(displayCommand);
+			i = 1;
+			mvwprintw(displayCommand, 1, 3, "You have total of %d orders", numberOrder);
+			for (Order order : orders) {
+				mvwprintw(displayCommand, j, 3, "Order %d ", i);
+				i++;
+				j++;
+				mvwprintw(displayCommand, j, 3, order.getCommand().c_str());
+				j++;
+			}
+			wrefresh(displayCommand);
 		}
 	}
 	while (command.empty() && flag){
@@ -410,3 +407,26 @@ std::list<Order> WindowFront::getOrders() const {
 const std::vector<std::string> &WindowFront::getLastCommands() const {
 	return lastCommand;
 }
+
+int WindowFront::getOrderFlag() {
+	return orderFlag;
+}
+
+void WindowFront::runNewOrder(WINDOW *displayCommand, WINDOW *local_win) {
+	this->lastCommand.clear();
+	numberOrder++;
+	wclear(local_win);
+	wclear(displayCommand);
+	wrefresh(local_win);
+	wrefresh(displayCommand);
+	createUserwin(local_win);
+}
+/*
+WINDOW *WindowFront::getLocalWin() {
+	return local_win_;
+}
+
+WINDOW *WindowFront::getDisplayCommand() {
+	return displayCommand_;
+}
+*/
