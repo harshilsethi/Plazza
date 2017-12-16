@@ -334,7 +334,7 @@ WINDOW* WindowFront::createUserwin(WINDOW *local_win /*std::vector<std::string> 
 			} else {//if (endPro == 'N' || endPro == 'n') {
 				wclear(displayCommand);
 				i = 1;
-				mvwprintw(displayCommand, 1, 3, "You have total of %d orders", numberOrder);
+				mvwprintw(displayCommand, 1, 3, "You have a total of %d order(s)", numberOrder);
 				for (Order order : orders) {
 					mvwprintw(displayCommand, j, 3, "Order %d ", i);
 					i++;
