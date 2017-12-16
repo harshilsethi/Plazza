@@ -82,20 +82,6 @@ void Manager::nextOrderID() {
 
 void Manager::manageKitchens(unsigned int maxCookers, PizzaFactory *factory) {
 	int nbKitchens = pizzas.size() / maxCookers;
-	int nbOfKitchensToRecreate = 0;
-	int nbFreeCookers = getNbOfFreeCookers();
-
-	if (nbFreeCookers < static_cast<int>(pizzas.size())) {
-		nbOfKitchensToRecreate = static_cast<int>((pizzas.size() - nbFreeCookers) / maxCookers);
-		if ((pizzas.size() - nbFreeCookers) % maxCookers != 0)
-			nbOfKitchensToRecreate++;
-	}
-
-	std::cout << "%%%%%%% nbOfKitchensToRecreate : " << nbOfKitchensToRecreate << std::endl;
-	for (int i = 0; i < nbOfKitchensToRecreate; ++i) {
-		kitchens.push_front(new Kitchen(idKitchen, maxCookers));
-		++idKitchen;
-	}
 
 	//security: limit of 10 processes
 	if (nbKitchens > 10)
@@ -104,18 +90,15 @@ void Manager::manageKitchens(unsigned int maxCookers, PizzaFactory *factory) {
 		nbKitchens = 1;
 	else if (pizzas.size() % maxCookers != 0)
 		nbKitchens++;
-
-	for (int i = 0; i < nbKitchens; ++i) {
-		/*kitchens.push_front(new Kitchen(idKitchen, maxCookers));
-		++idKitchen;*/
+	for (int i = 0; i < nbKitchens; ++i){
+		kitchens.push_front(new Kitchen(idKitchen, maxCookers));
+		++idKitchen;
 		if (pizzas.size() < maxCookers){
 			maxCookers = pizzas.size();
 		}
-		for(unsigned int j = 0; j < maxCookers; ++j) {
-			if ((kitchens.front()->getNbMaxCookers() - kitchens.front()->getNbBusyCookers()) > 0) {
-				kitchens.front()->addOrder(pizzas.front());
-				pizzas.pop();
-			}
+		for(unsigned int j = 0; j < maxCookers; ++j){
+			kitchens.front()->addOrder(pizzas.front());
+			pizzas.pop();
 		}
 
 		switch (fork()){
@@ -123,12 +106,10 @@ void Manager::manageKitchens(unsigned int maxCookers, PizzaFactory *factory) {
 				std::cerr << "Fatal error: can't create process!" << std::endl;
 				exit(1);
 			case 0:
-			std::cout << "ENFANT" << std::endl;
-				//if ((kitchens.front()->getNbMaxCookers() - kitchens.front()->getNbBusyCookers()) > 0)
-					kitchens.front()->dispatch(managerTeam, baseTime, factory);
+				kitchens.front()->dispatch(managerTeam, baseTime, factory);
 				exit(0);
 			default:
-				std::cout << "PERE " << std::endl;
+				std::cout << std::endl;
 		}
 	}
 }
