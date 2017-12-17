@@ -14,7 +14,6 @@ Team::Team(int howMany) {
 }
 
 Team::~Team() {
-        std::cout << howManyCookers() << std::endl;
 	while (!cookers.empty()){
 		delete cookers.front();
 		cookers.pop();
@@ -30,10 +29,4 @@ Cooker Team::takeCooker() {
 	Cooker *temp = cookers.front();
 	cookers.pop();
 	return (*temp);
-}
-
-int Team::howManyCookers() {
-	int howMany = cookers.size();
-	std::cout << howMany << " cooker(s) left." << std::endl;
-	return howMany;
 }

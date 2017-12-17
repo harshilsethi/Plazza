@@ -26,12 +26,16 @@ public:
 	WINDOW* createUserwin(WINDOW *local_win);
 	WINDOW* createKitchenWin(WINDOW *local_win);
 	void createCurses();
+	int getOrderFlag();
+	void runNewOrder(WINDOW *displayComannd, WINDOW *local_win);
+
 public:
 	std::list<Order> getOrders() const;
 	const std::vector<std::string> &getLastCommands() const;
 private:
 	std::list<Order> orders;
 	std::vector<std::string> lastCommand;
+	int orderFlag = 0;
 };
 void destroy_win(WINDOW *local_win);
 void createSimpleTitle(WINDOW *win);
