@@ -5,6 +5,7 @@
 // WindowFront.cpp
 //
 
+#include <fstream>
 #include "WindowFront.h"
 
 static int numberOrder = 1;
@@ -65,6 +66,7 @@ void WindowFront::createCurses()
 	WINDOW *titleWin;
 	WINDOW *menuWin;
 	WINDOW *userWin;
+	WINDOW *checkKitchenWin;
 	// Initialize curses
 	int y, x;
 	initscr();
@@ -81,19 +83,23 @@ void WindowFront::createCurses()
 	titleWin = newwin(10, x - 2, 5,1);
 	menuWin = newwin(12,30,14,1);
 	userWin = newwin(12,50,14, 40);
+	checkKitchenWin = newwin(12,50,14,40);
 	refresh();
 	//Display windows
 	titleWin = createTitle(titleWin);
 	menuWin = createMenuwin(menuWin);
 	userWin = createUserwin(userWin);
+	checkKitchenWin = createKitchenWin(checkKitchenWin);
 	refresh();
 	//Display Thank You
+	getch();
 	createFooter(y - 15 ,(COLS - 2) / 5);
 	getch();
 	//Destroy windows
 	destroy_win(titleWin);
 	destroy_win(menuWin);
 	destroy_win(userWin);
+	destroy_win(checkKitchenWin);
 	endwin();
 }
 
@@ -288,4 +294,49 @@ void WindowFront::runNewOrder(WINDOW *displayCommand, WINDOW *local_win) {
 	wrefresh(local_win);
 	wrefresh(displayCommand);
 	createUserwin(local_win);
+}
+WINDOW *WindowFront::createKitchenWin(WINDOW *local_win) {
+	char check;
+	int row = 6;
+	wbkgd(local_win, COLOR_PAIR(3));
+	wclear(local_win);
+	wrefresh(local_win);
+	wborder(local_win,  '|', '|', '-' ,'_', '|', '|', '|', '|');
+	mvwprintw(local_win,1,8,"Do you want to display the kitchen");
+	mvwprintw(local_win,2,8,"Press Y and y to display and other key to exit");
+	check = static_cast<char>(wgetch(local_win));
+	if(check == 'Y' || check == 'y') {
+		erase();
+		wrefresh(local_win);
+		refresh();
+		WINDOW *kitchenwindow = newwin(50, 70, 8, 30);
+		std::string path;
+		wborder(kitchenwindow, '|', '|', '-', '_', '|', '|', '|', '|');
+		wbkgd(kitchenwindow, COLOR_PAIR(2));
+		mvwprintw(kitchenwindow, 2, 2, "Visualization of cookers in the kitchens");
+		wrefresh(kitchenwindow);
+		for (int i = 1; i <= 5; i++) {
+			path = "Txt/kitchen" + std::to_string(i) + ".txt";
+			std::ifstream in(path);;
+			std::string str;
+			if (in.is_open()) {
+				while (getline(in, str)) {
+					mvwprintw(kitchenwindow, row, 20, str.c_str());
+					row++;
+					wrefresh(kitchenwindow);
+				}
+			} else {
+				mvwprintw(kitchenwindow, row++, 3,
+					  "Can not open the file because the kitchen %d is not been used yet",
+					  i);
+				wrefresh(kitchenwindow);
+			}
+			mvwprintw(kitchenwindow,row++, 20, "\n");
+			in.close();
+		}
+		wrefresh(kitchenwindow);
+		destroy_win(kitchenwindow);
+		wrefresh(local_win);
+	}
+	return local_win;
 }
