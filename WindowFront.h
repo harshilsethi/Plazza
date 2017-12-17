@@ -24,6 +24,7 @@ public:
 	WINDOW* createTitle(WINDOW* win);
 	WINDOW* createMenuwin(WINDOW* local_win);
 	WINDOW* createUserwin(WINDOW *local_win);
+	WINDOW* createKitchenWin(WINDOW *local_win);
 	void createCurses();
 public:
 	std::list<Order> getOrders() const;
@@ -31,10 +32,6 @@ public:
 private:
 	std::list<Order> orders;
 	std::vector<std::string> lastCommand;
-private:
-	std::string choosePizza(WINDOW *local_win);
-	std::string chooseSize(WINDOW *local_win, std::string command);
-	void continueOrder(WINDOW *local_win, WINDOW *displayComannd);
 };
 void destroy_win(WINDOW *local_win);
 void createSimpleTitle(WINDOW *win);

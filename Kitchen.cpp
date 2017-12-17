@@ -111,10 +111,10 @@ void Kitchen::quit() {
 	} catch (std::exception &e) {
 	}
 	std::cout << " QUIT : cookers.size() de Kitchen id# " << getId() << " : " << cookers.size() << std::endl;
-        std::string path = "Txt/kitchen" + std::to_string(getId()) + ".txt";
-        int val = std::remove(path.c_str());
-        if (val != 0)
-                std::cerr << "Warning: kitchen" << getId() << " hasn't been deleted";
+        //std::string path = "Txt/kitchen" + std::to_string(getId()) + ".txt";
+        //int val = std::remove(path.c_str());
+        //if (val != 0)
+        //        std::cerr << "Warning: kitchen" << getId() << " hasn't been deleted";
 	exit(0);
 }
 

@@ -5,6 +5,7 @@
 // WindowFront.cpp
 //
 
+#include <fstream>
 #include "WindowFront.h"
 
 static int numberOrder = 1;
@@ -65,6 +66,7 @@ void WindowFront::createCurses()
 	WINDOW *titleWin;
 	WINDOW *menuWin;
 	WINDOW *userWin;
+	WINDOW *checkKitchenWin;
 	// Initialize curses
 	int y, x;
 	initscr();
@@ -81,137 +83,26 @@ void WindowFront::createCurses()
 	titleWin = newwin(10, x - 2, 5,1);
 	menuWin = newwin(12,30,14,1);
 	userWin = newwin(12,50,14, 40);
+	checkKitchenWin = newwin(12,50,14,40);
 	refresh();
 	//Display windows
 	titleWin = createTitle(titleWin);
 	menuWin = createMenuwin(menuWin);
 	userWin = createUserwin(userWin);
+	checkKitchenWin = createKitchenWin(checkKitchenWin);
 	refresh();
 	//Display Thank You
+	getch();
 	createFooter(y - 15 ,(COLS - 2) / 5);
 	getch();
 	//Destroy windows
 	destroy_win(titleWin);
 	destroy_win(menuWin);
 	destroy_win(userWin);
+	destroy_win(checkKitchenWin);
 	//getch();
 	endwin();
 }
-/*
-std::string WindowFront::choosePizza(WINDOW *local_win)
-{
-	int pizza;
-	std::string command;
-	pizza = getch();
-	switch (pizza){
-		case '1':
-			command = "Margarita";
-			break;
-		case '2':
-			command = "Regina";
-			break;
-		case '3':
-			command = "American";
-			break;
-		case 4':
-			command = "Fantasia";
-			break;
-		default:
-			mvwprintw(local_win, 2, 3,"Please Enter the correct number");
-			command = std::string("");
-			wrefresh(local_win);
-	}
-	return command;
-}
-
-std::string WindowFront::chooseSize(WINDOW *local_win, std::string command) {
-	int size = static_cast<char>(getch());
-	int number;
-	switch (size) {
-		case '1':
-			command = command + " " + "M";
-			break;
-		case '2':
-			command.append(" ");
-			command.append("L");
-			break;
-		case '3':
-			command.append(" ");
-			command.append("XL");
-			break;
-		default:
-			command = std::string("");
-			wclear(local_win);
-			mvwprintw(local_win, 6, 3, "Please Enter the correct number");
-			wrefresh(local_win);
-	}
-	if (!command.empty()) {
-		mvwprintw(local_win, 6, 3, "Please choose the number of pizza you want");
-		mvwprintw(local_win, 7, 3, "Enter the number ");
-		wscanw(local_win, const_cast<char *>("%d"), &number);
-		wrefresh(local_win);
-		command = command + " " + std::to_string(number);
-		this->lastCommand.push_back(command);
-	}
-	wgetch(local_win);
-	return command;
-}
-
-void WindowFront::continueOrder(WINDOW *local_win, WINDOW *displayCommand) {
-	std::string result;
-	char endOrder;
-	char endPro;
-	int i = 2;
-	int j = 2;
-	//DO Function
-	mvwprintw(local_win, 9, 3, "Do you want to add pizza to this order ");
-	mvwprintw(local_win, 10, 3, "Y or y for Yes and N or n for No ");
-	endOrder = (char) wgetch(local_win);
-	wgetch(local_win);
-	if (endOrder == 'Y' || endOrder == 'y') {
-		wclear(local_win);
-		wclear(displayCommand);
-		wrefresh(local_win);
-		wrefresh(displayCommand);
-		createUserwin(local_win);
-	} else if (endOrder == 'N' || endOrder == 'n') {
-		mvwprintw(displayCommand, 1, 3, "List of Pizza of Command ");
-		for (std::string command : this->lastCommand) {
-			result = result + command + ";";
-			mvwprintw(displayCommand, i, 3, command.c_str());
-			wrefresh(displayCommand);
-			i++;
-		}
-		wclear(local_win);
-		wrefresh(local_win);
-		Order order(result);
-		orders.push_back(order);
-		mvwprintw(local_win, 1, 3, "Do you want to make another order ");
-		endPro = (char) wgetch(local_win);
-		wgetch(local_win);
-		if (endPro == 'Y' || endPro == 'y') {
-			this->lastCommand.clear();
-			numberOrder++;
-			wclear(local_win);
-			wclear(displayCommand);
-			wrefresh(local_win);
-			wrefresh(displayCommand);
-			createUserwin(local_win);
-		} else if (endPro == 'N' || endPro == 'n') {
-			wclear(displayCommand);
-			i = 1;
-			mvwprintw(displayCommand, 1, 3, "You have total of %d orders ", numberOrder);
-			for (Order order : orders) {
-				mvwprintw(displayCommand, j, 3, "Order %d ", i);
-				i++;
-				j++;
-				mvwprintw(displayCommand, j, 3, order.getCommand().c_str());
-				j++;
-			}
-			wrefresh(displayCommand);
-		}
-	}
-}*/
 
 WINDOW* WindowFront::createUserwin(WINDOW *local_win /*std::vector<std::string> lastCommand,*/)
 {
@@ -409,4 +300,50 @@ std::list<Order> WindowFront::getOrders() const {
 
 const std::vector<std::string> &WindowFront::getLastCommands() const {
 	return lastCommand;
+}
+
+WINDOW *WindowFront::createKitchenWin(WINDOW *local_win) {
+	char check;
+	int row = 6;
+	wbkgd(local_win, COLOR_PAIR(3));
+	wclear(local_win);
+	wrefresh(local_win);
+	wborder(local_win,  '|', '|', '-' ,'_', '|', '|', '|', '|');
+	mvwprintw(local_win,1,8,"Do you want to display the kitchen");
+	mvwprintw(local_win,2,8,"Press Y and y to display and other key to exit");
+	check = static_cast<char>(wgetch(local_win));
+	if(check == 'Y' || check == 'y') {
+		erase();
+		wrefresh(local_win);
+		refresh();
+		WINDOW *kitchenwindow = newwin(50, 70, 8, 30);
+		std::string path;
+		wborder(kitchenwindow, '|', '|', '-', '_', '|', '|', '|', '|');
+		wbkgd(kitchenwindow, COLOR_PAIR(2));
+		mvwprintw(kitchenwindow, 2, 2, "Visualization of cookers in the kitchens");
+		wrefresh(kitchenwindow);
+		for (int i = 1; i <= 5; i++) {
+			path = "Txt/kitchen" + std::to_string(i) + ".txt";
+			std::ifstream in(path);;
+			std::string str;
+			if (in.is_open()) {
+				while (getline(in, str)) {
+					mvwprintw(kitchenwindow, row, 20, str.c_str());
+					row++;
+					wrefresh(kitchenwindow);
+				}
+			} else {
+				mvwprintw(kitchenwindow, row++, 3,
+					  "Can not open the file because the kitchen %d is not been used yet",
+					  i);
+				wrefresh(kitchenwindow);
+			}
+			mvwprintw(kitchenwindow,row++, 20, "\n");
+			in.close();
+		}
+		wrefresh(kitchenwindow);
+		destroy_win(kitchenwindow);
+		wrefresh(local_win);
+	}
+	return local_win;
 }
