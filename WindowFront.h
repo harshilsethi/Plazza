@@ -25,12 +25,16 @@ public:
 	WINDOW* createMenuwin(WINDOW* local_win);
 	WINDOW* createUserwin(WINDOW *local_win);
 	void createCurses();
+	int getOrderFlag();
+	void runNewOrder(WINDOW *displayComannd, WINDOW *local_win);
+
 public:
 	std::list<Order> getOrders() const;
 	const std::vector<std::string> &getLastCommands() const;
 private:
 	std::list<Order> orders;
 	std::vector<std::string> lastCommand;
+	int orderFlag = 0;
 private:
 	std::string choosePizza(WINDOW *local_win);
 	std::string chooseSize(WINDOW *local_win, std::string command);

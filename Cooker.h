@@ -14,7 +14,6 @@
 #include <mutex>
 #include "Pizza/APizza.h"
 #include "Pizza/PizzaFactory.h"
-//#include "Kitchen.h"
 
 class Kitchen;
 
@@ -35,11 +34,10 @@ public:
 	Kitchen *getKitchen() const;
 	void setKitchen(Kitchen *kitchen);
 	const APizza &getPizza() const;
-	void cookPizza(std::string, std::string, int, PizzaFactory *);
+	void cookPizza(std::string const &, std::string const &, int, PizzaFactory *);
 	void runThread(const std::string &, const std::string &, int, PizzaFactory *);
-	void reset(); // reinit the cooker
+	void reset();
 	bool isBusy();
 };
-
 
 #endif //COOKER_H

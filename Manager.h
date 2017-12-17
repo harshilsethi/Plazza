@@ -32,7 +32,8 @@ public:
         unsigned int getOrderID();
         void nextOrderID();
 	std::list<Kitchen *> getKitchens();
-	std::map<int, int> getKitchenStatus();
+	std::list<int> getKitchenStatus();
+	int getNbOfFreeCookers();
 
 private:
 	std::queue<std::string> pizzas;

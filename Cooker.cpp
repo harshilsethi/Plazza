@@ -5,6 +5,7 @@
 // Cooker.cpp
 //
 
+#include <fstream>
 #include "Cooker.h"
 #include "Pizza/Margarita.h"
 #include "Pizza/American.h"
@@ -17,7 +18,6 @@ static int nextId = 0;
 Cooker::Cooker() {
 	nextId++;
 	pizza = nullptr;
-	//kitchen = nullptr;
 	id = nextId;
 }
 
@@ -25,7 +25,7 @@ Cooker::~Cooker(){
 	delete pizza;
 }
 
-Cooker::Cooker(const Cooker &origin) /*: kitchen(origin.kitchen) */{
+Cooker::Cooker(const Cooker &origin) {
 	id = origin.id;
 	pizza = origin.pizza;
 	busy = origin.busy;
@@ -34,7 +34,6 @@ Cooker::Cooker(const Cooker &origin) /*: kitchen(origin.kitchen) */{
 Cooker &Cooker::operator=(Cooker const &origin) {
 	if (this != &origin) {
 		id = origin.id;
-		//kitchen = origin.kitchen;
 		pizza = origin.pizza;
 		busy = origin.busy;
 	}
@@ -57,12 +56,20 @@ const APizza &Cooker::getPizza() const {
 	return *pizza;
 }
 
-void Cooker::cookPizza(std::string pizza, std::string size, int timeBase, PizzaFactory *factory) {
+void Cooker::cookPizza(std::string const &pizza, std::string const &size, int timeBase, PizzaFactory *factory) {
+	std::fstream file;
+	std::string path;
 	long int timeToWait;
 	cookerMtx.lock();
 	Kitchen *kitchen = getKitchen();
-	//kitchen->updateStatus();
-	std::cout << "Cooking the pizza: " << pizza << " in kitchen " << kitchen->getId() << std::endl;
+	kitchen->updateStatus(timeBase);
+
+	path = "Txt/PizzaCooked/Pizzas.txt";
+	file.open(path, std::fstream::app);
+	if (file){
+		file << "The " << pizza << " was cooked in kitchen " << kitchen->getId() <<  std::endl;
+	}
+	file.close();
 	if (pizza == "Margarita") {
 		std::unique_ptr<APizza> pizzaCooked = factory->createPizza(factory->MARGARITA, size);
 		timeToWait = static_cast<long>(pizzaCooked->getCookTime() * timeBase);
@@ -81,7 +88,8 @@ void Cooker::cookPizza(std::string pizza, std::string size, int timeBase, PizzaF
 		std::this_thread::sleep_for(std::chrono::milliseconds(timeToWait));
 	}
 	cookerMtx.unlock();
-	busy = false; //at the end
+	busy = false;
+        kitchen->setNbOfBusyCookers(-1);
 	kitchen->updateStatus(timeBase);
 }
 
@@ -92,7 +100,6 @@ void Cooker::runThread(const std::string &aPizza, const std::string &aSize, int 
 }
 
 void Cooker::reset() {
-	//kitchen = -1; // not sure ...
 	pizza = nullptr;
 	busy = false;
 }

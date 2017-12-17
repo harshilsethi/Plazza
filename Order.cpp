@@ -10,7 +10,6 @@
 #include <utility>
 
 Order::Order() {
-
 }
 
 Order::Order(std::string &order) : command(order) {

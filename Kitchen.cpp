@@ -5,9 +5,11 @@
 ** Kitchen.cpp
 */
 
+#include <iostream>
 #include <future>
 #include <zconf.h>
 #include "Kitchen.h"
+#include <fstream>
 
 Kitchen::Kitchen(int _id, int _nbCookers) {
 	id = _id;
@@ -21,24 +23,12 @@ int Kitchen::getId() {
 	return id + 1;
 }
 
-int Kitchen::getNbCookers() {
+int Kitchen::getNbBusyCookers() {
 	return nbBusyCookers;
-}
-
-std::list<Cooker> &Kitchen::getCookers() {
-	return cookers;
 }
 
 void Kitchen::addOrder(std::string &anOrder) {
 	orders.push(anOrder);
-}
-
-std::string Kitchen::giveOrder() {
-	return (orders.front());
-}
-
-void Kitchen::deleteOrder() {
-	orders.pop();
 }
 
 void Kitchen::dispatch(Team &aTeam, int baseTime, PizzaFactory *factory) {
@@ -50,7 +40,6 @@ void Kitchen::dispatch(Team &aTeam, int baseTime, PizzaFactory *factory) {
 		cookers.push_back(aTeam.takeCooker());
 		nbBusyCookers++;
 	}
-	std::cout << "Nb of busy cookers : " << nbBusyCookers << std::endl;
 	for (it = cookers.begin(); it != cookers.end(); ++it){
 		it->setKitchen(this);
 		if (orders.front().find("XL") != std::string::npos){
@@ -69,20 +58,28 @@ void Kitchen::dispatch(Team &aTeam, int baseTime, PizzaFactory *factory) {
 }
 
 void Kitchen::updateStatus(int timeBase) {
-	nbBusyCookers--;
-	std::cout << "\e[31m" << nbMaxCookers - nbBusyCookers << " cookers still free in kitchen " << this->getId() << " !\e[0m" << std::endl;
-	std::cout << "BUSY COOKERS : " << nbBusyCookers << std::endl;
+        std::fstream file;
+        std::string path;
+        path = "Txt/kitchen" + std::to_string(getId()) + ".txt";
+        file.open(path, std::ios::out | std::ios::trunc);
+        if (file){
+                file << "|----------------|" << std::endl;
+                file << "|    Kitchen" << getId() << "    |" << std::endl;
+                file << "|----------------|" << std::endl;
+                file << "|  busy cookers  |" << std::endl;
+                file << "|      " << nbBusyCookers << "/" << nbMaxCookers << "       |" << std::endl;
+                file << "|----------------|" << std::endl;
+        }
+        file.close();
 	if (nbBusyCookers == 0) {
-		std::cout << "Timer Start" << std::endl;
 		nbBusyCookers = nbMaxCookers;
-		// début timer et quand timer = 5 T destruction process + threads associés
 		timer(timeBase);
 		quit();
 	}
 }
 
-int Kitchen::getNbOfBusyCookers() {
-	return nbBusyCookers;
+void Kitchen::setNbOfBusyCookers(int add) {
+        nbBusyCookers = nbBusyCookers + add;
 }
 
 void Kitchen::quit() {
@@ -93,15 +90,21 @@ void Kitchen::quit() {
 		}
 	} catch (std::exception &e) {
 	}
-	std::cout << " QUIT : cookers.size() de Kitchen id# " << getId() << " : " << cookers.size() << std::endl;
+        std::string path = "Txt/kitchen" + std::to_string(getId()) + ".txt";
+        int val = std::remove(path.c_str());
+        if (val != 0)
+                std::cerr << "Warning: kitchen" << getId() << " hasn't been deleted";
 	exit(0);
+}
+
+int Kitchen::getNbMaxCookers() {
+	return nbMaxCookers;
 }
 
 void Kitchen::timer(int timeBase) {
 	auto start = std::chrono::high_resolution_clock::now();
         int baseTime = 5;
 	for(int i = 0; i < baseTime; ++i) {
-		std::cout << (baseTime-i) << "T" << std::endl;
 		std::this_thread::sleep_until(start + (i + 1) * std::chrono::milliseconds(timeBase));
 	}
 }
