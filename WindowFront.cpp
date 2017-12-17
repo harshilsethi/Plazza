@@ -103,7 +103,6 @@ WINDOW* WindowFront::createUserwin(WINDOW *local_win)
 	std::string result;
 	int pizza, size, number;
 	int i = 2;
-	int j = 2;
 	char endOrder, endPro, endError;
 	bool flag = true;
 	std::string command;
@@ -114,7 +113,7 @@ WINDOW* WindowFront::createUserwin(WINDOW *local_win)
 	wrefresh(local_win);
 	wborder(local_win,  '|', '|', '-' ,'_', '|', '|', '|', '|');
 	mvwprintw(local_win, 2, 3,"Please choose your pizza");
-	mvwprintw(local_win, 3, 3 ,"Enter the number corresponding to the pizza ");
+	mvwprintw(local_win, 3, 3 ,"Enter the number corresponding to the pizza:");
 	wrefresh(local_win);
 	displayCommand = newwin(12,40,14, 98);
 	wbkgd(displayCommand, COLOR_PAIR(4));
@@ -143,7 +142,7 @@ WINDOW* WindowFront::createUserwin(WINDOW *local_win)
 	wgetch(local_win);
 	if(!command.empty()) {
 		mvwprintw(local_win, 4, 3, "Which size do you want ?");
-		mvwprintw(local_win,5,3, "Please enter the corresponding number ");
+		mvwprintw(local_win,5,3, "Please enter the corresponding number:");
 		wrefresh(local_win);
 		size = static_cast<char>(wgetch(local_win));
 		wgetch(local_win);
@@ -167,12 +166,12 @@ WINDOW* WindowFront::createUserwin(WINDOW *local_win)
 				wgetch(local_win);
 		}
 		if (!command.empty()) {
-			mvwprintw(local_win, 6, 3, "Please choose the number of pizza you want");
-			mvwprintw(local_win, 7, 3, "Enter the number ");
+			mvwprintw(local_win, 6, 3, "How many pizzas do you want ?");
+			mvwprintw(local_win, 7, 3, "Enter the number:");
 			wscanw(local_win, const_cast<char *>("%d"), &number);
 			if(number == 0) {
 				wclear(local_win);
-				mvwprintw(local_win, 6, 3, "You entered not a number");
+				mvwprintw(local_win, 6, 3, "You haven't entered a number");
 				wgetch(local_win);
 				wrefresh(local_win);
 				command = std::string("");
@@ -185,8 +184,8 @@ WINDOW* WindowFront::createUserwin(WINDOW *local_win)
 		wrefresh(local_win);
 	}
 	if(!command.empty()) {
-		mvwprintw(local_win, 9, 3, "Do you want to add pizza to this order");
-		mvwprintw(local_win, 10, 3, "Y or y for Yes to continue and any key to exit ");
+		mvwprintw(local_win, 9, 3, "Do you want to add pizzas to this order ?");
+		mvwprintw(local_win, 10, 3, "Y or y for Yes to continue OR any key to exit ");
 		endOrder = (char) wgetch(local_win);
 		if (endOrder == 'Y' || endOrder == 'y') {
 			wclear(local_win);
@@ -195,7 +194,7 @@ WINDOW* WindowFront::createUserwin(WINDOW *local_win)
 			wrefresh(displayCommand);
 			createUserwin(local_win);
 		} else if (endOrder == 'N' || endOrder == 'n') {
-			mvwprintw(displayCommand, 1, 3, "List of Pizza of commands");
+			mvwprintw(displayCommand, 1, 3, "Let's recap your order :");
 			for (std::string command : lastCommand) {
 				result = result + command + ";";
 				mvwprintw(displayCommand, i, 3, command.c_str());
@@ -206,23 +205,13 @@ WINDOW* WindowFront::createUserwin(WINDOW *local_win)
 			wrefresh(local_win);
 			Order order(result);
 			orders.push_back(order);
-			mvwprintw(local_win, 1, 3, "Do you want to make another order ");
-			mvwprintw(local_win, 2, 3, "Enter Y or y to continue or any key to exit");
+			mvwprintw(local_win, 1, 3, "Do you want to make another order ?");
+			mvwprintw(local_win, 2, 3, "Enter Y or y to continue OR any key to exit ");
 			endPro = (char) wgetch(local_win);
 			if (endPro == 'Y' || endPro == 'y') {
 				orderFlag = 1;
 			} else {
 				orderFlag = 0;
-			}
-			wclear(displayCommand);
-			i = 1;
-			mvwprintw(displayCommand, 1, 3, "You have total of %d orders", numberOrder);
-			for (Order order : orders) {
-				mvwprintw(displayCommand, j, 3, "Order %d ", i);
-				i++;
-				j++;
-				mvwprintw(displayCommand, j, 3, order.getCommand().c_str());
-				j++;
 			}
 			wrefresh(displayCommand);
 		}
@@ -231,8 +220,8 @@ WINDOW* WindowFront::createUserwin(WINDOW *local_win)
 		i = 1;
 		wclear(local_win);
 		wrefresh(local_win);
-		mvwprintw(local_win,5,3,"Do you want to remake the order ");
-		mvwprintw(local_win,6,3,"Enter Y or y to continue and N or n to exit ");
+		mvwprintw(local_win,5,3,"Do you want to remake the order ?");
+		mvwprintw(local_win,6,3,"Enter Y or y to continue OR N or n to exit ");
 		endError = static_cast<char>(wgetch(local_win));
 		if(endError == 'Y' || endError == 'y') {
 			createUserwin(local_win);
