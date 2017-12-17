@@ -5,6 +5,7 @@
 // Cooker.cpp
 //
 
+#include <fstream>
 #include "Cooker.h"
 #include "Pizza/Margarita.h"
 #include "Pizza/American.h"
@@ -58,11 +59,20 @@ const APizza &Cooker::getPizza() const {
 }
 
 void Cooker::cookPizza(std::string pizza, std::string size, int timeBase, PizzaFactory *factory) {
+	std::fstream file;
+	std::string path;
 	long int timeToWait;
 	cookerMtx.lock();
 	Kitchen *kitchen = getKitchen();
         //kitchen->setNbOfBusyCookers(1);
 	kitchen->updateStatus(timeBase);
+
+	path = "Txt/PizzaCooked/Pizzas.txt";
+	file.open(path, std::fstream::app);
+	if (file){
+		file << "The " << pizza << " was cooked in kitchen " << kitchen->getId() <<  std::endl;
+	}
+	file.close();
 	std::cout << "Cooking the pizza: " << pizza << " in kitchen " << kitchen->getId() << std::endl;
 	if (pizza == "Margarita") {
 		std::unique_ptr<APizza> pizzaCooked = factory->createPizza(factory->MARGARITA, size);
