@@ -7,7 +7,6 @@
 
 #include <gtest/gtest.h>
 #include "../Cooker.h"
-#include "../Pizza/Margarita.h"
 
 class CookerTest : public ::testing::Test {
 protected:

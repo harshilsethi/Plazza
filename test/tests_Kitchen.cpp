@@ -7,7 +7,6 @@
 
 #include <gtest/gtest.h>
 #include "../Kitchen.h"
-#include "../Cooker.h"
 
 Kitchen kitchen(5, 3);
 
