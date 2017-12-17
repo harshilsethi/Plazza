@@ -22,8 +22,16 @@ int Kitchen::getId() {
 	return id + 1;
 }
 
-int Kitchen::getNbCookers() {
+int Kitchen::getNbOfBusyCookers() {
 	return nbBusyCookers;
+}
+
+void Kitchen::setNbOfBusyCookers(int add) {
+	nbBusyCookers = nbBusyCookers + add;
+}
+
+int Kitchen::getMaxCookers() {
+	return nbMaxCookers;
 }
 
 std::list<Cooker> &Kitchen::getCookers() {
@@ -92,13 +100,6 @@ void Kitchen::updateStatus(int timeBase) {
 		timer(timeBase);
 		quit();
 	}
-}
-
-void Kitchen::setNbOfBusyCookers(int add) {
-        nbBusyCookers = nbBusyCookers + add;
-}
-int Kitchen::getNbOfBusyCookers() {
-	return nbBusyCookers;
 }
 
 void Kitchen::quit() {

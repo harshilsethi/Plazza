@@ -33,14 +33,14 @@ public:
 	~Kitchen();
 
 	int getId();
+        int getNbOfBusyCookers();
         void setNbOfBusyCookers(int);
-	int getNbCookers();
+	int getMaxCookers();
 	std::list<Cooker> &getCookers();
 	void addOrder(std::string &);
 	std::string giveOrder();
 	void deleteOrder();
 	void dispatch(Team &, int, PizzaFactory *);
-	int getNbOfBusyCookers();
 	void updateStatus(int);
 	void quit();
 	void timer(int);

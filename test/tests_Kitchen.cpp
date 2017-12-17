@@ -9,20 +9,20 @@
 #include "../Kitchen.h"
 #include "../Cooker.h"
 
-Kitchen kitchen(3);
+Kitchen kitchen(5, 3);
 
-TEST(getNbCookers, return_value_is_good)
+TEST(getMaxCookers, return_value_is_good)
 {
 	int exceptedValue = 3;
 
-	EXPECT_EQ(kitchen.getNbCookers(), exceptedValue);
+	EXPECT_EQ(kitchen.getMaxCookers(), exceptedValue);
 }
 
-TEST(getNbCookers, return_value_is_bad)
+TEST(getMaxCookers, return_value_is_bad)
 {
-        EXPECT_NE(kitchen.getNbCookers(), 0);
-        EXPECT_NE(kitchen.getNbCookers(), 1);
-        EXPECT_NE(kitchen.getNbCookers(), 5);
+        EXPECT_NE(kitchen.getMaxCookers(), 0);
+        EXPECT_NE(kitchen.getMaxCookers(), 1);
+        EXPECT_NE(kitchen.getMaxCookers(), 5);
 }
 
 TEST(giveOrder, return_value_is_good)
