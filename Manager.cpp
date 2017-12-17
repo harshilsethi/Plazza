@@ -11,10 +11,14 @@
 Manager::Manager() : managerTeam(30){
 	std::cout << "Manager : I'm the Plazza's manager !" << std::endl;
 	orderID = 1;
+        idKitchen = 0;
 }
 
 Manager::~Manager() {
-	std::cout << "Manager : Here is the end of the day, see you !" << std::endl;
+        while(!kitchens.empty()){
+                delete kitchens.front();
+                kitchens.pop_front();
+        }
 }
 
 static inline std::string &ltrim(std::string &s) {
@@ -30,14 +34,13 @@ void split5(const std::string& str, Container& cont,
 }
 
 std::queue<std::string> Manager::convertInputIntoOrder(Order order) {
-	std::cout << "ORDER.GETCOMMAND " << order.getCommand() << std::endl;
-	std::string orderToConvert = order.getCommand(); // "Margarita L 2 ; American XL 1"
+	std::string orderToConvert = order.getCommand();
 	std::vector<std::string> result;
 	int pizzaCounter;
         int cpt;
 
 	ltrim(orderToConvert);
-	std::cout << orderToConvert << std::endl; // "MargaritaL2;AmericanXL1"
+	std::cout << orderToConvert << std::endl;
 	split5(orderToConvert, result);
 	std::copy(result.begin(), result.end(),
 		  std::ostream_iterator<std::string>(std::cout, "\n"));
@@ -55,17 +58,6 @@ std::queue<std::string> Manager::convertInputIntoOrder(Order order) {
 	}
 
 	return pizzas;
-	/*
-	 *
-	 * 	std::string delimiter = ";";
-	size_t pos = 0;
-	std::string token;
-	while ((pos = orderToConvert.find(delimiter)) != std::string::npos) {
-		token = orderToConvert.substr(0, pos);
-		std::cout << token << std::endl;
-		pizzas.push(token);
-		orderToConvert.erase(0, pos + delimiter.length());
-	} */
 }
 
 void Manager::setTime(int timeBase) {
@@ -88,9 +80,8 @@ void Manager::nextOrderID() {
 	++orderID;
 }
 
-void Manager::manageKitchens(unsigned int maxCookers) {
+void Manager::manageKitchens(unsigned int maxCookers, PizzaFactory *factory) {
 	int nbKitchens = pizzas.size() / maxCookers;
-	pid_t isSon;
 
 	//security: limit of 10 processes
 	if (nbKitchens > 10)
@@ -100,22 +91,44 @@ void Manager::manageKitchens(unsigned int maxCookers) {
 	else if (pizzas.size() % maxCookers != 0)
 		nbKitchens++;
 	for (int i = 0; i < nbKitchens; ++i){
-		Kitchen processK(maxCookers);
+                kitchens.push_front(new Kitchen(idKitchen, maxCookers));
+                ++idKitchen;
 		if (pizzas.size() < maxCookers){
 			maxCookers = pizzas.size();
 		}
 		for(unsigned int j = 0; j < maxCookers; ++j){
-			processK.addOrder(pizzas.front());
+                        kitchens.front()->addOrder(pizzas.front());
 			pizzas.pop();
 		}
 
-		isSon = fork();
-		if (isSon == -1)
-			std::cerr << "Fatal error: can't create process!" << std::endl;
-		else if(isSon == 0){
-			processK.dispatch(managerTeam, baseTime);
-			exit(EXIT_SUCCESS);
-		}else
-			wait(nullptr);
+		try {
+			switch (fork()){
+				case 0:
+					kitchens.front()->dispatch(managerTeam, baseTime, factory);
+					exit(0);
+				default:
+					std::cout << std::endl;
+			}
+		} catch (std::exception const &e) {
+			std::cerr << "Fatal error : can't create process!" << std::endl;
+			exit(1);
+		}
 	}
+}
+
+std::list<Kitchen *> Manager::getKitchens() {
+	return kitchens;
+}
+
+std::list<int> Manager::getKitchenStatus() {
+	std::list<Kitchen *> kitchens = getKitchens();
+	std::list<int> cookers;
+
+	for (auto &kitchen : kitchens) {
+		cookers.push_back(kitchen->getNbOfBusyCookers());
+	}
+	std::cout << "==== KITCHEN STATUS ====" << std::endl;
+	for (auto &value : cookers)
+		std::cout << " VALUE " <<  value << std::endl;
+	return cookers;
 }

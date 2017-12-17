@@ -11,26 +11,40 @@
 #include <list>
 #include <queue>
 #include <string>
-#include "AKitchen.h"
+#include <chrono>
 #include "Cooker.h"
 #include "Team.h"
+#include "Pizza/PizzaFactory.h"
+#include "Manager.h"
 
-class Kitchen : public AKitchen {
+class Kitchen {
 private:
-	int nbCookers;
+	int id;
+	PizzaFactory pizzaFactory;
+	int nbBusyCookers;
+	int nbMaxCookers;
 	std::queue<std::string> orders;
 	std::list<Cooker> cookers;
+	pid_t pid;
+	int time;
+
 public:
-	explicit Kitchen(int);
+	explicit Kitchen(int,int);
 	~Kitchen();
 
+	int getId();
+        void setNbOfBusyCookers(int);
 	int getNbCookers();
 	std::list<Cooker> &getCookers();
 	void addOrder(std::string &);
 	std::string giveOrder();
 	void deleteOrder();
-	void dispatch(Team &, int);
-	bool getStatut();
+	void dispatch(Team &, int, PizzaFactory *);
+	int getNbOfBusyCookers();
+	void updateStatus(int);
+	void quit();
+	void timer(int);
+
 };
 
 

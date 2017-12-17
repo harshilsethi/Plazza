@@ -14,6 +14,7 @@ Team::Team(int howMany) {
 }
 
 Team::~Team() {
+        std::cout << howManyCookers() << std::endl;
 	while (!cookers.empty()){
 		delete cookers.front();
 		cookers.pop();

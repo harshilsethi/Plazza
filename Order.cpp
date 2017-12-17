@@ -22,7 +22,7 @@ int Order::getId() const {
 	return id;
 }
 
-std::string Order::getCommand() {
+std::string Order::getCommand()const {
 	return command;
 }
 

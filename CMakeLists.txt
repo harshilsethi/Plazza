@@ -4,8 +4,6 @@ project(Plazzav1)
 set(CMAKE_CXX_STANDARD 14)
 
 set(SOURCE_FILES main.cpp
-        AKitchen.h
-        AKitchen.cpp
         Cooker.cpp
         Cooker.h
         Order.cpp
@@ -27,9 +25,5 @@ set(SOURCE_FILES main.cpp
         Kitchen.cpp
         Kitchen.h
         Team.cpp
-        Team.h)
+        Team.h WindowFront.h WindowFront.cpp)
 add_executable(Plazzav1 ${SOURCE_FILES})
-
-include_directories(Pizza)
-
-add_subdirectory(test)
