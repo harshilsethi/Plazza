@@ -101,15 +101,17 @@ void Manager::manageKitchens(unsigned int maxCookers, PizzaFactory *factory) {
 			pizzas.pop();
 		}
 
-		switch (fork()){
-			case -1:
-                        std::cerr << "Fatal error: can't create process!" << std::endl;
-				exit(1);
-			case 0:
-                                kitchens.front()->dispatch(managerTeam, baseTime, factory);
-				exit(0);
-			default:
-				std::cout << std::endl;
+		try {
+			switch (fork()){
+				case 0:
+					kitchens.front()->dispatch(managerTeam, baseTime, factory);
+					exit(0);
+				default:
+					std::cout << std::endl;
+			}
+		} catch (std::exception const &e) {
+			std::cerr << "Fatal error : can't create process!" << std::endl;
+			exit(1);
 		}
 	}
 }
