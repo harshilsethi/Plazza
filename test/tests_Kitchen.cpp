@@ -14,14 +14,14 @@ TEST(KitchenTest, getMaxCookers_good)
 {
 	int exceptedValue = 3;
 
-	EXPECT_EQ(kitchen.getMaxCookers(), exceptedValue);
+	EXPECT_EQ(kitchen.getNbMaxCookers(), exceptedValue);
 }
 
 TEST(KitchenTest, getMaxCookers_bad)
 {
-        EXPECT_NE(kitchen.getMaxCookers(), 0);
-        EXPECT_NE(kitchen.getMaxCookers(), 1);
-        EXPECT_NE(kitchen.getMaxCookers(), 5);
+        EXPECT_NE(kitchen.getNbMaxCookers(), 0);
+        EXPECT_NE(kitchen.getNbMaxCookers(), 1);
+        EXPECT_NE(kitchen.getNbMaxCookers(), 5);
 }
 
 TEST(KitchenTest, giveOrder_good)
