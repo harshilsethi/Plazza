@@ -35,12 +35,3 @@ TEST_F(CookerTest, getKitchen_bad)
 
         EXPECT_NE(cooker.getKitchen(), kitchen);
 }
-/*
-TEST_F(CookerTest, getPizza_good)
-{
-        Cooker  cooker;
-        Margarita       margarita("L");
-
-        EXPECT_EQ(cooker.getPizza(), margarita);
-}
-*/
