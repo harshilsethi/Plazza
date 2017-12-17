@@ -11,21 +11,21 @@
 
 Kitchen kitchen(5, 3);
 
-TEST(getMaxCookers, return_value_is_good)
+TEST(KitchenTest, getMaxCookers_good)
 {
 	int exceptedValue = 3;
 
 	EXPECT_EQ(kitchen.getMaxCookers(), exceptedValue);
 }
 
-TEST(getMaxCookers, return_value_is_bad)
+TEST(KitchenTest, getMaxCookers_bad)
 {
         EXPECT_NE(kitchen.getMaxCookers(), 0);
         EXPECT_NE(kitchen.getMaxCookers(), 1);
         EXPECT_NE(kitchen.getMaxCookers(), 5);
 }
 
-TEST(giveOrder, return_value_is_good)
+TEST(KitchenTest, giveOrder_good)
 {
         std::queue<std::string> orders;
         std::string margarita = "margarita";
@@ -41,7 +41,7 @@ TEST(getCookers, return_value_is_good)
         EXPECT_EQ(kitchen.getCookers(), cookers);
 }
 */
-TEST(giveOrder, return_value_is_bad)
+TEST(KitchenTest, giveOrder_bad)
 {
         std::queue<std::string> orders;
         std::string margarita = "margarita";
