@@ -5,40 +5,41 @@
 ** Kitchen
 */
 
-#include <criterion/criterion.h>
+#include <gtest/gtest.h>
 #include "../Kitchen.h"
-#include "../Cooker.h"
 
-Kitchen kitchen = new Kitchen(3);
+Kitchen kitchen(5, 3);
 
-Test(getNbCookers, return_value_is_good)
+TEST(KitchenTest, getMaxCookers_good)
 {
-	int	exceptedValue = 3;
+	int exceptedValue = 3;
 
-	cr_assert_eq(kitchen.getNbCookers(), exceptedValue);
+	EXPECT_EQ(kitchen.getNbMaxCookers(), exceptedValue);
 }
 
-Test(getNbCookers, return_value_is_bad)
+TEST(KitchenTest, getMaxCookers_bad)
 {
-	cr_assert_neq(kitchen.getNbCookers(), 0);
-	cr_assert_neq(kitchen.getNbCookers(), 1);
-	cr_assert_neq(kitchen.getNbCookers(), 5);
+        EXPECT_NE(kitchen.getNbMaxCookers(), 0);
+        EXPECT_NE(kitchen.getNbMaxCookers(), 1);
+        EXPECT_NE(kitchen.getNbMaxCookers(), 5);
 }
 
-Test(getCookers, return_value_is_good)
+TEST(KitchenTest, giveOrder_good)
 {
-	std::list<Cooker> cookers;
-	Cooker chef;
+        std::queue<std::string> orders;
+        std::string margarita = "margarita";
 
-        cookers.push_back(chef);
-
-	cr_assert_eq(kitchen.getCookers(), cookers);
+        orders.push(margarita);
+        EXPECT_EQ(orders.front(), margarita);
 }
 
-Test(getStatus, return_value_is_good)
+TEST(KitchenTest, giveOrder_bad)
 {
-        if(kitchen)
-	        cr_assert_eq(kitchen.getStatus(), true);
-        else
-                cr_assert_eq(kitchen.getStatus(), false);
+        std::queue<std::string> orders;
+        std::string margarita = "margarita";
+        std::string regina = "regina";
+
+        orders.push(margarita);
+        orders.push(regina);
+        EXPECT_NE(orders.front(), regina);
 }

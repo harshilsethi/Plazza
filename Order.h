@@ -5,8 +5,8 @@
 // Order.h
 //
 
-#ifndef PLAZZAV1_ORDER_H
-#define PLAZZAV1_ORDER_H
+#ifndef ORDER_H
+#define ORDER_H
 
 #include <string>
 
@@ -18,7 +18,7 @@ public:
 	virtual ~Order();
 
 	int getId() const;
-	std::string getCommand();
+	std::string getCommand()const;
 	void setCommand(std::string command);
 
 private:
@@ -26,5 +26,4 @@ private:
 	std::string command;
 };
 
-
-#endif //PLAZZAV1_ORDER_H
+#endif //ORDER_H

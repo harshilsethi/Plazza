@@ -30,9 +30,3 @@ Cooker Team::takeCooker() {
 	cookers.pop();
 	return (*temp);
 }
-
-int Team::howManyCookers() {
-	int howMany = cookers.size();
-	std::cout << howMany << " cooker(s) left." << std::endl;
-	return howMany;
-}

@@ -5,46 +5,46 @@
 ** APizza
 */
 
-#include <criterion/criterion.h>
-#include "Margarita.h"
-#include "Regina.h"
-#include "American.h"
-#include "Fantasia.h"
+#include <gtest/gtest.h>
+#include "../Pizza/Margarita.h"
+#include "../Pizza/Regina.h"
+#include "../Pizza/American.h"
+#include "../Pizza/Fantasia.h"
 
-Margarita margarita = new Margarita("XL");
-Regina regina = new Regina("L");
-American american = new American("M");
-Fantasia fantasia = new Fantasia("L");
+Margarita margarita("XL");
+Regina regina("L");
+American american("M");
+Fantasia fantasia("L");
 
-Test(getSize, return_value_is_good)
+TEST(APizzaTest, getSize_good)
 {
-        cr_str_assert_eq(margarita.getSize(), "XL");
-        cr_str_assert_eq(regina.getSize(), "L");
-        cr_str_assert_eq(american.getSize(), "M");
-        cr_str_assert_eq(fantasia.getSize(), "L");
+        EXPECT_EQ(margarita.getSize(), "XL");
+        EXPECT_EQ(regina.getSize(), "L");
+        EXPECT_EQ(american.getSize(), "M");
+        EXPECT_EQ(fantasia.getSize(), "L");
 }
 
-Test(getSize, return_value_is_bad)
+TEST(APizzaTest, getSize_bad)
 {
-        cr_str_assert_neq(margarita.getSize(), "M");
-        cr_str_assert_neq(regina.getSize(), "XL");
-        cr_str_assert_neq(american.getSize(), "L");
-        cr_str_assert_neq(fantasia.getSize(), "M");
+        EXPECT_NE(margarita.getSize(), "M");
+        EXPECT_NE(regina.getSize(), "XL");
+        EXPECT_NE(american.getSize(), "L");
+        EXPECT_NE(fantasia.getSize(), "M");
 }
 
-Test(getCookTime, return_value_is_good)
+TEST(APizzaTest, getCookTime_good)
 {
-        cr_assert_eq(margarita.getCookTime(), 1.5);
-        cr_assert_eq(regina.getCookTime(), 1);
-        cr_assert_eq(american.getCookTime(), 2);
-        cr_assert_eq(fantasia.getCookTime(), 4);
+        EXPECT_EQ(margarita.getCookTime(), 1.5);
+        EXPECT_EQ(regina.getCookTime(), 1);
+        EXPECT_EQ(american.getCookTime(), 2);
+        EXPECT_EQ(fantasia.getCookTime(), 4);
 }
 
-Test(getCookTime, return_value_is_good)
+TEST(APizzaTest, getCookTime_bad)
 {
-        cr_assert_neq(margarita.getCookTime(), 1);
-        cr_assert_neq(regina.getCookTime(), 4);
-        cr_assert_neq(american.getCookTime(), 1.5);
-        cr_assert_neq(fantasia.getCookTime(), 2);
+        EXPECT_NE(margarita.getCookTime(), 1);
+        EXPECT_NE(regina.getCookTime(), 4);
+        EXPECT_NE(american.getCookTime(), 1.5);
+        EXPECT_NE(fantasia.getCookTime(), 2);
 }
 

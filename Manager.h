@@ -26,19 +26,22 @@ public:
 
 	std::queue<std::string> convertInputIntoOrder(Order order);
 	std::queue<std::string> getPizzas();
-	void manageKitchens(unsigned int);
+	void manageKitchens(unsigned int, PizzaFactory *);
 	void setTime(int);
 	int getTime();
         unsigned int getOrderID();
         void nextOrderID();
+	std::list<Kitchen *> getKitchens();
+	std::list<int> getKitchenStatus();
+	int getNbOfFreeCookers();
 
 private:
-//        std::map<unsigned int, std::queue<std::string>> orders;
 	std::queue<std::string> pizzas;
 	std::list<Kitchen *> kitchens;
 	Team managerTeam;
 	int baseTime;
         unsigned int orderID;
+        unsigned int idKitchen;
 };
 
 #endif /* ! MANAGER_H__ */
