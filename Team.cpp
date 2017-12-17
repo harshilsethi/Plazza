@@ -30,8 +30,3 @@ Cooker Team::takeCooker() {
 	cookers.pop();
 	return (*temp);
 }
-
-int Team::howManyCookers() {
-	int howMany = cookers.size();
-	return howMany;
-}

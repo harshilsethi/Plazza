@@ -35,16 +35,12 @@ public:
 	int getId();
         void setNbOfBusyCookers(int);
 	int getNbBusyCookers();
-	std::list<Cooker> &getCookers();
 	void addOrder(std::string &);
-	std::string giveOrder();
-	void deleteOrder();
 	void dispatch(Team &, int, PizzaFactory *);
 	void updateStatus(int);
 	void quit();
 	void timer(int);
 	int getNbMaxCookers();
-
 };
 
 #endif //KITCHEN_H__

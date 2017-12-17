@@ -27,20 +27,8 @@ int Kitchen::getNbBusyCookers() {
 	return nbBusyCookers;
 }
 
-std::list<Cooker> &Kitchen::getCookers() {
-	return cookers;
-}
-
 void Kitchen::addOrder(std::string &anOrder) {
 	orders.push(anOrder);
-}
-
-std::string Kitchen::giveOrder() {
-	return (orders.front());
-}
-
-void Kitchen::deleteOrder() {
-	orders.pop();
 }
 
 void Kitchen::dispatch(Team &aTeam, int baseTime, PizzaFactory *factory) {

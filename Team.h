@@ -22,7 +22,6 @@ public:
 
 	void getBackCooker(Cooker &aCooker);
 	Cooker takeCooker();
-	int howManyCookers();
 };
 
 #endif //TEAM_H__
