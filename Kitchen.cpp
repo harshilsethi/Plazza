@@ -89,7 +89,6 @@ void Kitchen::updateStatus(int timeBase) {
 	if (nbBusyCookers == 0) {
 		std::cout << "\e[90mTimer Start" << "\e[0m" << std::endl;
 		nbBusyCookers = nbMaxCookers;
-		// début timer et quand timer = 5 T destruction process + threads associés
 		timer(timeBase);
 		quit();
 	}
@@ -111,10 +110,22 @@ void Kitchen::quit() {
 	} catch (std::exception &e) {
 	}
 	std::cout << " QUIT : cookers.size() de Kitchen id# " << getId() << " : " << cookers.size() << std::endl;
-        std::string path = "Txt/kitchen" + std::to_string(getId()) + ".txt";
-        int val = std::remove(path.c_str());
-        if (val != 0)
-                std::cerr << "Warning: kitchen" << getId() << " hasn't been deleted";
+        std::string path = "";
+	try {
+		path = "Txt/kitchen" + std::to_string(getId()) + ".txt";
+	} catch (std::exception const &e) {
+		std::cerr << "The path of the file is incorrect" << std::endl;
+	}
+
+        int val = 0;
+	try {
+		val = std::remove(path.c_str());
+		if (val != 0)
+			std::cerr << "Warning: kitchen" << getId() << " hasn't been deleted";
+	} catch (std::exception const &e) {
+		std::cerr << "Warning: kitchen" << getId() << " hasn't been deleted";
+	}
+
 	exit(0);
 }
 
