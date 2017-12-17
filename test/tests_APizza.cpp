@@ -16,7 +16,7 @@ Regina regina("L");
 American american("M");
 Fantasia fantasia("L");
 
-TEST(getSize, return_value_is_good)
+TEST(APizza, getSize_good)
 {
         EXPECT_EQ(margarita.getSize(), "XL");
         EXPECT_EQ(regina.getSize(), "L");
@@ -24,7 +24,7 @@ TEST(getSize, return_value_is_good)
         EXPECT_EQ(fantasia.getSize(), "L");
 }
 
-TEST(getSize, return_value_is_bad)
+TEST(APizza, getSize_bad)
 {
         EXPECT_NE(margarita.getSize(), "M");
         EXPECT_NE(regina.getSize(), "XL");
@@ -32,7 +32,7 @@ TEST(getSize, return_value_is_bad)
         EXPECT_NE(fantasia.getSize(), "M");
 }
 
-TEST(getCookTime, return_value_is_good)
+TEST(APizza, getCookTime_good)
 {
         EXPECT_EQ(margarita.getCookTime(), 1.5);
         EXPECT_EQ(regina.getCookTime(), 1);
@@ -40,7 +40,7 @@ TEST(getCookTime, return_value_is_good)
         EXPECT_EQ(fantasia.getCookTime(), 4);
 }
 
-TEST(getCookTime, return_value_is_bad)
+TEST(APizza, getCookTime_bad)
 {
         EXPECT_NE(margarita.getCookTime(), 1);
         EXPECT_NE(regina.getCookTime(), 4);
