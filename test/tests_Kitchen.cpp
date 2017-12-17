@@ -7,7 +7,6 @@
 
 #include <gtest/gtest.h>
 #include "../Kitchen.h"
-#include "../Cooker.h"
 
 Kitchen kitchen(5, 3);
 
@@ -44,12 +43,3 @@ TEST(KitchenTest, giveOrder_bad)
         orders.push(regina);
         EXPECT_NE(orders.front(), regina);
 }
-
-/*
-TEST(getCookers, return_value_is_good)
-{
-        std::list<Cooker> cookers;
-
-        EXPECT_NE(kitchen.getCookers(), cookers);
-}
-*/
