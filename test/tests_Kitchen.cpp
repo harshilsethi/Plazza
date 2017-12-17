@@ -33,14 +33,7 @@ TEST(KitchenTest, giveOrder_good)
         orders.push(margarita);
         EXPECT_EQ(orders.front(), margarita);
 }
-/*
-TEST(getCookers, return_value_is_good)
-{
-        std::list<Cooker> cookers;
 
-        EXPECT_EQ(kitchen.getCookers(), cookers);
-}
-*/
 TEST(KitchenTest, giveOrder_bad)
 {
         std::queue<std::string> orders;
@@ -53,11 +46,10 @@ TEST(KitchenTest, giveOrder_bad)
 }
 
 /*
-Test(getStatus, return_value_is_good)
+TEST(getCookers, return_value_is_good)
 {
-        if(kitchen)
-	        cr_assert_eq(kitchen.getStatus(), true);
-        else
-                cr_assert_eq(kitchen.getStatus(), false);
+        std::list<Cooker> cookers;
+
+        EXPECT_NE(kitchen.getCookers(), cookers);
 }
 */

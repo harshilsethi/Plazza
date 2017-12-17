@@ -21,7 +21,8 @@ SET(SRC ../Pizza/APizza.h ../Pizza/APizza.cpp
         ../Team.h ../Team.cpp)
 
 SET(TEST_SOURCES MainGTest.cpp  tests_Cooker.cpp
-                                tests_Kitchen.cpp)
+                                tests_Kitchen.cpp
+                                tests_APizza.cpp)
 
 add_executable(tests ${SRC} ${TEST_SOURCES})
 
