@@ -23,7 +23,7 @@ TEST_F(CookerTest, getId_bad)
 {
         EXPECT_NE(cooker.getId(), -1);
 }
-/*
+
 TEST_F(CookerTest, getKitchen_good)
 {
         EXPECT_EQ(cooker.getKitchen(), cooker.getKitchen());
@@ -31,11 +31,11 @@ TEST_F(CookerTest, getKitchen_good)
 
 TEST_F(CookerTest, getKitchen_bad)
 {
-        EXPECT_NE(cooker.getKitchen(), 0);
-        EXPECT_NE(cooker.getKitchen(), 1);
-        EXPECT_NE(cooker.getKitchen(), 5);
+        Kitchen *kitchen = nullptr;
+
+        EXPECT_NE(cooker.getKitchen(), kitchen);
 }
-*/
+
 /*
 TEST(getPizza, return_value_is_good)
 {
