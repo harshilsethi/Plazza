@@ -15,6 +15,7 @@
 #include <ncurses.h>
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 void launchOrder (Manager *manager, Order &anOrder, int cookersNb, PizzaFactory *factory){
 	manager->convertInputIntoOrder(anOrder);
@@ -23,6 +24,10 @@ void launchOrder (Manager *manager, Order &anOrder, int cookersNb, PizzaFactory 
 }
 
 int main(int argc, char *argv[]) {
+	std::ofstream ofs;
+	ofs.open("Txt/PizzaCooked/Pizzas.txt", std::ofstream::out | std::ofstream::trunc);
+	ofs.close();
+
 	int baseTime;
 	int cookersNb;
 	if (argc < 3) {
