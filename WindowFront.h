@@ -27,8 +27,6 @@ public:
 	void createCurses();
 	int getOrderFlag();
 	void runNewOrder(WINDOW *displayComannd, WINDOW *local_win);
-	//WINDOW *getLocalWin();
-	//WINDOW *getDisplayCommand();
 
 public:
 	std::list<Order> getOrders() const;
@@ -37,8 +35,6 @@ private:
 	std::list<Order> orders;
 	std::vector<std::string> lastCommand;
 	int orderFlag = 0;
-	//WINDOW *local_win_;
-	//WINDOW *displayCommand_;
 private:
 	std::string choosePizza(WINDOW *local_win);
 	std::string chooseSize(WINDOW *local_win, std::string command);

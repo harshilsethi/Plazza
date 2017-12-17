@@ -25,5 +25,4 @@ public:
 	int howManyCookers();
 };
 
-
 #endif //TEAM_H__

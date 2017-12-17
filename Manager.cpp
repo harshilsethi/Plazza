@@ -8,8 +8,7 @@
 #include "Manager.h"
 #include <boost/algorithm/string.hpp>
 
-Manager::Manager() : managerTeam(30){
-	std::cout << "Manager : I'm the Plazza's manager !" << std::endl;
+Manager::Manager() : managerTeam(150){
 	orderID = 1;
 	idKitchen = 0;
 }
@@ -40,10 +39,7 @@ std::queue<std::string> Manager::convertInputIntoOrder(Order order) {
 	int cpt;
 
 	ltrim(orderToConvert);
-	std::cout << orderToConvert << std::endl;
 	split5(orderToConvert, result);
-	std::copy(result.begin(), result.end(),
-		  std::ostream_iterator<std::string>(std::cout, "\n"));
 	for (auto &entry : result){
 		pizzaCounter = 0;
 		cpt = 1;
@@ -83,9 +79,9 @@ void Manager::nextOrderID() {
 void Manager::manageKitchens(unsigned int maxCookers, PizzaFactory *factory) {
 	int nbKitchens = pizzas.size() / maxCookers;
 
-	//security: limit of 10 processes
-	if (nbKitchens > 10)
-		nbKitchens = 10;
+	//security: limit of 25 processes
+	if (nbKitchens > 25)
+		nbKitchens = 25;
 	else if (nbKitchens < 1)
 		nbKitchens = 1;
 	else if (pizzas.size() % maxCookers != 0)
@@ -125,9 +121,6 @@ std::list<int> Manager::getKitchenStatus() {
 	for (auto &kitchen : kitchens) {
 		cookers.push_back(kitchen->getNbBusyCookers());
 	}
-	std::cout << "==== KITCHEN STATUS ====" << std::endl;
-	for (auto &value : cookers)
-		std::cout << " VALUE " <<  value << std::endl;
 	return cookers;
 }
 

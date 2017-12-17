@@ -47,5 +47,4 @@ public:
 
 };
 
-
 #endif //KITCHEN_H__

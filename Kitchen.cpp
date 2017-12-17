@@ -4,6 +4,7 @@
 ** File description:
 ** Kitchen.cpp
 */
+
 #include <iostream>
 #include <future>
 #include <zconf.h>
@@ -51,7 +52,6 @@ void Kitchen::dispatch(Team &aTeam, int baseTime, PizzaFactory *factory) {
 		cookers.push_back(aTeam.takeCooker());
 		nbBusyCookers++;
 	}
-	std::cout << "Nb of busy cookers : " << nbBusyCookers << std::endl;
 	for (it = cookers.begin(); it != cookers.end(); ++it){
 		it->setKitchen(this);
 		if (orders.front().find("XL") != std::string::npos){
@@ -83,13 +83,8 @@ void Kitchen::updateStatus(int timeBase) {
                 file << "|----------------|" << std::endl;
         }
         file.close();
-	std::cout << "\e[31m" << nbMaxCookers - nbBusyCookers << " cookers still free in kitchen " << this->getId() << " !\e[0m" << std::endl;
-	std::cout << "\e[32mBUSY COOKERS : " << nbBusyCookers << "\e[0m" << std::endl;
-
 	if (nbBusyCookers == 0) {
-		std::cout << "\e[90mTimer Start" << "\e[0m" << std::endl;
 		nbBusyCookers = nbMaxCookers;
-		// début timer et quand timer = 5 T destruction process + threads associés
 		timer(timeBase);
 		quit();
 	}
@@ -107,7 +102,6 @@ void Kitchen::quit() {
 		}
 	} catch (std::exception &e) {
 	}
-	std::cout << " QUIT : cookers.size() de Kitchen id# " << getId() << " : " << cookers.size() << std::endl;
         std::string path = "Txt/kitchen" + std::to_string(getId()) + ".txt";
         int val = std::remove(path.c_str());
         if (val != 0)
@@ -123,7 +117,6 @@ void Kitchen::timer(int timeBase) {
 	auto start = std::chrono::high_resolution_clock::now();
         int baseTime = 5;
 	for(int i = 0; i < baseTime; ++i) {
-		std::cout << "\e[90m" << (baseTime-i) << "T\e[0m" << std::endl;
 		std::this_thread::sleep_until(start + (i + 1) * std::chrono::milliseconds(timeBase));
 	}
 }
